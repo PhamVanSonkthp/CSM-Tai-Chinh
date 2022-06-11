@@ -1,0 +1,16 @@
+.sidebar {
+    &__menu {
+        &-list {
+            &>li>a {
+                padding: 26px 26px !important;
+                display: block !important;
+                font-size: 1.0625rem !important;
+
+                &>i {
+                    margin-right: 8px;
+                    font-size: 1.625rem !important;
+                }
+            }
+        }
+    }
+}

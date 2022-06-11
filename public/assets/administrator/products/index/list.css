@@ -1,0 +1,14 @@
+.product_image_150_100{
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+}
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-width: 200px;
+    max-height: 150px;
+}

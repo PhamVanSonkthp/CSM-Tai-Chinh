@@ -1,0 +1,17 @@
+.select2-selection__choice{
+    background-color: #1b2d1f !important;
+}
+
+.select2-selection__choice__display{
+    color: white !important;
+}
+
+.image_detail_product, .feature_image{
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+}
+
+.container_image_detail, .container_image_detail{
+    margin-top: 20px;
+}

@@ -1,0 +1,485 @@
+/* =================== PC BIG ===================*/
+@media only screen and (min-width: 1241px) {
+  .container {
+    max-width: 1270px;
+    margin: 0 auto;
+    /* padding: 0 15px */
+  }
+}
+
+/* ============= PC LOWER  min-1023px ===============*/
+@media only screen and (min-width: 63.9375em) and (max-width: 1240px) {
+  .hide-on-pc-Lose {
+    display: none;
+  }
+
+  .lecture__content-video {
+    padding: 0 1%;
+  }
+
+  .page-content .route .route__course .col-lg-3 {
+    width: 33.33333%;
+  }
+
+  .page-content .course .col-lg-8,
+  .page-content .course .col-lg-4 {
+    width: 100%;
+  }
+
+  .course__register {
+    margin: 28px 0;
+  }
+
+  .account {
+    width: 84%;
+  }
+
+  .route__course-pack-limit {
+    font-size: 32px;
+  }
+
+  .route__course-pack-nav .nav-link {
+    line-height: 22px;
+    margin: 0 14px;
+  }
+
+  .route__course-pack-btn {
+    width: 80%;
+  }
+
+  .route__course-pack-discount {
+    right: -34px;
+    top: 24%;
+  }
+
+  .route__course-pack-price {
+    padding: 38px 0 12px;
+  }
+
+  .listCourse__item-progress {
+    width: 88%;
+  }
+
+  .settingAcc__list {
+    grid-template-columns: auto;
+  }
+
+  .settingAcc__item-details {
+    width: 100%;
+  }
+
+  .mission__step-item-img {
+    min-height: auto;
+  }
+
+  .mission__step {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mission__step-btn-reward {
+    padding: 8px 20px;
+  }
+}
+
+/* =============== Mobile & tablet ==============*/
+@media only screen and (max-width: 63.9375em) {
+  .hide-on-mobile-tablet {
+    display: none !important;
+  }
+
+  .lecture__content-video {
+    padding: 0;
+  }
+
+  .lecture__content-wrap {
+    min-height: auto;
+  }
+
+  .lecture__content-video {
+    height: 45vh;
+  }
+
+  .lecture__route-header>h3 {
+    font-size: 1.125rem;
+  }
+
+  .nav-item.hide {
+    display: block;
+  }
+
+  .course__register {
+    margin: 28px 0;
+  }
+
+  .course {
+    padding: 0px 4px;
+  }
+
+  .mission__progress {
+    width: 62%;
+  }
+
+  .news {
+    flex-wrap: wrap;
+  }
+
+  .news__related,
+  .news__main {
+    width: 100%;
+  }
+
+  .news__related-list {
+    justify-content: space-between;
+  }
+
+  .news__related-post {
+    padding: 10px 0px 26px;
+  }
+
+  .news__related {
+    margin: 0;
+  }
+
+  .news__related-post>img {
+    max-width: 45%;
+    max-height: 82px;
+  }
+
+  .news__main {
+    padding: 10px 0px;
+  }
+
+  .page-content {
+    background-color: #fff !important;
+  }
+
+  .route__course-item.trading .route__course-number,
+  .route__course-item.trading .route__course-title {
+    display: block;
+  }
+
+  .route__course-item.trading .route__course-img {
+    border-radius: 16px !important;
+  }
+
+  .route__course-item.trading {
+    box-shadow: none;
+  }
+
+  .lecture__route-accordion .course__accordion-lecture {
+    padding: 16px 6px 16px;
+  }
+
+  .listCourse__item-btn {
+    font-size: 16px;
+    padding: 8px 24px;
+  }
+
+  .listCourse__item-date-end {
+    margin-left: 20px;
+  }
+
+  .listCourse__item-progress {
+    width: 80%;
+  }
+
+  .listCourse__item-info {
+    padding: 20px 18px 60px;
+  }
+
+  .settingAcc__list {
+    grid-template-columns: auto;
+  }
+
+  .settingAcc__item-details {
+    width: 100%;
+  }
+
+  .mission__step-item-img {
+    min-height: auto;
+  }
+
+
+
+
+  .mission {
+    width: 100%;
+  }
+}
+
+/* ==================== Tablet ===================*/
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+  .hide-on-tablet {
+    display: none !important;
+  }
+
+  .account {
+    width: 86%;
+  }
+
+  .mission {
+    width: 96%;
+  }
+
+  .account__progress-levelUp .progress {
+    width: 58%;
+  }
+
+  .mission__step {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+
+  .mission .account__progress-levelUp .progress {
+    width: 100%;
+  }
+
+  .mission__step-btn-reward {
+    padding: 8px 20px;
+  }
+
+}
+
+/* =================== Mobile ===================*/
+@media only screen and (max-width: 46.1875em) {
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .lecture__content-video {
+    height: 24vh;
+  }
+
+  .lecture__content-tab {
+    margin: 18px 0px 0;
+  }
+
+  .route {
+    padding: 0 8px;
+  }
+
+  .course__content-item {
+    flex-basis: 100%;
+  }
+
+  .course__content-item>svg {
+    min-width: 16px;
+    margin-top: 6px;
+  }
+
+  .course__content-general {
+    line-height: 1.375rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .course__content-main {
+    flex-direction: column;
+  }
+
+  .course__content-allIn {
+    width: 100%;
+    margin: 14px 0px 10px;
+    text-align: right;
+  }
+
+  .course__accordion-lecture {
+    padding: 16px 20px;
+  }
+
+  .course__accordion-lecture-content {
+    max-width: 228px;
+  }
+
+  .account {
+    width: 100%;
+  }
+
+  .account__progress-levelUp img {
+    width: 54px;
+    height: 54px;
+  }
+
+  .account__progress-levelUp .progress {
+    width: 50%;
+  }
+
+  .account__progress-levelUp {
+    margin: 24px 0 18px;
+  }
+
+  .account__progress-heading {
+    font-size: 1rem;
+  }
+
+  .account__progress-currentLevel {
+    margin-top: 10px;
+    border: 2px solid #eef6ff;
+  }
+
+  .account__progress-currentLevel-text {
+    font-size: 0.6875rem;
+  }
+
+  .account__progress-currentLevel-number {
+    font-size: 1.5rem;
+  }
+
+  .mission__progress .progress {
+    width: 100%;
+  }
+
+  .mission .cont {
+    width: 130px;
+    height: 44px;
+  }
+
+  .mission .account__progress-levelUp {
+    padding: 12px 0px 22px;
+    align-items: flex-start;
+  }
+
+  .mission__reward {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mission__reward-box {
+    margin-top: 28px;
+  }
+
+  .mission__modal-info {
+    text-align: center;
+    width: 250px;
+  }
+
+  .news__related-post>img {
+    max-width: 34%;
+  }
+
+  .lecture__content-nav {
+    margin: 20px 0px 0;
+  }
+
+  .listCourse__item-img {
+    object-position: center;
+    object-fit: cover;
+    border-radius: 14px;
+    height: 190px;
+    width: 100%;
+    display: block;
+    min-width: 190px;
+  }
+
+  .listCourse__item {
+    flex-direction: column;
+  }
+
+  .listCourse__item-status {
+    margin-top: 6px;
+  }
+
+  .listCourse__item-progress {
+    width: 96%;
+    margin: 12px 2px 0;
+  }
+
+  .listCourse__item-footer {
+    padding-top: 20px;
+    position: relative;
+    width: 100%;
+    bottom: 0px;
+    flex-direction: column;
+  }
+
+  .listCourse__item-info {
+    height: auto;
+    padding: 20px 18px 24px;
+  }
+
+  .listCourse__item-date {
+    margin-left: 20px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .listCourse__item-date-end {
+    margin: 10px 0 20px 0;
+  }
+
+  .settingAcc__header {
+    flex-direction: column;
+    margin-bottom: 18px;
+  }
+
+  .settingAcc__header-title {
+    margin-bottom: 14px;
+  }
+
+  .settingAcc__description {
+    line-height: 24px;
+    text-align: center;
+  }
+
+  .mission__header {
+    flex-direction: column;
+  }
+
+  .mission__step {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .mission__step-btn-reward {
+    padding: 8px 40px;
+  }
+
+}
+
+/* ================= Iphone X ===============*/
+@media only screen and (max-width: 24.4375em) {
+  .mission__step-btn-reward {
+    padding: 8px 28px;
+  }
+}
+
+@media only screen and (min-width: 63.9375em) {
+
+  /* 5 colum Bootstrap */
+  .col-xs-5ths,
+  .col-sm-5ths,
+  .col-md-5ths,
+  .col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .col-xs-5ths {
+    width: 20%;
+    float: left;
+  }
+
+  @media (min-width: 768px) {
+    .col-sm-5ths {
+      width: 20%;
+      float: left;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .col-md-5ths {
+      width: 20%;
+      float: left;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .col-lg-5ths {
+      width: 20%;
+      float: left;
+    }
+  }
+}

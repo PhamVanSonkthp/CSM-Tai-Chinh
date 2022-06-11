@@ -1,0 +1,98 @@
+html {
+    // font-size: 62.5%;
+    scroll-behavior: smooth !important;
+}
+
+body {
+    scroll-behavior: smooth !important;
+    transition: all 0.3s ease;
+    transition: 0.3s;
+    overflow-y: auto;
+    font-family: $primary-font;
+    line-height: 1;
+    color: $text-gray;
+    margin: 0;
+    font-size: 1rem;
+    background-color: $background-light;
+    padding-right: 0 !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center center !important;
+}
+
+.back-white {
+    background-color: #fff;
+}
+
+.no-space {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.hide {
+    display: none;
+}
+
+#page-topbar {
+    font-size: .9375rem !important;
+    line-height: 1.5 !important;
+}
+
+
+
+
+.btn.header-item.noti-icon.waves-effect {
+    padding: 6px 26px;
+}
+
+
+.top__control {
+    position: fixed;
+    cursor: pointer;
+    background: rgba(64, 64, 64, 0.75);
+    border-radius: 0 0 0 0;
+    color: #fff;
+    width: 47px;
+    height: 47px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1040;
+
+    &.position {
+        bottom: 0;
+        right: 20px;
+    }
+}
+
+.top__control>i {
+    font-size: 1.9rem;
+}
+
+.g-4,
+.gx-4 {
+    --bs-gutter-x: 2.4rem;
+}
+
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 50px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background: #dcdcdc;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}

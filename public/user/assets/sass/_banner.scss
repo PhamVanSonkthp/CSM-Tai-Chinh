@@ -1,0 +1,87 @@
+.banner {
+    &__slide {
+        // max-height: 382px;
+        border-radius: 6px;
+        height: 100%;
+
+        &-main {
+            &-item {
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+            }
+        }
+
+        &-img {
+            max-height: 382px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        }
+
+
+        .swiper-wrapper {
+            padding-bottom: 40px;
+        }
+
+        .swiper-pagination-bullet {
+            margin: 0 6px !important;
+            box-shadow: #7d7d7d 0px 1px 2px 0px, #d1d1d1 0px 2px 6px 2px;
+            opacity: 1;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+            background: #a2a2a2;
+            width: 32px;
+            height: 7px;
+            border-radius: 18px;
+        }
+
+        .swiper-pagination-bullet-active {
+            border-radius: 18px;
+            width: 50px;
+            background: #787878 !important;
+        }
+
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            width: 36px;
+            height: 36px;
+            color: #4b4b4b;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+            text-align: center;
+            line-height: 32px;
+            font-size: 0.875rem;
+            cursor: pointer;
+
+            &::after {
+                @include flexBox(both);
+                font-weight: 800;
+                font-size: 0.9375rem;
+            }
+        }
+
+        .swiper-button-prev,
+        .swiper-rtl .swiper-button-next {
+            left: 3px;
+        }
+
+        .swiper-button-next,
+        .swiper-rtl .swiper-button-prev {
+            right: 3px;
+        }
+
+        .swiper-button-next::after {
+            margin-top: 1px;
+            margin-left: 2px;
+        }
+
+        .swiper-button-prev::after {
+            margin-right: 2px;
+            margin-top: 1px;
+        }
+
+    }
+}

@@ -1,0 +1,23 @@
+
+//
+// datatable
+//
+
+
+div.dataTables_wrapper {
+	div.dataTables_filter {
+		text-align: right;
+		input {
+			margin-left: .5em;
+			display: inline-block;
+			width: auto;
+		}
+  }
+  
+  div.dataTables_length {
+    label{
+        margin-bottom: .5rem;
+    }
+}
+}
+

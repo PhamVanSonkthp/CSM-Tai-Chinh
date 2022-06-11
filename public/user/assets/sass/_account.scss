@@ -1,0 +1,162 @@
+.account {
+    width: 70%;
+    margin: 0 auto 58px;
+
+    &__header {
+        font-size: 1.375rem;
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+    }
+
+    &__progress {
+        &-heading {
+            font-size: 1.125rem;
+            text-align: center;
+
+            &>span {
+                font-weight: bold;
+            }
+        }
+
+        &-levelUp {
+            margin: 24px 0 14px;
+            @include flexBox(hor);
+            justify-content: space-between;
+
+            img {
+                width: 64px;
+                height: 64px;
+            }
+
+            .progress {
+                width: 70%;
+                height: 12px;
+                border-radius: 8px;
+                transition: all .5s ease-in-out;
+
+                .progress-bar {
+                    animation: showSearch ease 2.4s;
+                }
+            }
+        }
+
+        &-currentLevel {
+            position: relative;
+            color: #fff;
+            background-color: #7dd7f8;
+            padding: 2px 4px;
+            border-radius: 6px;
+            border: 4px solid #eef6ff;
+
+            &>span {
+                display: block;
+                text-align: center;
+            }
+
+            &::after {
+                position: absolute;
+                content: "";
+                bottom: -14px;
+                background-color: #646d8b;
+                height: 12px;
+                width: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            &-text {
+                font-size: 0.9375rem;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            &-number {
+                margin-right: 2px;
+                font-family: 'Patrick Hand', cursive;
+                font-size: 1.875rem;
+
+            }
+        }
+    }
+
+    &__level {
+        @include flexBox(both);
+
+        &-title {
+            line-height: 1.25rem;
+            text-align: center;
+        }
+
+        &-info {
+            margin-left: 14px;
+        }
+
+        &-paces {
+            color: #FCCE00;
+            font-size: 1.188rem;
+            font-weight: 500;
+            margin-top: 8px;
+            text-align: center;
+        }
+    }
+
+    &__form {
+        margin-top: 30px;
+
+        &-group {
+            margin-bottom: 34px;
+        }
+
+        label {
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        input {
+            border: 0;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+            font-size: 1.063rem;
+            padding: 6px 8px;
+            color: #000;
+
+            &:focus {
+                color: #000;
+            }
+
+            &:disabled {
+                color: rgba(0, 0, 0, .7);
+                background-color: #fff;
+            }
+        }
+    }
+
+    &__btn {
+        padding-top: 34px;
+        @include flexBox(hor);
+        justify-content: flex-end;
+
+        button {
+            background-color: #0b74e5;
+            font-size: 1rem;
+            padding: 6px 50px;
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
+
+        &-save {
+            &>button {
+                padding: 6px 44px;
+                background-color: #fff;
+
+                &:first-child {
+                    background-color: #0b74e5;
+                    margin-right: 12px;
+                }
+            }
+        }
+    }
+}

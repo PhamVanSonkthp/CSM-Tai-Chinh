@@ -1,0 +1,258 @@
+.route {
+    padding: 0 18px;
+    margin-top: 26px;
+    border-radius: 5px;
+
+    &__quantity {
+        &>span {
+            color: #82919b;
+        }
+    }
+
+    &__nav {
+        @include flexBox(hor);
+        justify-content: space-between;
+
+        &-heading {
+            padding: 16px 0;
+            font-size: 1.6875rem;
+            font-weight: bold;
+
+            &>sup {
+                background-color: #1473e6;
+                color: #fff;
+                padding: 2px 6px;
+                font-size: 0.75rem;
+                border-radius: 6px;
+            }
+
+        }
+
+        &-link {
+            min-width: 104px;
+            color: $color-main;
+            @include flexBox(hor);
+
+            &>svg {
+                transition: all .2s ease 0s;
+                margin-left: 6px;
+                width: 0.625em;
+            }
+
+            &:hover {
+                color: $color-main;
+                text-decoration: underline !important;
+
+                &>svg {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+
+    &__course {
+
+        &-img {
+            position: relative;
+            cursor: pointer;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            padding-top: 58%;
+            border-radius: 16px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, .1);
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+            &:hover .button {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+
+            &:hover .overlay {
+                display: block;
+                background: rgba(0, 0, 0, .3);
+            }
+
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 16px;
+                background: rgba(0, 0, 0, 0);
+                transition: background 0.5s ease;
+            }
+
+            .button {
+                position: absolute;
+                width: 100%;
+                left: 50%;
+                // -webkit-transform: translate(-50%, -50%);
+                // transform: translate(-50%, -50%);
+                transform: translate(-50%, 43px);
+                top: 50%;
+                opacity: 0;
+                text-align: center;
+                transition: all .3s ease 0s;
+            }
+
+            .button a {
+                padding: 10px 34px;
+                text-align: center;
+                color: $text-gray;
+                font-weight: bold;
+                border-radius: 26px;
+                z-index: 1;
+                background-color: #fff;
+
+            }
+
+
+
+        }
+
+        &-item {
+            margin-bottom: 34px;
+
+            &.trading {
+                padding-bottom: 100px;
+                position: relative;
+                height: 100%;
+                border-radius: 12px;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+                .route__course-img {
+                    border-radius: 0;
+                    border-top-right-radius: 12px;
+                    border-top-left-radius: 12px;
+                }
+
+                &>.route__course-title,
+                &>.route__course-number {
+                    display: none;
+                }
+            }
+        }
+
+        &-title {
+            font-size: 16px;
+            padding: 14px 0px 2px;
+        }
+
+        &-number {
+            @include flexBox(hor);
+
+            &>svg {
+                color: $text-light;
+                width: 1.25em;
+            }
+
+            &>span {
+                margin-left: 10px;
+                color: $text-light;
+            }
+        }
+
+        &-pack {
+            width: 100%;
+            // margin-top: 18px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+
+            &-header {
+                position: relative;
+                background-color: #D3B574;
+                color: #fff;
+                text-align: center;
+                padding: 14px 0;
+                overflow: hidden;
+
+                .route__course-title {
+                    padding: 6px 20px 2px;
+                }
+            }
+
+            &-content {
+                background-color: #f7f7f7;
+
+                &>ul>li {
+                    font-size: 17px;
+                    padding: 4px 0px;
+                    margin: 0 36px;
+                    line-height: 22px;
+                    text-align: center;
+                    border-bottom: 1px solid #ddd;
+                }
+            }
+
+            &-name {
+                text-transform: uppercase;
+                font-size: 24px;
+            }
+
+            &-duration {
+                margin-top: 6px;
+                font-size: 15px;
+            }
+
+            &-price {
+                @include flexBox(both);
+                padding: 20px 0 14px;
+            }
+
+            &-money {
+                text-decoration: line-through;
+                margin-right: 15px;
+                font-size: 16px;
+            }
+
+            &-limit {
+                font-size: 34px;
+                font-weight: bold;
+
+                &>sup {
+                    top: -22px;
+                    font-size: 13px;
+                }
+            }
+
+            &-btn {
+                display: block;
+                width: 50%;
+                font-size: 17px;
+                padding: 8px 20px;
+                margin: 30px auto 0;
+                background-color: #D3B574;
+                border: 1px solid #D3B574;
+            }
+
+            &-description {
+                display: block;
+                padding: 20px 30px 22px;
+                text-align: center;
+                line-height: 20px;
+            }
+
+            &-discount {
+                position: absolute;
+                background-color: #F40303;
+                padding: 6px 40px;
+                font-size: 13px;
+                text-transform: uppercase;
+                right: -31px;
+                font-weight: bold;
+                top: 33%;
+                transform: rotate(45deg) translateY(-50%);
+            }
+
+            &-footer {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+            }
+        }
+    }
+}

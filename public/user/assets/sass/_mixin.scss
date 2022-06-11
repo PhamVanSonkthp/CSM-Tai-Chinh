@@ -1,0 +1,83 @@
+/* Iphone 5/SE */
+$res_ip5: "only screen and (max-width: 20em)";
+
+/* Mobile */
+$res_mobile: "only screen and (max-width: 46.1875em)";
+
+/* Tablet */
+$res_table: "only screen and (min-width: 46.25em) and (max-width: 63.9375em)";
+
+/* Mobile & tablet */
+$res_bothTM: "only screen and (max-width: 63.9375em)";
+
+/* PC LOWER  min-1023px */
+$res_pcLower: "only screen and (min-width: 63.9375em) and (max-width: 1240px)";
+
+/* PC BIG */
+$res_big: "only screen and (min-width: 1241px)";
+
+@mixin responsive_ip5() {
+    @media #{$res_ip5} {
+        @content;
+    }
+}
+@mixin responsive_mobile() {
+    @media #{$res_mobile} {
+        @content;
+    }
+}
+@mixin responsive_table() {
+    @media #{$res_table} {
+        @content;
+    }
+}
+@mixin responsive_bothTM() {
+    @media #{$res_bothTM} {
+        @content;
+    }
+}
+@mixin responsive_pcLower() {
+    @media #{$res_pcLower} {
+        @content;
+    }
+}
+@mixin responsive_big() {
+    @media #{$res_big} {
+        @content;
+    }
+}
+
+%backgroundImg {
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+}
+@mixin flexBox($direc) {
+    display: flex;
+    @if ($direc == ver) {
+        justify-content: center;
+    }
+    @if ($direc == hor) {
+        align-items: center;
+    }
+    @if ($direc == both) {
+        justify-content: center;
+        align-items: center;
+    }
+}
+@mixin border($width, $color, $position) {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: $width;
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: linear-gradient(to right, transparent, $color, transparent);
+
+    @if ($position == top) {
+        top: 0;
+    }
+    @if ($position == bottom) {
+        bottom: 0;
+    }
+}
