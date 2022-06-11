@@ -12,4 +12,12 @@ class Lend extends Model implements Auditable
     use HasFactory;
 
     protected $guarded = [];
+
+    public function admin(){
+        return $this->hasOne(User::class, 'id','admin_id');
+    }
+
+    public function lendStatus(){
+        return $this->hasOne(LendStatus::class, 'id','lend_status_id');
+    }
 }

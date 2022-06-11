@@ -32,38 +32,47 @@ class AdminLendController extends Controller
 
     public function index(Request $request)
     {
-        $query = $this->model->where('is_admin', '!=', 1);
+        $query = $this->model;
 
         foreach ($request->all() as $key => $item) {
 
             if ($key == "search_query") {
                 if (!empty($item) || strlen($item) > 0) {
                     $query = $query->where(function($query) use ($item){
-                        $query->orWhere('name', 'LIKE', "%{$item}%");
+                        $query->orWhere('phone', 'LIKE', "%{$item}%");
+                        $query->orWhere('identity_card_number', 'LIKE', "%{$item}%");
                     });
                 }
-            } else if ($key == "gender") {
-                if (!empty($item) || strlen($item) > 0) {
-                    $query = $query->where('gender_id', $item);
+            } else if ($key == "lend_status_id_1") {
+                if ((!empty($item) || strlen($item) > 0) && $item == 'true') {
+                    $query = $query->where('lend_status_id', 1);
+                }
+            } else if ($key == "lend_status_id_2") {
+                if ((!empty($item) || strlen($item) > 0) && $item == 'true') {
+                    $query = $query->where('lend_status_id', 2);
+                }
+            }else if ($key == "lend_status_id_3") {
+                if ((!empty($item) || strlen($item) > 0) && $item == 'true') {
+                    $query = $query->where('lend_status_id', 3);
                 }
             }
         }
 
-        $items = $query->latest('users.created_at')->paginate(Formatter::getLimitRequest())->appends(request()->query());
+        $items = $query->latest()->paginate(Formatter::getLimitRequest())->appends(request()->query());
 
-        return view('administrator.user.index', compact('items'));
+        return view('administrator.lend.index', compact('items'));
     }
 
     public function create()
     {
         $roles = $this->role->all();
-        return view('administrator.user.add', compact('roles'));
+        return view('administrator.lend.add', compact('roles'));
     }
 
     public function store(UserAddRequest $request)
     {
 
-        $user = $this->model->create([
+        $item = $this->model->create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -74,13 +83,13 @@ class AdminLendController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('administrator.users.edit', ["id" => $user->id]);
+        return redirect()->route('administrator.users.edit', ["id" => $item->id]);
     }
 
     public function edit($id)
     {
         $item = $this->model->find($id);
-        return view('administrator.user.edit', compact('item'));
+        return view('administrator.lend.edit', compact('item'));
     }
 
     public function update($id, UserEditRequest $request)

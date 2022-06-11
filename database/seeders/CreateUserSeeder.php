@@ -28,6 +28,18 @@ class CreateUserSeeder extends Seeder
                 'married_status_id'=> 1,
                 'work'=> 'work',
             ],
+            [
+                'name' => 'user',
+                'identity_card_number' => 'identity_card_number',
+                'phone' => '000333111',
+                'email' => 'user',
+                'date_of_birth' => '1999/04/18',
+                'password' => '$2y$10$sr.4gc0Gpv.t5nvrFA3maOJI/dTS3SNL1fKC7SvGfuGdQlOHffBAy',
+                'is_admin'=> 0,
+                'education_level_id'=> 1,
+                'married_status_id'=> 1,
+                'work'=> 'work',
+            ],
         ]);
 
     }

@@ -10,70 +10,73 @@
     <div class="col-md-12">
 
         <div class="card">
-            <div class="card-body">
 
-                <div class="row align-items-end">
+            <div class="card-header">
+                <div>
+                    <label>
+                        Tùy chọn
+                    </label>
+                </div>
+
+                <div class="form-check form-check-inline mt-3">
+                    <label class="form-check-label" for="inlineCheckbox1">Chưa xác minh</label>
+                    <input name="lend_status_id_1" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" {{request('lend_status_id_1') == 'true' ? 'checked' : ''}}>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="inlineCheckbox2">Đã xác minh</label>
+                    <input name="lend_status_id_2" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2"{{request('lend_status_id_2') == 'true' ? 'checked' : ''}}>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="inlineCheckbox3">Đã tạo hồ sơ</label>
+                    <input name="lend_status_id_3" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"{{request('lend_status_id_3') == 'true' ? 'checked' : ''}}>
+                </div>
+
+
+                <div class="row mt-3">
                     <div class="col-md-3">
                         <div id="datatable_filter" class="dataTables_filter row" style="align-items: flex-end;">
                             <div class="col-9">
-                                <label>Search:</label>
                                 <input id="input_search" type="search" class="form-control form-control-sm"
-                                       placeholder="Entering..." aria-controls="datatable" onkeydown="search(this)">
+                                       placeholder="Số điện thoại hoặc CMND" aria-controls="datatable" onkeydown="search(this)">
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-primary waves-effect waves-light" onclick="searchButton()">Tìm</button>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-3">
-                        <label>Ngày tạo</label>
-                        <span>
-                            <input type="text" id="config-demo" class="form-control">
-                        </span>
-                    </div>
-
-                    <div class="col-md-2">
-                        <label>Giới tính</label>
-                        <select id="select_gender" class="form-control select2_init" style="width: 100px;">
-                            <option value="">Giới tính</option>
-                            @foreach(\App\Models\GenderUser::all() as $item)
-                                <option value="{{$item->id}}">{{$item->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-md-2">
-                        <p style="cursor: pointer;" onclick="viewBirthOfDay()">Có <span class="text-danger">{{\App\Models\User::whereMonth('date_of_birth',now()->month)->whereDay('date_of_birth',now()->day)->where('is_admin' , 0)->count()}}</span> khách hàng sinh nhật hôm nay</p>
-                    </div>
-
-                    <div class="col-md-2 text-end">
-                        <a href="{{route('administrator.users.create')}}" class="btn btn-success float-end m-2">Add</a>
-                        <button onclick="exportExcel()" class="btn btn-success float-end m-2">Export</button>
-                    </div>
                 </div>
+            </div>
 
+
+            <div class="card-body">
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">
                         <thead>
                         <tr>
-                            <th>Tên</th>
                             <th>Số điện thoại</th>
-                            <th>Ngày sinh</th>
-                            <th>Giới tính</th>
-                            <th>Người giới thiệu</th>
-                            <th>Action</th>
+                            <th>NV hỗ trợ</th>
+                            <th>Tên</th>
+                            <th>Trạng thái hồ sơ</th>
+                            <th>Khởi tạo lúc</th>
+                            <th>Tùy chọn</th>
+                            <th>Tùy chọn</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($items as $item)
                             <tr>
-                                <td>{{$item->name}}</td>
                                 <td>{{$item->phone}}</td>
-                                <td>{{$item->date_of_birth}}</td>
-                                <td>{{ optional($item->gender)->name}}</td>
-                                <td>{{ optional($item->presenter)->name}}</td>
+                                <td>{{ optional($item->admin)->name}}</td>
+                                <td>{{$item->name}}</td>
+                                <td>{{ optional($item->lendStatus)->name}}</td>
+                                <td>{{ $item->created_at }}</td>
+                                <td>
+                                    <a>Xem chi tiết</a>
+                                </td>
+                                <td>
+                                    <a>Đặt lại mật khẩu</a>
+                                </td>
                             </tr>
                         @endforeach
 
@@ -168,7 +171,9 @@
                 searchParams = new URLSearchParams(window.location.search)
             }
             searchParams.set('search_query', $('#input_search').val())
-            searchParams.set('gender', $('#select_gender').val())
+            searchParams.set('lend_status_id_1', $('input[name="lend_status_id_1"]').is(':checked'))
+            searchParams.set('lend_status_id_2', $('input[name="lend_status_id_2"]').is(':checked'))
+            searchParams.set('lend_status_id_3', $('input[name="lend_status_id_3"]').is(':checked'))
             window.location.search = searchParams.toString()
 
         }

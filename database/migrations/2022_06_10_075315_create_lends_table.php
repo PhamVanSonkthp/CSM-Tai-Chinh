@@ -17,7 +17,6 @@ class CreateLendsTable extends Migration
             $table->id();
             $table->integer('interval');
             $table->float('interest_rate');
-            $table->float('first_pay');
             $table->bigInteger('user_id')->index();
             $table->string('purpose');
             $table->string('name_friend');
@@ -33,11 +32,12 @@ class CreateLendsTable extends Migration
             $table->bigInteger('bank_id');
             $table->string('bank_number');
             $table->string('bank_name');
-            $table->bigInteger('total');
+            $table->bigInteger('lend_money');
             $table->string('sign_image_name');
             $table->string('sign_image_path');
             $table->bigInteger('admin_id')->index();
             $table->bigInteger('lend_status_id')->default(1);
+            $table->string('phone');
             $table->timestamps();
         });
     }

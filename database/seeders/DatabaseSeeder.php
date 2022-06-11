@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CreateLendStatusSeeder::class);
         $this->call(CreateMariedStatusSeeder::class);
         $this->call(CreateMiddleIncomeSeeder::class);
+        $this->call(CreateLendSeeder::class);
 
     }
 }

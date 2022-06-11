@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Bank;
 use App\Models\EducationLevel;
 use App\Models\GenderUser;
+use App\Models\LendStatus;
 use App\Models\Logo;
 use App\Models\Permission;
 use App\Models\Slider;
@@ -22,9 +23,12 @@ class CreateLendStatusSeeder extends Seeder
      */
     public function run()
     {
-        Bank::insert([
+        LendStatus::insert([
             [
                 "name" => "Chưa xác minh",
+            ],
+            [
+                "name" => "Đã xác minh",
             ],
             [
                 "name" => "Đã tạo hồ sơ",

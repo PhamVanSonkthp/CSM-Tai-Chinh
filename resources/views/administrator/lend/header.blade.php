@@ -1,5 +1,5 @@
 @php
-    $title = "Khách hàng";
+    $title = "Hợp đồng";
 @endphp
 @section('title')
     <title>{{$title}}</title>
@@ -10,6 +10,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
-@section('user')
+@section('lend')
     class="mm-active"
 @endsection
