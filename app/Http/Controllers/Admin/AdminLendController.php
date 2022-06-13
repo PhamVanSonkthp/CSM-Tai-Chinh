@@ -92,6 +92,12 @@ class AdminLendController extends Controller
         return view('administrator.lend.edit', compact('item'));
     }
 
+    public function detail($id)
+    {
+        $item = $this->model->find($id);
+        return view('administrator.lend.detail', compact('item'));
+    }
+
     public function update($id, UserEditRequest $request)
     {
         try {

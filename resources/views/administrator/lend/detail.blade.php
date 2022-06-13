@@ -3,21 +3,345 @@
 @include('administrator.lend.header')
 
 @section('css')
-
+    <style>
+        label{
+            padding: 10px;
+        }
+    </style>
 @endsection
 
 @section('content')
     <div class="col-lg-9">
 
-        <div class="row">
-            <div class="col-md-3">
-                
+        <div class="card">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="">
+                    <div class="text-center">
+                        <label>{{$item->phone}}</label>
+                    </div>
+                    <div class="text-center">
+                        <label>{{$item->name}}</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Số CMND
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{$item->identity_card_number}}
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Địa chỉ
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{$item->address}}
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Nghề nghiệp
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{$item->work}}
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Tình trạng hôn nhân
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{ optional($item->marriedStatus)->name}}
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Học vấn
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{ optional($item->educationLevel)->name}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Thu nhập
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{ optional($item->middleIncome)->name}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Mục đích vay
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{$item->purpose}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Số người thân
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{$item->phone_friend}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Tên người thân
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{$item->name_friend}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <form action="{{route('administrator.lend.update', ['id' => $item->id ])}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="d-grid">
+                            <button class="btn btn-primary" type="submit">Xác minh khách hàng</button>
+                        </div>
+                    </form>
+
+
+                </div>
+
+                <div class="col-md-3">
+                    <label>
+                        <strong>
+                            Thông tin tài khoản thụ hưởng
+                        </strong>
+                    </label>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Ngân hàng
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{ optional($item->bank)->name}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Tên người thụ hưởng
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{$item->bank_name}}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Số tài khoản
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                {{$item->bank_number}}
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
+
+    </div>
+
+    <div class="col-lg-3">
         <div class="card">
 
         </div>
+    </div>
 
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="d-flex">
+                <div class="flex-1">
+                    <label>
+                        Số tiền:
+                    </label>
+                </div>
+
+                <div class="flex-1">
+                    <label>
+                        {{ number_format($item->lend_money) }}
+                    </label>
+                </div>
+            </div>
+
+            <div class="d-flex">
+                <div class="flex-1">
+                    <label>
+                        Trạng thái:
+                    </label>
+                </div>
+
+                <div class="flex-1">
+                    <label>
+                        {{ optional($item->lendStatus)->name}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="d-flex">
+                <div class="flex-1">
+                    <label>
+                        Thời hạn:
+                    </label>
+                </div>
+
+                <div class="flex-1">
+                    <label>
+                        {{$item->interval}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="d-flex">
+                <div class="flex-1">
+                    <label>
+                        Mã hợp đồng:
+                    </label>
+                </div>
+
+                <div class="flex-1">
+                    <label>
+                        {{$item->id}}
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div>
+                <label>
+                    Hiện không có yêu cầu
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div>
+                <label>
+                    Ví người dùng
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    Số dư:
+                </label>
+
+                <label>
+                    <strong>
+                        0 VNĐ
+                    </strong>
+                </label>
+            </div>
+
+            <div class="d-flex">
+                <div class="flex-1">
+                    <label>
+                        Trừ ví
+                    </label>
+                </div>
+
+                <div class="flex-1">
+                    <label>
+                        Cộng ví
+                    </label>
+                </div>
+
+            </div>
+
+            <div>
+                <label>
+                    Lịch sử
+                </label>
+
+            </div>
+
+        </div>
     </div>
 
 @endsection

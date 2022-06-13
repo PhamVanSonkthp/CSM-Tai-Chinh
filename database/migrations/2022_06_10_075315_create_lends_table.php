@@ -30,7 +30,6 @@ class CreateLendsTable extends Migration
             $table->bigInteger('married_status_id');
             $table->string('work');
             $table->bigInteger('bank_id');
-            $table->string('bank_number');
             $table->string('bank_name');
             $table->bigInteger('lend_money');
             $table->string('sign_image_name');

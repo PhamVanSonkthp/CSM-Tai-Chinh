@@ -292,6 +292,12 @@ Route::prefix('administrator')->group(function () {
             'middleware' => 'can:lend-edit',
         ]);
 
+        Route::get('/detail/{id}', [
+            'as' => 'administrator.lends.detail',
+            'uses' => 'App\Http\Controllers\Admin\AdminLendController@detail',
+            'middleware' => 'can:lend-edit',
+        ]);
+
         Route::put('/update/{id}', [
             'as' => 'administrator.lends.update',
             'uses' => 'App\Http\Controllers\Admin\AdminLendController@update',
