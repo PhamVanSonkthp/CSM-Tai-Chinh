@@ -4,19 +4,81 @@
 
 @section('css')
     <style>
-        label{
+        label {
             padding: 10px;
         }
     </style>
+
+    <!-- Swiper Css -->
+    <link rel="stylesheet" href="{{asset('vendor/swiper/swiper-bundle.min.css')}}">
+    /*<!-- Bootstrap Css -->*/
+    /*
+    <link rel="stylesheet" type="text/css" href="./bootstrap.min.css">*/
+
+    <style>
+        .banner__slide {
+            position: relative;
+        }
+
+        img {
+            height: 500px;
+            width: 100%;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            position: relative;
+            display: flex;
+            margin-top: 30px;
+            color: #000;
+
+            background-color: #fff;
+            padding: 4px 20px;
+            border: 1px solid rgb(180, 180, 180);
+            width: auto;
+            border-radius: 4px;
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            display: none;
+        }
+
+        .banner__slide-wrapper {
+            margin: 20px 0px 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .banner__slide-title {
+            position: absolute;
+            bottom: -28px;
+            left: 50%;
+            transform: translateX(-50%)
+        }
+
+        .card {
+            height: 100%;
+        }
+
+        img {
+            max-height: 350px;
+        }
+    </style>
+
 @endsection
 
 @section('content')
     <div class="col-lg-9">
-
         <div class="card">
-            <div class="row">
+            <form action="{{route('administrator.lends.update', ['id' => $item->id ])}}" method="post"
+                  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+            <div class="row pb-4 pt-4">
                 <div class="col-md-3">
-                    <img src="">
+                    <img src="{{$item->feature_image_path}}" style="object-fit: cover;">
                     <div class="text-center">
                         <label>{{$item->phone}}</label>
                     </div>
@@ -25,7 +87,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="d-flex">
                         <div class="flex-1">
                             <label>
@@ -34,9 +96,12 @@
                         </div>
 
                         <div class="flex-1">
-                            <label>
-                                {{$item->identity_card_number}}
-                            </label>
+                            <input name="identity_card_number" type="text"
+                                   class="form-control @error('identity_card_number') is-invalid @enderror"
+                                   value="{{$item->identity_card_number}}">
+                            @error('identity_card_number')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
 
                     </div>
@@ -49,9 +114,12 @@
                         </div>
 
                         <div class="flex-1">
-                            <label>
-                                {{$item->address}}
-                            </label>
+                            <input name="address" type="text"
+                                   class="form-control @error('address') is-invalid @enderror"
+                                   value="{{$item->address}}">
+                            @error('address')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
 
                     </div>
@@ -64,9 +132,11 @@
                         </div>
 
                         <div class="flex-1">
-                            <label>
-                                {{$item->work}}
-                            </label>
+                            <input name="work" type="text" class="form-control @error('work') is-invalid @enderror"
+                                   value="{{$item->work}}">
+                            @error('work')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
 
                     </div>
@@ -79,9 +149,16 @@
                         </div>
 
                         <div class="flex-1">
-                            <label>
-                                {{ optional($item->marriedStatus)->name}}
-                            </label>
+                            <select name="married_status_id"
+                                    class="form-select @error('married_status_id') is-invalid @enderror">
+                                @foreach(\App\Models\MarriedStatus::all() as $marriedStatusItem)
+                                    <option
+                                        value="{{$marriedStatusItem->id}}" {{$item->married_status_id == $marriedStatusItem->id ? 'selected' : ''}}>{{$marriedStatusItem->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('married_status_id')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
 
                     </div>
@@ -94,9 +171,16 @@
                         </div>
 
                         <div class="flex-1">
-                            <label>
-                                {{ optional($item->educationLevel)->name}}
-                            </label>
+                            <select name="education_level_id"
+                                    class="form-select @error('education_level_id') is-invalid @enderror">
+                                @foreach(\App\Models\EducationLevel::all() as $educationLevelItem)
+                                    <option
+                                        value="{{$educationLevelItem->id}}" {{$item->education_level_id == $educationLevelItem->id ? 'selected' : ''}}>{{$educationLevelItem->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('education_level_id')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -108,9 +192,16 @@
                         </div>
 
                         <div class="flex-1">
-                            <label>
-                                {{ optional($item->middleIncome)->name}}
-                            </label>
+                            <select name="middle_income_id"
+                                    class="form-select @error('middle_income_id') is-invalid @enderror">
+                                @foreach(\App\Models\MiddleIncome::all() as $middleIncomeItem)
+                                    <option
+                                        value="{{$middleIncomeItem->id}}" {{$item->middle_income_id == $middleIncomeItem->id ? 'selected' : ''}}>{{$middleIncomeItem->name}}</option>
+                                @endforeach
+                                @error('middle_income_id')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
+                            </select>
                         </div>
                     </div>
 
@@ -156,75 +247,130 @@
                         </div>
                     </div>
 
-                    <form action="{{route('administrator.lend.update', ['id' => $item->id ])}}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="d-grid">
-                            <button class="btn btn-primary" type="submit">Xác minh khách hàng</button>
-                        </div>
-                    </form>
+                    <input style="display: none" name="lend_status_id" value="2">
 
+                    @if($item->lend_status_id == 1)
+                        <label class="w-100">
+                            <div class="d-grid">
+                                <button class="btn btn-primary lend-status-{{$item->lend_status_id}}" type="submit">Xác
+                                    minh khách hàng
+                                </button>
+                            </div>
+                        </label>
+
+                    @else
+                        <label class="w-100">
+                            <div class="d-grid">
+                                <button class="btn btn-primary lend-status-{{$item->lend_status_id}}" type="button">Đã
+                                    tạo hồ sơ
+                                </button>
+                            </div>
+                        </label>
+
+                    @endif
 
                 </div>
 
-                <div class="col-md-3">
-                    <label>
-                        <strong>
-                            Thông tin tài khoản thụ hưởng
-                        </strong>
-                    </label>
+                <div class="col-md-4">
+                    <div class="p-3">
+                        <label>
+                            <strong>
+                                Thông tin tài khoản thụ hưởng
+                            </strong>
+                        </label>
+                        <div class="d-flex">
+                            <div class="flex-1">
+                                <label>
+                                    Ngân hàng
+                                </label>
+                            </div>
 
-                    <div class="d-flex">
-                        <div class="flex-1">
-                            <label>
-                                Ngân hàng
-                            </label>
+                            <div class="flex-1">
+                                <select name="bank_id" class="form-select @error('bank_id') is-invalid @enderror">
+                                    @foreach(\App\Models\Bank::orderBy('name')->get() as $bankItem)
+                                        <option
+                                            value="{{$bankItem->id}}" {{$item->bank_id == $bankItem->id ? 'selected' : ''}}>{{$bankItem->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('bank_id')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
+                            </div>
                         </div>
 
-                        <div class="flex-1">
-                            <label>
-                                {{ optional($item->bank)->name}}
-                            </label>
-                        </div>
-                    </div>
+                        <div class="d-flex">
+                            <div class="flex-1">
+                                <label>
+                                    Tên người thụ hưởng
+                                </label>
+                            </div>
 
-                    <div class="d-flex">
-                        <div class="flex-1">
-                            <label>
-                                Tên người thụ hưởng
-                            </label>
-                        </div>
-
-                        <div class="flex-1">
-                            <label>
-                                {{$item->bank_name}}
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="d-flex">
-                        <div class="flex-1">
-                            <label>
-                                Số tài khoản
-                            </label>
+                            <div class="flex-1">
+                                <input name="bank_name" type="text"
+                                       class="form-control @error('bank_name') is-invalid @enderror"
+                                       value="{{$item->bank_name}}">
+                                @error('bank_name')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
+                            </div>
                         </div>
 
-                        <div class="flex-1">
-                            <label>
-                                {{$item->bank_number}}
-                            </label>
+                        <div class="d-flex">
+                            <div class="flex-1">
+                                <label>
+                                    Số tài khoản
+                                </label>
+                            </div>
+
+                            <div class="flex-1">
+                                <input name="bank_number" type="text"
+                                       class="form-control @error('bank_number') is-invalid @enderror"
+                                       value="{{$item->bank_number}}">
+                                @error('bank_number')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
+                            </div>
                         </div>
+
+                        <label class="w-100">
+                            <div class="d-grid">
+                                <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+                            </div>
+                        </label>
                     </div>
 
                 </div>
             </div>
+
+            </form>
         </div>
 
     </div>
 
     <div class="col-lg-3">
-        <div class="card">
+        <div class="card pb-4">
 
+            <div class="contianer-xl">
+                <div class="col-lg-12">
+                    <div class="swiper mySwiper banner__slide">
+                        <div class="swiper-wrapper">
+                            <!-- slider image -->
+                            @foreach($item->lendImages as $lendImagesItem)
+                                <div class="swiper-slide banner__slide-item">
+                                    <img style="object-fit: cover;" src="{{$lendImagesItem->image_path}}"
+                                         alt="{{$lendImagesItem->image_name}}" class="banner__slide-img"></img>
+                                    <span class="banner__slide-title">{{$lendImagesItem->image_name}}</span>
+                                </div>
+                            @endforeach
+                        </div>
+                        <!-- <div class="swiper-pagination"></div> -->
+                        <div class="banner__slide-wrapper">
+                            <div class="swiper-button-prev">Trước</div>
+                            <div class="swiper-button-next">Sau</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -252,7 +398,7 @@
                 </div>
 
                 <div class="flex-1">
-                    <label>
+                    <label class="lend-status-{{$item->lend_status_id}}">
                         {{ optional($item->lendStatus)->name}}
                     </label>
                 </div>
@@ -314,30 +460,50 @@
 
                 <label>
                     <strong>
-                        0 VNĐ
+                        {{number_format($item->user->wallet)}} VNĐ
                     </strong>
                 </label>
             </div>
 
             <div class="d-flex">
-                <div class="flex-1">
-                    <label>
-                        Trừ ví
-                    </label>
+                <div class="flex-1 text-center">
+                    <button type="button" class="btn btn-danger">Trừ ví</button>
                 </div>
 
-                <div class="flex-1">
-                    <label>
-                        Cộng ví
-                    </label>
+                <div class="flex-1 text-center">
+                    <button type="button" class="btn btn-success">Cộng ví</button>
                 </div>
-
             </div>
 
             <div>
                 <label>
                     Lịch sử
                 </label>
+
+                <div class="ps-4">
+                    @foreach($item->user->walletHistories as $walletHistoriesItem)
+                        <div class="d-flex">
+                            <div class="flex-1">
+                                <label>
+                                    {{$walletHistoriesItem->name}}
+                                </label>
+                            </div>
+
+                            <div class="flex-1">
+                                @if($walletHistoriesItem->money > 0)
+                                    <label class="text-success">
+                                        +{{number_format($walletHistoriesItem->money)}}
+                                    </label>
+                                @else
+                                    <label class="text-danger">
+                                        {{number_format($walletHistoriesItem->money)}}
+                                    </label>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
 
             </div>
 
@@ -370,11 +536,11 @@
             const options = {}
             options.autoApply = false;
 
-            if (url.searchParams.get("start")){
+            if (url.searchParams.get("start")) {
                 options.startDate = getFormattedDate(new Date(url.searchParams.get("start")))
             }
 
-            if (url.searchParams.get("end")){
+            if (url.searchParams.get("end")) {
                 options.endDate = getFormattedDate(new Date(url.searchParams.get("end")))
             }
 
@@ -388,7 +554,7 @@
 
         updateConfig()
 
-        function viewBirthOfDay(){
+        function viewBirthOfDay() {
             // addUrlParameterObjects([{name: "start", value: new Date().toISOString().slice(0, 10)}, {
             //     name: "end",
             //     value: new Date().toISOString().slice(0, 10)
@@ -404,7 +570,7 @@
         function addUrlParameterObjects($params) {
             const searchParams = new URLSearchParams(window.location.search)
 
-            for(let i = 0 ; i < $params.length; i++){
+            for (let i = 0; i < $params.length; i++) {
                 searchParams.set($params[i].name, $params[i].value)
             }
 
@@ -412,13 +578,13 @@
         }
 
         function search(ele) {
-            if(event.key === 'Enter') {
+            if (event.key === 'Enter') {
                 searchButton()
             }
         }
 
         function searchButton(searchParams) {
-            if(!searchParams){
+            if (!searchParams) {
                 searchParams = new URLSearchParams(window.location.search)
             }
             searchParams.set('search_query', $('#input_search').val())
@@ -429,9 +595,37 @@
 
         }
 
-        function exportExcel(){
+        function exportExcel() {
             window.location.href = "{{route('administrator.users.export')}}" + window.location.search
         }
 
     </script>
+
+    <!-- Jquery JS -->
+    {{--    <script type="text/javascript" src="./jquery.min.js"></script>--}}
+    {{--    <!-- Script Bootstrap -->--}}
+    {{--    <script type="text/javascript" src="./bootstrap.bundle.min.js"></script>--}}
+    <!-- Swiper JS -->
+    <script type="text/javascript" src="{{asset('vendor/swiper/swiper-bundle.min.js')}}"></script>
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 10,
+            // loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            direction: 'horizontal',
+            autoplay: {
+                delay: 5000,
+            },
+        });
+    </script>
+
 @endsection

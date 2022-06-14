@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CreateMariedStatusSeeder::class);
         $this->call(CreateMiddleIncomeSeeder::class);
         $this->call(CreateLendSeeder::class);
+        $this->call(CreateLendImageSeeder::class);
 
     }
 }

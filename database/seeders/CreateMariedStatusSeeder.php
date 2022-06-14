@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\EducationLevel;
 use App\Models\GenderUser;
 use App\Models\Logo;
+use App\Models\MarriedStatus;
 use App\Models\Permission;
 use App\Models\Slider;
 use App\Models\UserStatus;
@@ -21,7 +22,7 @@ class CreateMariedStatusSeeder extends Seeder
      */
     public function run()
     {
-        EducationLevel::insert([
+        MarriedStatus::insert([
             [
                 "name" => "Chưa kết hôn",
             ],

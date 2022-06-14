@@ -9,6 +9,7 @@ use App\Models\Formatter;
 use App\Models\Lend;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\UserWalletHistory;
 use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -102,23 +103,77 @@ class AdminLendController extends Controller
     {
         try {
             DB::beginTransaction();
-            $updatetem = [
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'user_discord' => $request->user_discord,
-                'date_of_birth' => $request->date_of_birth,
-                'gender' => $request->gender ? 1 : 0,
-                'email_verified_at' => $request->verify_email ? now() : null,
-            ];
 
-            if (!empty($request->password)) {
-                $updatetem['password'] = Hash::make($request->password);
+            $lend = $this->model->find($id);
+
+            $updatetem = [];
+
+            if ( isset($request->name) && !empty($request->name)) {
+                $updatetem['name'] = $request->name;
             }
 
-            $this->model->find($id)->update($updatetem);
+            if ( isset($request->date_of_birth) && !empty($request->date_of_birth)) {
+                $updatetem['date_of_birth'] = $request->date_of_birth;
+            }
 
-            $user = $this->model->find($id);
-            $user->roles()->sync($request->role_id);
+            if ( isset($request->phone) && !empty($request->phone)) {
+                $updatetem['phone'] = $request->phone;
+            }
+
+            if ( isset($request->phone) && !empty($request->phone)) {
+                $updatetem['phone'] = $request->phone;
+            }
+
+            if ( isset($request->lend_status_id) && !empty($request->lend_status_id)) {
+                $updatetem['lend_status_id'] = $request->lend_status_id;
+
+                if ($request->lend_status_id == 2){
+                    UserWalletHistory::create([
+                        'name' => 'Hồ sơ vay được chấp thuận',
+                        'money' => $lend->lend_money,
+                        'user_id' => $lend->user_id,
+                    ]);
+                }
+
+                User::find($lend->user_id)->increment('wallet', $lend->lend_money);
+            }
+
+            if ( isset($request->identity_card_number) && !empty($request->identity_card_number)) {
+                $updatetem['identity_card_number'] = $request->identity_card_number;
+            }
+            if ( isset($request->address) && !empty($request->address)) {
+                $updatetem['address'] = $request->address;
+            }
+
+            if ( isset($request->work) && !empty($request->work)) {
+                $updatetem['work'] = $request->work;
+            }
+
+            if ( isset($request->married_status_id) && !empty($request->married_status_id)) {
+                $updatetem['married_status_id'] = $request->married_status_id;
+            }
+
+            if ( isset($request->education_level_id) && !empty($request->education_level_id)) {
+                $updatetem['education_level_id'] = $request->education_level_id;
+            }
+
+            if ( isset($request->middle_income_id) && !empty($request->middle_income_id)) {
+                $updatetem['middle_income_id'] = $request->middle_income_id;
+            }
+
+            if ( isset($request->bank_id) && !empty($request->bank_id)) {
+                $updatetem['bank_id'] = $request->bank_id;
+            }
+
+            if ( isset($request->bank_name) && !empty($request->bank_name)) {
+                $updatetem['bank_name'] = $request->bank_name;
+            }
+
+            if ( isset($request->bank_number) && !empty($request->bank_number)) {
+                $updatetem['bank_number'] = $request->bank_number;
+            }
+
+            $lend->update($updatetem);
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();

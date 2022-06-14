@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Lend extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
@@ -35,5 +36,13 @@ class Lend extends Model implements Auditable
 
     public function bank(){
         return $this->hasOne(Bank::class, 'id','bank_id');
+    }
+
+    public function lendImages(){
+        return $this->hasMany(LendImage::class, 'lend_id','id');
+    }
+
+    public function user(){
+        return $this->hasOne(User::class, 'id','user_id');
     }
 }

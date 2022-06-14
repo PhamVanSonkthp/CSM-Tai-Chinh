@@ -67,6 +67,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
     }
 
+    public function walletHistories()
+    {
+        return $this->hasMany(UserWalletHistory::class, 'user_id', 'id');
+    }
 
     public function checkPermissionAccess($permissionCheck)
     {

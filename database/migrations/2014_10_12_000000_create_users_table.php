@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('middle_income_id');
             $table->bigInteger('married_status_id');
             $table->string('work');
+            $table->bigInteger('wallet')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

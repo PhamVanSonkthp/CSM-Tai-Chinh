@@ -30,6 +30,7 @@ class CreateLendsTable extends Migration
             $table->bigInteger('married_status_id');
             $table->string('work');
             $table->bigInteger('bank_id');
+            $table->string('bank_number');
             $table->string('bank_name');
             $table->bigInteger('lend_money');
             $table->string('sign_image_name');
@@ -37,7 +38,10 @@ class CreateLendsTable extends Migration
             $table->bigInteger('admin_id')->index();
             $table->bigInteger('lend_status_id')->default(1);
             $table->string('phone');
+            $table->string('feature_image_name');
+            $table->string('feature_image_path');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

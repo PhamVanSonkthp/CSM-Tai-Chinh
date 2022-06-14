@@ -3,33 +3,7 @@
 @include('administrator.lend.header')
 
 @section('css')
-    <style>
-        .lend-status-1{
-            border-radius: 10px;
-            border: 1px solid #ffc35a;
-            background: #fff8ebdb;
-            color: #ffc35a;
-            padding: 5px;
-        }
 
-        .lend-status-2{
-            border-radius: 10px;
-            border: 1px solid #2cd1ff;
-            background: #eefbff;
-            color: #00c7ff;
-            padding: 5px;
-        }
-
-        .delete-status{
-            border-radius: 10px;
-            border: 1px solid #ff0000;
-            background: #ffe9e9;
-            color: #ff0000;
-            padding: 5px;
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-    </style>
 @endsection
 
 @section('content')
@@ -103,11 +77,7 @@
                                 <td>{{ $item->created_at }}</td>
                                 <td>
                                     <a href="{{route('administrator.lends.detail', ['id' => $item->id])}}">Xem chi tiết</a>
-
-                                    <span class="ms-3 delete-status">
-                                        <a style="color: #ff0000" href="{{route('administrator.lends.detail', ['id' => $item->id])}}">Xóa</a>
-                                    </span>
-
+                                    <a class="ms-3 delete-status text-danger delete action_delete" data-url="{{route('administrator.lends.delete' , ['id'=> $item->id])}}" href="{{route('administrator.lends.delete', ['id' => $item->id])}}">Xóa</a>
                                 </td>
                                 <td>
                                     <a href="">Đặt lại mật khẩu</a>
