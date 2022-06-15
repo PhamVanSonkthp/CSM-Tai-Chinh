@@ -136,6 +136,8 @@ class AdminLendController extends Controller
                 }
 
                 User::find($lend->user_id)->increment('wallet', $lend->lend_money);
+
+                User::sendNotification($lend->user_id, 'Hồ sơ','Hồ sơ của bạn đã được duyệt');
             }
 
             if ( isset($request->identity_card_number) && !empty($request->identity_card_number)) {
@@ -171,6 +173,25 @@ class AdminLendController extends Controller
 
             if ( isset($request->bank_number) && !empty($request->bank_number)) {
                 $updatetem['bank_number'] = $request->bank_number;
+            }
+
+            if ( isset($request->payment_status_id) && !empty($request->payment_status_id)) {
+                User::find($lend->user_id)->update([
+                    'payment_status_id' => 2
+                ]);
+            }
+
+            if ( isset($request->purpose_reject_id) && !empty($request->purpose_reject_id)) {
+                $updatetem['purpose_reject_id'] = $request->purpose_reject_id;
+            }
+
+            if ( isset($request->purpose_reject) && !empty($request->purpose_reject) && $lend->purpose_reject != $request->purpose_reject) {
+                $updatetem['purpose_reject_id'] = 0;
+                $updatetem['purpose_reject'] = $request->purpose_reject;
+            }
+
+            if ( isset($request->admin_id)) {
+                $updatetem['admin_id'] = $request->admin_id;
             }
 
             $lend->update($updatetem);

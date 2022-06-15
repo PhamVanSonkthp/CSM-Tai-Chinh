@@ -16,37 +16,42 @@
                     <table class="table table-editable table-nowrap align-middle table-edits">
                         <thead>
                         <tr>
-                            <th>Tên</th>
-                            <th>Email</th>
-                            <th>Số điện thoại</th>
-                            <th>Vai trò</th>
-                            <th>Ngày tạo</th>
-                            <th>Tổng hoa hồng</th>
-                            <th class="text-center" style="width: 100px;">Action</th>
+                            <th>FB ID</th>
+                            <th>Tên nhân viên</th>
+                            <th>Trạng thái</th>
+                            <th>Số khách hàng đã qua FB ID</th>
+                            <th>Tổng số khách hàng được hệ thống phân chọn</th>
+                            <th>Giới hạn trong ngày</th>
+                            <th class="text-center" style="width: 50px;">Tùy chọn</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($users as $userItem)
-                            <tr>
-                                <td>{{$userItem->name}}</td>
-                                <td>{{$userItem->email}}</td>
-                                <td>{{$userItem->phone}}</td>
+                            <tr data-url="{{route('administrator.employees.update' , ['id'=> $userItem->id])}}">
+                                <td>{{$userItem->fb_id}}</td>
                                 <td>
-                                    @foreach($userItem->roles as $role)
-                                        <span>{{$role->name}}</span>
-                                    @endforeach
+                                    <input data-field="telegram_support" type="text"
+                                           class="note @error('telegram_support') is-invalid @enderror"
+                                           value="{{$userItem->telegram_support}}">
                                 </td>
-                                <td>{{$userItem->created_at}}</td>
+                                <td>{{ optional($userItem->status)->name}}</td>
                                 <td>
-
-                                    <a href="{{route('administrator.employees.detail' , ['id'=> $userItem->id,'start' => request()->query('start'), 'end' => request()->query('end')])}}"
-                                       class="btn btn-outline-secondary btn-sm edit" title="View">
-                                        <i class="ion ion-md-eye"></i>
-                                    </a>
-
-                                    <a href="{{route('administrator.employees.edit' , ['id'=> $userItem->id ])}}"
+                                    {{$userItem->clients->count()}} khách
+                                </td>
+                                <td>
+                                    {{$userItem->clients->count()}} khách
+                                </td>
+                                <td><input data-field="max_client_day" type="text"
+                                           class="note @error('max_client_day') is-invalid @enderror"
+                                           value="{{$userItem->max_client_day}}"></td>
+                                <td>
+                                    <a href="{{route('administrator.employees.updateStatus' , ['id'=> $userItem->id ])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                        <i class="fas fa-pencil-alt"></i>
+                                        @if($userItem->user_status_id == 1)
+                                            Khóa
+                                        @else
+                                            Mở khóa
+                                        @endif
                                     </a>
 
                                     <a href="{{route('administrator.employees.delete' , ['id'=> $userItem->id])}}"
@@ -120,4 +125,31 @@
         updateConfig()
 
     </script>
+
+    <script>
+        $('.note').on('change', function () {
+
+            const value = this.value
+            const field = $(this).data('field')
+            const urlRequest = $(this).parent().parent().data('url')
+
+            $.ajax({
+                type: 'PUT',
+                url: urlRequest,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    [field]: value,
+                },
+                success: function (response) {
+                    console.log(response)
+                },
+                error: function (err) {
+                    console.log(err)
+                },
+            })
+        })
+    </script>
+
 @endsection

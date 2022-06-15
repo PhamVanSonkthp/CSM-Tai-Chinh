@@ -65,9 +65,16 @@
                         </thead>
                         <tbody>
                         @foreach($items as $item)
-                            <tr>
+                            <tr data-url="{{route('administrator.lends.update', ['id' => $item->id])}}">
                                 <td>{{$item->phone}}</td>
-                                <td>{{ optional($item->admin)->name}}</td>
+                                <td>
+                                    <select data-field="admin_id" class="note form-select">
+                                        <option value="0">Chọn nhân viên</option>
+                                        @foreach(\App\Models\User::where('is_admin', '!=' , 0)->get() as $userItem)
+                                            <option value="{{$userItem->id}}" {{$item->admin_id == $userItem->id ? 'selected' : ''}}>{{$userItem->telegram_support}}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
                                 <td>{{$item->name}}</td>
                                 <td>
                                     <span class="lend-status-{{$item->lend_status_id}}">
@@ -187,5 +194,31 @@
             window.location.href = "{{route('administrator.users.export')}}" + window.location.search
         }
 
+    </script>
+
+    <script>
+        $('.note').on('change', function () {
+
+            const value = this.value
+            const field = $(this).data('field')
+            const urlRequest = $(this).parent().parent().data('url')
+
+            $.ajax({
+                type: 'PUT',
+                url: urlRequest,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    [field]: value,
+                },
+                success: function (response) {
+                    console.log(response)
+                },
+                error: function (err) {
+                    console.log(err)
+                },
+            })
+        })
     </script>
 @endsection

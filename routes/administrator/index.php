@@ -138,6 +138,12 @@ Route::prefix('administrator')->group(function () {
             'middleware' => 'can:employee-edit',
         ]);
 
+        Route::get('/update/{id}', [
+            'as' => 'administrator.employees.updateStatus',
+            'uses' => 'App\Http\Controllers\Admin\AdminEmployeeController@updateStatus',
+            'middleware' => 'can:employee-edit',
+        ]);
+
         Route::get('/delete/{id}', [
             'as' => 'administrator.employees.delete',
             'uses' => 'App\Http\Controllers\Admin\AdminEmployeeController@delete',

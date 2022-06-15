@@ -27,6 +27,18 @@
                     </li>
                 @endcan
 
+                @can('notification-list')
+                    <li @yield('notification')>
+                        <a href="{{route('administrator.notification.index')}}" class="waves-effect">
+                            @if(\App\Models\Notification::where('notifiable_id', auth()->id())->whereNull('read_at')->count() > 0)
+                                <span class="badge rounded-pill bg-danger float-end">{{\App\Models\Notification::where('notifiable_id', auth()->id())->whereNull('read_at')->count()}}</span>
+                            @endif
+                            <i class="mdi mdi-cube-outline"></i>
+                            <span> Thông báo </span>
+                        </a>
+                    </li>
+                @endcan
+
                 <li class=" menu-title text-warning">Quản lý trang</li>
 
                 @can('logo-list')

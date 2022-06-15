@@ -376,62 +376,136 @@
 
     <div class="col-lg-6">
         <div class="card">
-            <div class="d-flex">
-                <div class="flex-1">
-                    <label>
-                        Số tiền:
-                    </label>
+
+            <form action="{{route('administrator.lends.update', ['id' => $item->id ])}}" method="post"
+                  enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="d-flex">
+                    <div class="flex-1">
+                        <label>
+                            Số tiền:
+                        </label>
+                    </div>
+
+                    <div class="flex-1">
+                        <label>
+                            {{ number_format($item->lend_money) }}
+                        </label>
+                    </div>
                 </div>
 
-                <div class="flex-1">
-                    <label>
-                        {{ number_format($item->lend_money) }}
-                    </label>
-                </div>
-            </div>
+                <div class="d-flex">
+                    <div class="flex-1">
+                        <label>
+                            Trạng thái:
+                        </label>
+                    </div>
 
-            <div class="d-flex">
-                <div class="flex-1">
-                    <label>
-                        Trạng thái:
-                    </label>
-                </div>
-
-                <div class="flex-1">
-                    <label class="lend-status-{{$item->lend_status_id}}">
-                        {{ optional($item->lendStatus)->name}}
-                    </label>
-                </div>
-            </div>
-
-            <div class="d-flex">
-                <div class="flex-1">
-                    <label>
-                        Thời hạn:
-                    </label>
+                    <div class="flex-1">
+                        <label class="lend-status-{{$item->lend_status_id}}">
+                            {{ optional($item->lendStatus)->name}}
+                        </label>
+                    </div>
                 </div>
 
-                <div class="flex-1">
-                    <label>
-                        {{$item->interval}}
-                    </label>
-                </div>
-            </div>
+                <div class="d-flex">
+                    <div class="flex-1">
+                        <label>
+                            Thời hạn:
+                        </label>
+                    </div>
 
-            <div class="d-flex">
-                <div class="flex-1">
-                    <label>
-                        Mã hợp đồng:
-                    </label>
+                    <div class="flex-1">
+                        <label>
+                            {{$item->interval}}
+                        </label>
+                    </div>
                 </div>
 
-                <div class="flex-1">
-                    <label>
-                        {{$item->id}}
-                    </label>
-                </div>
-            </div>
+                <div class="d-flex">
+                    <div class="flex-1">
+                        <label>
+                            Mã hợp đồng:
+                        </label>
+                    </div>
 
+                    <div class="flex-1">
+                        <label>
+                            {{$item->IDLend()}}
+                        </label>
+                    </div>
+                </div>
+
+                @if($item->lend_status_id == 2)
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Rút tiền:
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                <div class="form-check form-switch">
+                                    <input name="payment_status_id" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{$item->user->payment_status_id == 2 ? 'checked' : ''}}>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Lí do từ chối:
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                <div class="d-flex">
+                                    <div style="flex: 3">
+                                        <select name="purpose_reject_id" class="form-select @error('purpose_reject_id') is-invalid @enderror">
+                                            <option value="" disabled selected>Chọn lý do</option>
+                                            @foreach(\App\Models\PurposeReject::orderBy('name')->get() as $purposeRejectItem)
+                                                <option value="{{$purposeRejectItem->id}}" {{$item->purpose_reject_id == $purposeRejectItem->id ? 'selected' : ''}}>{{$purposeRejectItem->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('purpose_reject_id')
+                                        <div class="alert alert-danger">{{$message}}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div style="flex: 1">
+                                        <input name="purpose_reject" type="text"
+                                               class="form-control @error('purpose_reject') is-invalid @enderror"
+                                               value="{{ optional($item->purposeReject)->name ?? $item->purpose_reject}}" placeholder="Khác">
+                                        @error('purpose_reject')
+                                        <div class="alert alert-danger">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                <button class="btn btn-primary" type="button">Xem hợp đồng</button>
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <label>
+                                <button class="btn btn-primary" type="submit">Cập nhật</button>
+                            </label>
+                        </div>
+                    </div>
+                @endif
+            </form>
         </div>
     </div>
 

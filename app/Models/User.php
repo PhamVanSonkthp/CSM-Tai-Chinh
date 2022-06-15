@@ -85,4 +85,21 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return false;
     }
+
+    public function sendNotification($user_id, $title, $content){
+        Notification::createNotification($user_id, $title, $content);
+    }
+
+    public function notifications(){
+        return $this->hasMany(Notification::class, 'notifiable_id','id');
+    }
+
+    public function clients(){
+        return $this->hasMany(Lend::class, 'admin_id','id');
+    }
+
+    public function status()
+    {
+        return $this->hasOne(UserStatus::class , 'id','user_status_id');
+    }
 }

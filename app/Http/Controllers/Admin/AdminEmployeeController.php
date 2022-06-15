@@ -31,7 +31,7 @@ class AdminEmployeeController extends Controller
 
     public function index(){
 
-        $query = $this->user;
+        $query = $this->user->where('is_admin', '!=' , 0);
 
         if(isset($_GET['search_query'])){
             $query = $query->where('name', 'LIKE', "%{$_GET['search_query']}%");
@@ -113,6 +113,10 @@ class AdminEmployeeController extends Controller
 //                'phone'=>$request->phone,
             ];
 
+            if(!empty($request->telegram_support)){
+                $updatetem['telegram_support'] = $request->telegram_support;
+            }
+
             if(!empty($request->password)){
                 $updatetem['password'] = Hash::make($request->password);
             }
@@ -121,6 +125,28 @@ class AdminEmployeeController extends Controller
 
             $user = $this->user->find($id);
             $user->roles()->sync($request->role_id);
+            DB::commit();
+        }catch (\Exception $exception){
+            DB::rollBack();
+            Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
+        }
+
+        return back();
+    }
+
+    public function updateStatus($id , UserEditRequest $request){
+        try {
+            DB::beginTransaction();
+
+            $item = $this->user->find($id);
+
+            if ($item->user_status_id == 1){
+                $item->user_status_id = 2;
+            }else{
+                $item->user_status_id = 1;
+            }
+
+            $item->save();
             DB::commit();
         }catch (\Exception $exception){
             DB::rollBack();

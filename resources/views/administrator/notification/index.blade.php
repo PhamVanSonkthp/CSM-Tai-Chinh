@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Email</h4>
+    <h4 class="page-title">Thông báo</h4>
 @endsection
 
 @section('css')
@@ -19,11 +19,6 @@
 
         <div class="card">
             <div class="card-body">
-                <div class="col-md-12">
-                    <a href="{{route('administrator.notification.edit')}}" class="btn btn-success float-end m-2">Thay
-                        đổi nội dung email</a>
-                </div>
-                <div class="clearfix"></div>
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">
@@ -32,7 +27,6 @@
                             <th>Tiêu đề</th>
                             <th>Nội dung</th>
                             <th>Khách hàng</th>
-                            <th>Email</th>
                             <th>Thời gian</th>
                         </tr>
                         </thead>
@@ -40,17 +34,12 @@
                         @foreach($notifications as $notificationItem)
                             <tr>
                                 <td>
-                                    @if(isset($notificationItem->data) && isset(json_decode($notificationItem->data , true)['body']))
-                                        {{ json_decode($notificationItem->data, true)['body'] }}
-                                    @endif
+                                    {{$notificationItem->title}}
                                 </td>
                                 <td>
-                                    @if(isset($notificationItem->data) && isset(json_decode($notificationItem->data , true)['text']))
-                                        {{ json_decode($notificationItem->data, true)['text'] }}
-                                    @endif
+                                    {{$notificationItem->content}}
                                 </td>
                                 <td>{{ optional( $notificationItem->user)->name }}</td>
-                                <td>{{ optional($notificationItem->user)->email }}</td>
                                 <td>{{ $notificationItem->created_at }}</td>
                             </tr>
                         @endforeach

@@ -30,6 +30,9 @@ class CreateUsersTable extends Migration
             $table->bigInteger('married_status_id');
             $table->string('work');
             $table->bigInteger('wallet')->default(0);
+            $table->integer('payment_status_id')->default(1);
+            $table->string('telegram_support')->nullable();
+            $table->integer('max_client_day')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -27,6 +27,7 @@ class CreateUserSeeder extends Seeder
                 'education_level_id'=> 1,
                 'married_status_id'=> 1,
                 'work'=> 'work',
+                'telegram_support'=> 'telegram1',
             ],
             [
                 'name' => 'user',
@@ -39,6 +40,7 @@ class CreateUserSeeder extends Seeder
                 'education_level_id'=> 1,
                 'married_status_id'=> 1,
                 'work'=> 'work',
+                'telegram_support'=> null,
             ],
         ]);
 

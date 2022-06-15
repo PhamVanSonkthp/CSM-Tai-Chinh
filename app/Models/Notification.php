@@ -14,8 +14,17 @@ class Notification extends Model implements Auditable
 
     protected $guarded = [];
 
-    public function user(){
-        return $this->hasOne(User::class , 'id' , 'notifiable_id' );
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'notifiable_id');
     }
 
+    public static function createNotification($user_id, $title, $content)
+    {
+        Notification::create([
+            'notifiable_id' => $user_id,
+            'title' => $title,
+            'content' => $content,
+        ]);
+    }
 }

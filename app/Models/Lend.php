@@ -14,6 +14,10 @@ class Lend extends Model implements Auditable
 
     protected $guarded = [];
 
+    public function IDLend(){
+        return Formatter::getOnlyDate($this->created_at) . "_" . $this->id;
+    }
+
     public function admin(){
         return $this->hasOne(User::class, 'id','admin_id');
     }
@@ -44,5 +48,9 @@ class Lend extends Model implements Auditable
 
     public function user(){
         return $this->hasOne(User::class, 'id','user_id');
+    }
+
+    public function purposeReject(){
+        return $this->hasOne(PurposeReject::class, 'id','purpose_reject_id');
     }
 }
