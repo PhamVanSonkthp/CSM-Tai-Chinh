@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Notifications\FirebaseNotifications;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Notification extends Model implements Auditable
@@ -22,6 +23,7 @@ class Notification extends Model implements Auditable
     public static function createNotification($user_id, $title, $content)
     {
         Notification::create([
+            'id' => Str::uuid(),
             'notifiable_id' => $user_id,
             'title' => $title,
             'content' => $content,

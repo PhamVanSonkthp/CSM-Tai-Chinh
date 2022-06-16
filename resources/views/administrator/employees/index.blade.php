@@ -10,7 +10,15 @@
     <div class="col-12">
 
         <div class="card">
+
             <div class="card-body">
+
+                <div class="col-md-12 text-end">
+                    <a href="{{route('administrator.employees.create')}}" class="btn btn-success float-end m-2">Thêm</a>
+                </div>
+                <div class="clearfix">
+
+                </div>
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">

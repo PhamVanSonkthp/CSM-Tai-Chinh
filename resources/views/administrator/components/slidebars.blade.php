@@ -27,6 +27,38 @@
                     </li>
                 @endcan
 
+                <li class=" menu-title text-warning" style="display: none">Quản lý trang</li>
+
+                @can('logo-list')
+                    <li @yield('logo') style="display: none">
+                        <a href="{{route('administrator.logo.add')}}" class="waves-effect">
+                            <i class="mdi mdi-cube-outline"></i>
+                            <span> Logo </span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('slider-list')
+                    <li @yield('slider') style="display: none">
+                        <a href="{{route('administrator.slider.index')}}" class="waves-effect">
+                            <i class="mdi mdi-cube-outline"></i>
+                            <span> Slider </span>
+                        </a>
+                    </li>
+                @endcan
+
+                <li class=" menu-title text-warning" style="display: none">Phân quyền</li>
+
+                @can('employee-list')
+                    <li @yield('employee')>
+                        <a href="{{route('administrator.employees.index' , ['start' => date("Y-m-01", strtotime(date("Y-m-d"))), "end" => date("Y-m-t", strtotime(date("Y-m-d")))])}}"
+                           class="waves-effect">
+                            <i class="mdi mdi-cube-outline"></i>
+                            <span>Nhân viên</span>
+                        </a>
+                    </li>
+                @endcan
+
                 @can('notification-list')
                     <li @yield('notification')>
                         <a href="{{route('administrator.notification.index')}}" class="waves-effect">
@@ -39,40 +71,8 @@
                     </li>
                 @endcan
 
-                <li class=" menu-title text-warning">Quản lý trang</li>
-
-                @can('logo-list')
-                    <li @yield('logo')>
-                        <a href="{{route('administrator.logo.add')}}" class="waves-effect">
-                            <i class="mdi mdi-cube-outline"></i>
-                            <span> Logo </span>
-                        </a>
-                    </li>
-                @endcan
-
-                @can('slider-list')
-                    <li @yield('slider')>
-                        <a href="{{route('administrator.slider.index')}}" class="waves-effect">
-                            <i class="mdi mdi-cube-outline"></i>
-                            <span> Slider </span>
-                        </a>
-                    </li>
-                @endcan
-
-                <li class=" menu-title text-warning">Phân quyền</li>
-
-                @can('employee-list')
-                    <li @yield('employee')>
-                        <a href="{{route('administrator.employees.index' , ['start' => date("Y-m-01", strtotime(date("Y-m-d"))), "end" => date("Y-m-t", strtotime(date("Y-m-d")))])}}"
-                           class="waves-effect">
-                            <i class="mdi mdi-cube-outline"></i>
-                            <span>Nhân viên</span>
-                        </a>
-                    </li>
-                @endcan
-
                 @can('role-list')
-                    <li @yield('role')>
+                    <li @yield('role') style="display: none">
                         <a href="{{route('administrator.roles.index')}}" class="waves-effect">
                             <i class="mdi mdi-cube-outline"></i>
                             <span>Vai trò</span>
@@ -80,10 +80,10 @@
                     </li>
                 @endcan
 
-                <li class=" menu-title text-warning">More</li>
+                <li class=" menu-title text-warning" style="display: none">More</li>
 
                 @can('history-data-list')
-                    <li @yield('history_data')>
+                    <li @yield('history_data') style="display: none">
                         <a href="{{route('administrator.history_data.index')}}" class="waves-effect">
                             <i class="mdi mdi-cube-outline"></i>
                             <span>Lịch sử dữ liệu</span>

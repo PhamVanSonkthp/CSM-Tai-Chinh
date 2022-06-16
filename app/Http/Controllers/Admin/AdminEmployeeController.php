@@ -31,7 +31,7 @@ class AdminEmployeeController extends Controller
 
     public function index(){
 
-        $query = $this->user->where('is_admin', '!=' , 0);
+        $query = $this->user->where('is_admin' , 1);
 
         if(isset($_GET['search_query'])){
             $query = $query->where('name', 'LIKE', "%{$_GET['search_query']}%");
@@ -77,11 +77,12 @@ class AdminEmployeeController extends Controller
         try {
             DB::beginTransaction();
             $user = $this->user->create([
-                'name'=>$request->name,
-                'email'=>$request->email,
-                'phone'=>$request->phone,
+                'name'=>$request->telegram_support,
+                'telegram_support'=>$request->telegram_support,
                 'password'=> Hash::make($request->password),
                 'is_admin'=> 1,
+                'fb_id'=> $request->fb_id,
+                'max_client_day'=> $request->max_client_day,
             ]);
 
             $user->roles()->attach($request->role_id);
@@ -115,6 +116,14 @@ class AdminEmployeeController extends Controller
 
             if(!empty($request->telegram_support)){
                 $updatetem['telegram_support'] = $request->telegram_support;
+            }
+
+            if(!empty($request->max_client_day)){
+                $updatetem['max_client_day'] = $request->max_client_day;
+            }
+
+            if(!empty($request->fb_id)){
+                $updatetem['fb_id'] = $request->fb_id;
             }
 
             if(!empty($request->password)){

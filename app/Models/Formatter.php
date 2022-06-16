@@ -18,7 +18,7 @@ class Formatter extends Model
 
     public static function getOnlyDate($input){
         try {
-            return date('d-m-Y', strtotime($input));
+            return date('d/m/Y', strtotime($input));
         }catch (\Exception $exception){
             return null;
         }

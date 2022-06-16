@@ -26,14 +26,14 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="display: none">
                         <label>Ngày tạo</label>
                         <span>
                             <input type="text" id="config-demo" class="form-control">
                         </span>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-2" style="display: none">
                         <label>Giới tính</label>
                         <select id="select_gender" class="form-control select2_init" style="width: 100px;">
                             <option value="">Giới tính</option>
@@ -43,11 +43,11 @@
                         </select>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-2" style="display: none">
                         <p style="cursor: pointer;" onclick="viewBirthOfDay()">Có <span class="text-danger">{{\App\Models\User::whereMonth('date_of_birth',now()->month)->whereDay('date_of_birth',now()->day)->where('is_admin' , 0)->count()}}</span> khách hàng sinh nhật hôm nay</p>
                     </div>
 
-                    <div class="col-md-2 text-end">
+                    <div class="col-md-2 text-end" style="display: none">
                         <a href="{{route('administrator.users.create')}}" class="btn btn-success float-end m-2">Add</a>
                         <button onclick="exportExcel()" class="btn btn-success float-end m-2">Export</button>
                     </div>
@@ -61,9 +61,7 @@
                             <th>Tên</th>
                             <th>Số điện thoại</th>
                             <th>Ngày sinh</th>
-                            <th>Giới tính</th>
-                            <th>Người giới thiệu</th>
-                            <th>Action</th>
+                            <th style="width: 50px;">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -72,8 +70,13 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->phone}}</td>
                                 <td>{{$item->date_of_birth}}</td>
-                                <td>{{ optional($item->gender)->name}}</td>
-                                <td>{{ optional($item->presenter)->name}}</td>
+                                <td>
+                                    <a href="{{route('administrator.users.delete' , ['id'=> $item->id])}}"
+                                       data-url="{{route('administrator.users.delete' , ['id'=> $item->id])}}"
+                                       class="btn btn-danger btn-sm delete action_delete" title="Delete">
+                                        <i class="mdi mdi-close"></i>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
 

@@ -23,7 +23,7 @@ class CreateUserSeeder extends Seeder
                 'email' => 'admin',
                 'date_of_birth' => '1999/04/18',
                 'password' => '$2y$10$sr.4gc0Gpv.t5nvrFA3maOJI/dTS3SNL1fKC7SvGfuGdQlOHffBAy',
-                'is_admin'=> 1,
+                'is_admin'=> 2,
                 'education_level_id'=> 1,
                 'married_status_id'=> 1,
                 'work'=> 'work',

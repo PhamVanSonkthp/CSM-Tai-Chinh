@@ -26,7 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $guarded = [
-        'is_admin',
+//        'is_admin',
     ];
 
     /**
@@ -74,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function checkPermissionAccess($permissionCheck)
     {
-        if (optional(auth()->user())->is_admin == 1) return true;
+        if (optional(auth()->user())->is_admin == 2) return true;
 
         $roles = optional(auth()->user())->roles;
         foreach ($roles as $role) {

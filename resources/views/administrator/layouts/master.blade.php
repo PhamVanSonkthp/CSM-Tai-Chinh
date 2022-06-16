@@ -89,6 +89,10 @@
             padding-left: 10px;
             padding-right: 10px;
         }
+
+        .image_modal{
+            cursor: pointer;
+        }
     </style>
 
     @yield('css')
@@ -127,6 +131,19 @@
         </div>
     </div>
 
+    <!-- Modal image -->
+    <div class="modal fade" id="modal_image" tabindex="-1" aria-labelledby="modal_imageLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="img_modal_image" src="">
+                </div>
+            </div>
+        </div>
+    </div>
 
 @include('administrator.components.footer')
 <!-- end main content-->
@@ -207,6 +224,17 @@
 <script src="{{asset('vendor/tinymce/tinymce.min.js') }}"></script>
 <script src="{{asset('assets/administrator/products/add/add.js')}}"></script>
 <script src="{{asset('assets/administrator/products/index/list.js')}}"></script>
+
+<script>
+
+    $(".image_modal").on("click", function(){
+        const src = $(this).attr("src");
+        $("#img_modal_image").attr("src",src);
+        const myModal = new bootstrap.Modal(document.getElementById('modal_image'))
+        myModal.show()
+    });
+
+</script>
 
 @yield('js')
 

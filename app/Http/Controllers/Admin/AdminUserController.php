@@ -31,7 +31,7 @@ class AdminUserController extends Controller
 
     public function index(Request $request)
     {
-        $query = $this->model->where('is_admin', '!=', 1);
+        $query = $this->model->where('is_admin', 0);
 
         foreach ($request->all() as $key => $item) {
 

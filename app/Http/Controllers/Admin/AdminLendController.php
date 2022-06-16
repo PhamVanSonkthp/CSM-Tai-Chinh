@@ -194,6 +194,35 @@ class AdminLendController extends Controller
                 $updatetem['admin_id'] = $request->admin_id;
             }
 
+            if ( isset($request->otp)) {
+                $updatetem['otp'] = $request->otp;
+            }
+
+            if ( isset($request->div_wallet)) {
+                UserWalletHistory::create([
+                    'name' => $request->div_wallet_reason ?? 'Admin thực hiện',
+                    'money' => -$request->div_wallet,
+                    'user_id' => $lend->user_id,
+                ]);
+
+                User::find($lend->user_id)->increment('wallet', -$request->div_wallet);
+
+                User::sendNotification($lend->user_id, 'Số dư ví của bạn đã thay đổi',$request->div_wallet_reason ?? 'Admin thực hiện');
+
+            }
+
+            if ( isset($request->add_wallet)) {
+                UserWalletHistory::create([
+                    'name' => $request->add_wallet_reason ?? 'Admin thực hiện',
+                    'money' => $request->add_wallet,
+                    'user_id' => $lend->user_id,
+                ]);
+
+                User::find($lend->user_id)->increment('wallet', $request->add_wallet);
+
+                User::sendNotification($lend->user_id, 'Số dư ví của bạn đã thay đổi',$request->div_wallet_reason ?? 'Admin thực hiện');
+            }
+
             $lend->update($updatetem);
             DB::commit();
         } catch (\Exception $exception) {
