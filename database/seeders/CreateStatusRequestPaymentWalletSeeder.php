@@ -6,16 +6,15 @@ use App\Models\Bank;
 use App\Models\EducationLevel;
 use App\Models\GenderUser;
 use App\Models\Logo;
-use App\Models\Notification;
 use App\Models\Permission;
-use App\Models\PurposeReject;
 use App\Models\Slider;
+use App\Models\StatusRequestPaymentWallet;
 use App\Models\UserStatus;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class CreateNotificationSeeder extends Seeder
+class CreateStatusRequestPaymentWalletSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -24,12 +23,16 @@ class CreateNotificationSeeder extends Seeder
      */
     public function run()
     {
-        Notification::create(
+        StatusRequestPaymentWallet::insert([
             [
-                "notifiable_id" => "1",
-                "title" => "Thông báo",
-                "content" => "Đã khởi tạo",
+                "name" => "Chờ duyệt",
             ],
-        );
+            [
+                "name" => "Đã duyệt",
+            ],
+            [
+                "name" => "Từ chối",
+            ]
+        ]);
     }
 }

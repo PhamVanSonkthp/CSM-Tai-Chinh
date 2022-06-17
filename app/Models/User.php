@@ -86,6 +86,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
+    public function requestPaymentWallets(){
+        return $this->hasMany(RequestPaymentWallet::class, 'user_id','id');
+    }
+
     public function sendNotification($user_id, $title, $content){
         Notification::createNotification($user_id, $title, $content);
     }
@@ -101,5 +105,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function status()
     {
         return $this->hasOne(UserStatus::class , 'id','user_status_id');
+    }
+
+    public function paymentStatus()
+    {
+        return $this->hasOne(PaymentStatus::class , 'id','payment_status_id');
     }
 }

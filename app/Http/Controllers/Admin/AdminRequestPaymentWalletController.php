@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAddRequest;
 use App\Http\Requests\UserEditRequest;
 use App\Models\Formatter;
+use App\Models\Lend;
+use App\Models\RequestPaymentWallet;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\UserWalletHistory;
 use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,53 +19,64 @@ use Illuminate\Support\Facades\Log;
 use function redirect;
 use function view;
 
-class AdminUserController extends Controller
+class AdminRequestPaymentWalletController extends Controller
 {
     use DeleteModelTrait;
 
     private $model;
-    private $role;
 
-    public function __construct(User $model, Role $role)
+    public function __construct(RequestPaymentWallet $model)
     {
         $this->model = $model;
-        $this->role = $role;
     }
 
     public function index(Request $request)
     {
-        $query = $this->model->where('is_admin', 0);
+        $query = $this->model;
 
         foreach ($request->all() as $key => $item) {
 
             if ($key == "search_query") {
                 if (!empty($item) || strlen($item) > 0) {
+
+                    $query= $query->select('request_payment_wallets.*')
+                        ->join('users', 'request_payment_wallets.user_id', '=', 'users.id');
+
                     $query = $query->where(function($query) use ($item){
-                        $query->orWhere('name', 'LIKE', "%{$item}%");
+                        $query->orWhere('users.name', 'LIKE', "%{$item}%");
+                        $query->orWhere('phone', 'LIKE', "%{$item}%");
+                        $query->orWhere('identity_card_number', 'LIKE', "%{$item}%");
                     });
                 }
-            } else if ($key == "gender") {
-                if (!empty($item) || strlen($item) > 0) {
-                    $query = $query->where('gender_id', $item);
+            } else if ($key == "status_request_payment_wallet_id_1") {
+                if ((!empty($item) || strlen($item) > 0) && $item == 'true') {
+                    $query = $query->where('status_request_payment_wallet_id', 1);
+                }
+            } else if ($key == "status_request_payment_wallet_id_2") {
+                if ((!empty($item) || strlen($item) > 0) && $item == 'true') {
+                    $query = $query->where('status_request_payment_wallet_id', 2);
+                }
+            }else if ($key == "status_request_payment_wallet_id_3") {
+                if ((!empty($item) || strlen($item) > 0) && $item == 'true') {
+                    $query = $query->where('status_request_payment_wallet_id', 3);
                 }
             }
         }
 
-        $items = $query->latest('users.created_at')->paginate(Formatter::getLimitRequest())->appends(request()->query());
+        $items = $query->latest()->paginate(Formatter::getLimitRequest())->appends(request()->query());
 
-        return view('administrator.user.index', compact('items'));
+        return view('administrator.request_payment_wallet.index', compact('items'));
     }
 
     public function create()
     {
-        $roles = $this->role->all();
-        return view('administrator.user.add', compact('roles'));
+        return view('administrator.request_payment_wallet.add');
     }
 
     public function store(UserAddRequest $request)
     {
 
-        $user = $this->model->create([
+        $item = $this->model->create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -73,58 +87,39 @@ class AdminUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('administrator.users.edit', ["id" => $user->id]);
+        return redirect()->route('administrator.users.edit', ["id" => $item->id]);
     }
 
     public function edit($id)
     {
         $item = $this->model->find($id);
-        return view('administrator.user.edit', compact('item'));
+        return view('administrator.request_payment_wallet.edit', compact('item'));
     }
 
-    public function update($id, UserEditRequest $request)
+    public function detail($id)
+    {
+        $item = $this->model->find($id);
+        return view('administrator.request_payment_wallet.detail', compact('item'));
+    }
+
+    public function update($id, Request $request)
     {
         try {
             DB::beginTransaction();
+
+            $item = $this->model->find($id);
+
             $updatetem = [];
 
-            if (!empty($request->name)) {
-                $updatetem['name'] = $request->name;
+            if ( isset($request->status_request_payment_wallet_id)) {
+                $updatetem['status_request_payment_wallet_id'] = $request->status_request_payment_wallet_id;
             }
 
-            if (!empty($request->phone)) {
-                $updatetem['phone'] = $request->phone;
+            if ( isset($request->note)) {
+                $updatetem['note'] = $request->note;
             }
 
-            if (!empty($request->date_of_birth)) {
-                $updatetem['date_of_birth'] = $request->date_of_birth;
-            }
-
-            if (!empty($request->gender)) {
-                $updatetem['gender'] = $request->gender ? 1 : 0;
-            }
-
-            if (!empty($request->email_verified_at)) {
-                $updatetem['email_verified_at'] = $request->verify_email ? now() : null;
-            }
-
-            if (!empty($request->payment_status_id)) {
-                $updatetem['payment_status_id'] = $request->payment_status_id;
-            }
-
-            if (!empty($request->user_status_id)) {
-                $updatetem['user_status_id'] = $request->user_status_id;
-            }
-
-
-            if (!empty($request->password)) {
-                $updatetem['password'] = Hash::make($request->password);
-            }
-
-            $this->model->find($id)->update($updatetem);
-
-            $user = $this->model->find($id);
-            $user->roles()->sync($request->role_id);
+            $item->update($updatetem);
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();

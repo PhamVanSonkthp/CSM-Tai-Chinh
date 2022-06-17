@@ -59,8 +59,8 @@
                             <th>Tên</th>
                             <th>Trạng thái hồ sơ</th>
                             <th>Khởi tạo lúc</th>
-                            <th>Tùy chọn</th>
-                            <th>Tùy chọn</th>
+                            <th style="width: 50px;">Tùy chọn</th>
+{{--                            <th>Tùy chọn</th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -86,9 +86,9 @@
                                     <a href="{{route('administrator.lends.detail', ['id' => $item->id])}}">Xem chi tiết</a>
                                     <a class="ms-3 delete-status text-danger delete action_delete" data-url="{{route('administrator.lends.delete' , ['id'=> $item->id])}}" href="{{route('administrator.lends.delete', ['id' => $item->id])}}">Xóa</a>
                                 </td>
-                                <td>
-                                    <a href="">Đặt lại mật khẩu</a>
-                                </td>
+{{--                                <td>--}}
+{{--                                    <a href="">Đặt lại mật khẩu</a>--}}
+{{--                                </td>--}}
                             </tr>
                         @endforeach
 

@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CreatePurposeRejectSeeder::class);
         $this->call(CreatePaymentStatusSeeder::class);
         $this->call(CreateNotificationSeeder::class);
+        $this->call(CreateStatusRequestPaymentWalletSeeder::class);
+        $this->call(CreateRequestPaymentWalletSeeder::class);
 
     }
 }

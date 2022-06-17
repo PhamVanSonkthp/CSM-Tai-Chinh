@@ -233,6 +233,33 @@ Route::prefix('administrator')->group(function () {
 
     });
 
+    Route::prefix('request-payment-wallet')->group(function () {
+        Route::get('/', [
+            'as' => 'administrator.request_payment_wallet.index',
+            'uses' => 'App\Http\Controllers\Admin\AdminRequestPaymentWalletController@index',
+            'middleware' => 'can:notification-list',
+        ]);
+
+        Route::get('/edit', [
+            'as' => 'administrator.request_payment_wallet.edit',
+            'uses' => 'App\Http\Controllers\Admin\AdminRequestPaymentWalletController@edit',
+            'middleware' => 'can:notification-edit',
+        ]);
+
+        Route::put('/update/{id}', [
+            'as' => 'administrator.request_payment_wallet.update',
+            'uses' => 'App\Http\Controllers\Admin\AdminRequestPaymentWalletController@update',
+            'middleware' => 'can:notification-edit',
+        ]);
+
+        Route::get('/delete/{id}', [
+            'as'=>'administrator.request_payment_wallet.delete',
+            'uses'=>'App\Http\Controllers\Admin\AdminRequestPaymentWalletController@delete',
+            'middleware'=>'can:notification-delete',
+        ]);
+
+    });
+
     Route::prefix('slider')->group(function () {
         Route::get('/', [
             'as' => 'administrator.slider.index',

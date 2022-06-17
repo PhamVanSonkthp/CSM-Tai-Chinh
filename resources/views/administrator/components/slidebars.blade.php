@@ -60,6 +60,18 @@
                 @endcan
 
                 @can('notification-list')
+                    <li @yield('request_payment_wallet')>
+                        <a href="{{route('administrator.request_payment_wallet.index')}}" class="waves-effect">
+                            @if(\App\Models\RequestPaymentWallet::where('status_request_payment_wallet_id', 1)->count() > 0)
+                                <span class="badge rounded-pill bg-danger float-end">{{\App\Models\RequestPaymentWallet::where('status_request_payment_wallet_id', 1)->count()}}</span>
+                            @endif
+                            <i class="mdi mdi-cube-outline"></i>
+                            <span> Yêu cầu rút tiền </span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('notification-list')
                     <li @yield('notification')>
                         <a href="{{route('administrator.notification.index')}}" class="waves-effect">
                             @if(\App\Models\Notification::where('notifiable_id', auth()->id())->whereNull('read_at')->count() > 0)

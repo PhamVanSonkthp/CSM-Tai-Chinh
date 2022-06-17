@@ -45,7 +45,7 @@ class CreateLendSeeder extends Seeder
                 "lend_money" => "30000000",
                 "sign_image_name" => "sign_image_name",
                 "sign_image_path" => "sign_image_path",
-                "admin_id" => "1",
+                "admin_id" => "2",
                 "lend_status_id" => "1",
                 "phone" => "phone",
                 "feature_image_name" => "Ảnh",

@@ -1,6 +1,6 @@
 @extends('administrator.layouts.master')
 
-@include('administrator.user.header')
+@include('administrator.request_payment_wallet.header')
 
 @section('css')
 
@@ -10,92 +10,79 @@
     <div class="col-md-12">
 
         <div class="card">
-            <div class="card-body">
 
-                <div class="row align-items-end">
+            <div class="card-header">
+                <div>
+                    <label>
+                        Tùy chọn
+                    </label>
+                </div>
+
+                <div class="form-check form-check-inline mt-3">
+                    <label class="form-check-label" for="inlineCheckbox1">Chờ duyệt</label>
+                    <input name="status_request_payment_wallet_id_1" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" {{request('status_request_payment_wallet_id_1') == 'true' ? 'checked' : ''}}>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="inlineCheckbox2">Đã duyệt</label>
+                    <input name="status_request_payment_wallet_id_2" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2"{{request('status_request_payment_wallet_id_2') == 'true' ? 'checked' : ''}}>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="inlineCheckbox3">Từ chối</label>
+                    <input name="status_request_payment_wallet_id_3" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"{{request('status_request_payment_wallet_id_3') == 'true' ? 'checked' : ''}}>
+                </div>
+
+
+                <div class="row mt-3">
                     <div class="col-md-3">
                         <div id="datatable_filter" class="dataTables_filter row" style="align-items: flex-end;">
                             <div class="col-9">
-                                <label>Search:</label>
                                 <input id="input_search" type="search" class="form-control form-control-sm"
-                                       placeholder="Entering..." aria-controls="datatable" onkeydown="search(this)">
+                                       placeholder="Tên khách hàng" aria-controls="datatable" onkeydown="search(this)">
                             </div>
                             <div class="col-3">
                                 <button type="button" class="btn btn-primary waves-effect waves-light" onclick="searchButton()">Tìm</button>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-3" style="display: none">
-                        <label>Ngày tạo</label>
-                        <span>
-                            <input type="text" id="config-demo" class="form-control">
-                        </span>
-                    </div>
-
-                    <div class="col-md-2" style="display: none">
-                        <label>Giới tính</label>
-                        <select id="select_gender" class="form-control select2_init" style="width: 100px;">
-                            <option value="">Giới tính</option>
-                            @foreach(\App\Models\GenderUser::all() as $item)
-                                <option value="{{$item->id}}">{{$item->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-md-2" style="display: none">
-                        <p style="cursor: pointer;" onclick="viewBirthOfDay()">Có <span class="text-danger">{{\App\Models\User::whereMonth('date_of_birth',now()->month)->whereDay('date_of_birth',now()->day)->where('is_admin' , 0)->count()}}</span> khách hàng sinh nhật hôm nay</p>
-                    </div>
-
-                    <div class="col-md-2 text-end" style="display: none">
-                        <a href="{{route('administrator.users.create')}}" class="btn btn-success float-end m-2">Add</a>
-                        <button onclick="exportExcel()" class="btn btn-success float-end m-2">Export</button>
-                    </div>
                 </div>
+            </div>
 
+
+            <div class="card-body">
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">
                         <thead>
                         <tr>
-                            <th>Tên</th>
-                            <th>Số điện thoại</th>
-                            <th>Ngày sinh</th>
-                            <th>Trạng thái rút tiền</th>
-                            <th>Trạng thái tài khoản</th>
-                            <th style="width: 50px;">Action</th>
+                            <th>Tên khách hàng</th>
+                            <th>Số tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Ghi chú</th>
+                            <th>Khởi tạo lúc</th>
+                            <th style="width: 50px;">Tùy chọn</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($items as $item)
-                            <tr data-url="{{route('administrator.users.update' , ['id'=> $item->id])}}">
-                                <td>{{$item->name}}</td>
-                                <td>{{$item->phone}}</td>
-                                <td>{{$item->date_of_birth}}</td>
+                            <tr data-url="{{route('administrator.request_payment_wallet.update', ['id' => $item->id])}}">
+                                <td>{{ optional($item->user)->name}}</td>
+                                <td>{{number_format($item->money)}}</td>
+
                                 <td>
-                                    <select data-field="payment_status_id" class="note form-select @error('payment_status_id') is-invalid @enderror">
-                                        <option value="" disabled selected>Chọn</option>
-                                        @foreach(\App\Models\PaymentStatus::orderBy('name')->get() as $PaymentStatusItem)
-                                            <option value="{{$PaymentStatusItem->id}}" {{$item->payment_status_id == $PaymentStatusItem->id ? 'selected' : ''}}>{{$PaymentStatusItem->name}}</option>
+                                    <select data-field="status_request_payment_wallet_id" class="note form-select">
+                                        <option value="0" selected disabled>---Trạng thái---</option>
+                                        @foreach(\App\Models\StatusRequestPaymentWallet::all() as $StatusRequestPaymentWalletItem)
+                                            <option value="{{$StatusRequestPaymentWalletItem->id}}" {{$item->status_request_payment_wallet_id == $StatusRequestPaymentWalletItem->id ? 'selected' : ''}}>{{$StatusRequestPaymentWalletItem->name}}</option>
                                         @endforeach
                                     </select>
                                 </td>
 
                                 <td>
-                                    <select data-field="user_status_id" class="note form-select @error('user_status_id') is-invalid @enderror">
-                                        <option value="" disabled selected>Chọn</option>
-                                        @foreach(\App\Models\UserStatus::orderBy('name')->get() as $UserStatusItem)
-                                            <option value="{{$UserStatusItem->id}}" {{$item->user_status_id == $UserStatusItem->id ? 'selected' : ''}}>{{$UserStatusItem->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <input data-field="note" type="text" class="note form-control @error('note') is-invalid @enderror" value="{{ $item->note }}">
                                 </td>
-
+                                <td>{{ $item->created_at }}</td>
                                 <td>
-                                    <a href="{{route('administrator.users.delete' , ['id'=> $item->id])}}"
-                                       data-url="{{route('administrator.users.delete' , ['id'=> $item->id])}}"
-                                       class="btn btn-danger btn-sm delete action_delete" title="Delete">
-                                        <i class="mdi mdi-close"></i>
-                                    </a>
+                                    <a class="ms-3 delete-status text-danger delete action_delete" data-url="{{route('administrator.request_payment_wallet.delete' , ['id'=> $item->id])}}" href="{{route('administrator.request_payment_wallet.delete', ['id' => $item->id])}}">Xóa</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -191,7 +178,9 @@
                 searchParams = new URLSearchParams(window.location.search)
             }
             searchParams.set('search_query', $('#input_search').val())
-            searchParams.set('gender', $('#select_gender').val())
+            searchParams.set('status_request_payment_wallet_id_1', $('input[name="status_request_payment_wallet_id_1"]').is(':checked'))
+            searchParams.set('status_request_payment_wallet_id_2', $('input[name="status_request_payment_wallet_id_2"]').is(':checked'))
+            searchParams.set('status_request_payment_wallet_id_3', $('input[name="status_request_payment_wallet_id_3"]').is(':checked'))
             window.location.search = searchParams.toString()
 
         }
@@ -227,5 +216,4 @@
             })
         })
     </script>
-
 @endsection

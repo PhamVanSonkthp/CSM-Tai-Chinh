@@ -26,8 +26,8 @@
                         <tr>
                             <th>Tiêu đề</th>
                             <th>Nội dung</th>
-                            <th>Khách hàng</th>
-                            <th>Thời gian</th>
+{{--                            <th>Khách hàng</th>--}}
+                            <th style="width: 50px;">Thời gian</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,7 +39,7 @@
                                 <td>
                                     {{$notificationItem->content}}
                                 </td>
-                                <td>{{ optional( $notificationItem->user)->name }}</td>
+{{--                                <td>{{ optional( $notificationItem->user)->name }}</td>--}}
                                 <td>{{ $notificationItem->created_at }}</td>
                             </tr>
                         @endforeach
