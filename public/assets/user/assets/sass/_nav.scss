@@ -1,0 +1,47 @@
+.nav {
+    @include responsive_mobile {
+        &-list {
+            @include flexBox(bothSides);
+            flex-wrap: wrap;
+        }
+
+        &-item {
+            margin-bottom: 40px;
+            min-width: 49%;
+
+            &__icon {
+                @include flexBox(both);
+                width: 60px;
+                height: 60px;
+
+                cursor: pointer;
+                margin: 0 auto;
+                border-radius: 20px;
+                background-color: $color-blue;
+
+                &>svg {
+                    width: 30px;
+                    height: 30px;
+                    fill: $back-white;
+                }
+
+                &:active {
+                    opacity: 0.5;
+                    transform: scale(0.9) translateZ(0px);
+                }
+            }
+
+            &__text {
+                margin-top: 8px;
+                font-size: 1.4rem;
+                text-align: center;
+            }
+
+            &:nth-child(2n) {
+                .nav-item__icon {
+                    background-color: $color-green;
+                }
+            }
+        }
+    }
+}

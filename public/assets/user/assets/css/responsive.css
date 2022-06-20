@@ -1,0 +1,473 @@
+/* =================== PC BIG ===================*/
+@media (min-width: 1650px) {
+  .container-xl {
+    max-width: 1520px;
+  }
+
+  .banner__slide {
+    max-width: 98%;
+    margin-right: auto;
+  }
+
+  .banner__media-bottom {
+    justify-content: right;
+    grid-template-columns: 49% 49%;
+  }
+
+  .category__swiper .flashSale__swiper-info {
+    padding: 0px 20px;
+  }
+
+  .service__contact-input {
+    width: 40%;
+  }
+}
+
+/* =================== PC Lower ===================*/
+@media only screen and (max-width: 1440px) {
+
+  /* ==================== Details Product ================ */
+  .details-info__digital-header {
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .details-info__digital-header>li {
+    padding: 0 8px 0 8px;
+    margin-bottom: 6px;
+  }
+
+  .details-info__digital-title {
+    font-size: 1.5rem;
+  }
+
+  .details-info__branch-header {
+    padding: 10px 12px;
+  }
+
+  .details-info__slider-img>img {
+    max-height: 415px;
+    min-height: 415px;
+  }
+
+  .details-info__slider-thumbs .swiper-slide>img {
+    min-height: 89px;
+  }
+
+  .details-digital__title {
+    width: 30%;
+    min-width: 102px;
+    padding-right: 14px;
+  }
+
+  .details-digital__item>p {
+    line-height: 1.8rem;
+  }
+}
+
+/* =================== PC HD ===================*/
+@media only screen and (max-width: 1281px) {
+  .hide-on-pc-HD {
+    display: none;
+  }
+
+  /* ------------------ HEADER ------------------- */
+  .header__btn-cart-quantity,
+  .header__btn>svg {
+    margin-right: 8px;
+  }
+
+  .header__btn-cart {
+    color: #000;
+  }
+
+  .header__btn-cart,
+  .header__btn-build {
+    padding: 12px 11px;
+  }
+
+  .header__btn {
+    margin-left: 10px;
+  }
+
+  .header__main-search {
+    margin-left: 20px;
+    min-width: 41%;
+  }
+
+  .header__main-search input {
+    padding: 8px 4px 8px 10px;
+  }
+
+  .header__scroll-wrapper .header__btn-cart {
+    padding: 10px;
+  }
+
+  /* ------------------ BANNER ------------------- */
+
+  .banner__media>.row>.col-lg-9 {
+    width: 100%;
+  }
+
+  .banner__slide {
+    max-width: 100%;
+  }
+
+  .banner__slide-img {
+    height: 427px;
+    max-height: 427px;
+  }
+
+  .banner__media {
+    width: calc(100% - (255px + 16px));
+    margin: 16px 0 0 16px;
+  }
+
+  .banner__media-bottom {
+    column-gap: 18px;
+  }
+
+  /* ------------------ CATEGORY ------------------- */
+
+  .category__swiper-valuate-star span {
+    margin-top: 6px;
+    display: block;
+  }
+
+  .category__header-title {
+    font-size: 2rem;
+  }
+
+  .category__swiper .flashSale__swiper-sale {
+    font-size: 1.2rem;
+  }
+
+  .category__swiper-heading {
+    line-height: 22px;
+  }
+
+  /* ------------------ Filters ------------------ */
+  .filters-content__action>button {
+    margin-bottom: 10px;
+  }
+
+  .filters-content__list {
+    margin-left: 10px;
+  }
+
+  .filters-content__item>a {
+    line-height: 22px;
+  }
+
+  .filters-content__item {
+    margin-bottom: 12px;
+    align-items: flex-start;
+    line-height: 20px;
+  }
+
+  .filters-content__item .form-check-input {
+    margin-top: 3px !important;
+  }
+
+  .filters-content__price {
+    font-size: 1.4rem;
+  }
+
+  .filters-content__title {
+    font-size: 1.5rem;
+  }
+
+  .filters-content__range-price {
+    --bs-gutter-x: 0.8rem;
+  }
+
+  .filters-content__range-price input {
+    font-size: 1.3rem;
+    padding: 6px 5px;
+  }
+
+  .filters-content__condition {
+    margin-right: 20px;
+    width: 23%;
+  }
+
+  .filters-content__product {
+    width: 77%;
+  }
+
+  .filters-content__details>span {
+    font-size: 1.4rem;
+  }
+
+  .filters-title {
+    font-size: 2.6rem;
+  }
+
+  .filters-content__product-list>.row>.col-xl-3 {
+    flex: 0 0 auto !important;
+    width: 33.33333333% !important;
+  }
+
+  /* ===================== Details Product =================== */
+
+  .details-info__slider-thumbs .swiper-slide>img {
+    min-height: auto;
+  }
+
+  .details-info__branch-option>select {
+    padding: 8px 2px 8px 6px;
+    background-position: right 0px center;
+  }
+
+  .details-info__digital-option {
+    flex-wrap: wrap;
+  }
+
+  .details-info__digital-warranty {
+    padding: 8px 12px;
+  }
+
+  .details-info__digital-saving {
+    margin-top: 7px;
+  }
+
+  .details-info__digital-money .price-new {
+    margin-right: 20px;
+  }
+
+  .details-evaluate__ratio {
+    margin-top: 26px;
+  }
+
+  .details-info__slider-img>img {
+    min-height: 355px;
+  }
+
+  .details-info__slider-thumbs .swiper-slide {
+    width: calc((100% - 20px) / 4) !important;
+  }
+
+  .details-evaluate__vote>.row>.col-lg-8.col-xl-8,
+  .details-evaluate__vote>.row>.col-lg-4.col-xl-4 {
+    width: 100%;
+  }
+
+}
+
+/* =================== PC Responsive ===================*/
+@media only screen and (max-width: 1200px) {
+  body {
+    overflow: auto;
+    width: 1200px;
+  }
+
+  .header__scroll{
+    display: none !important;
+  }
+
+  /* .filters-content__condition {
+    min-width: 254px;
+  }
+
+  .filters-content__product {
+    min-width: 850px;
+  } */
+
+  .details-slider .swiper-button-next,
+  .details-slider .swiper-button-prev {
+    color: #6c6c6c;
+  }
+
+  .details-slider .swiper-button-next,
+  .details-slider .swiper-rtl .swiper-button-prev {
+    right: -10px;
+  }
+
+  .details-slider .swiper-button-prev,
+  .details-slider .swiper-rtl .swiper-button-next {
+    left: -10px;
+  }
+
+  .details-digital__item>p {
+    line-height: 2.1rem;
+  }
+}
+
+/* ============= PC LOWER  min-1023px ===============*/
+@media only screen and (min-width: 63.9375em) and (max-width: 1240px) {
+  .hide-on-pc-Lose {
+    display: none;
+  }
+
+  /* ====================== Header =================== */
+  .header__interest {
+    padding: 12px 16px;
+  }
+
+  .header__btn,
+  .header__main-search {
+    margin-left: 12px;
+  }
+
+  .header__main-logo {
+    max-width: 242px;
+  }
+
+
+  .header__btn>svg {
+    margin-right: 10px;
+  }
+
+  .header__btn-cart-quantity {
+    margin-right: 10px;
+  }
+
+  .header__btn-build {
+    padding: 12px 8px;
+  }
+
+  .header__btn-cart {
+
+    padding: 12px 8px;
+    /* flex-direction: column; */
+  }
+
+  .header__main-search button {
+    padding: 4px 12px;
+  }
+
+  .header__main-search input {
+    padding: 8px 6px;
+  }
+
+  .header__nav-menu.child .banner__category {
+    left: 58%;
+  }
+
+
+  /* ====================== Banner ================== */
+  .banner__media .col-lg-9 {
+    width: 100%;
+  }
+
+  .banner__media {
+    width: 73%;
+  }
+
+  .banner__category {
+    width: 27%;
+  }
+
+
+  /* ======================== Category ===================== */
+
+  .category__header-item {
+    padding: 0px 16px;
+  }
+
+  .category__header-title {
+    font-size: 2rem;
+  }
+
+  .category__main .swiper-button-next,
+  .category__main .swiper-rtl .swiper-button-prev {
+    right: 0px;
+  }
+
+  .category__main .swiper-button-prev,
+  .category__main .swiper-rtl .swiper-button-next {
+    left: 0px;
+  }
+
+  /* ====================== Service ===================== */
+
+  .service__policy-content {
+    align-items: flex-start;
+  }
+
+  .service__policy-content img {
+    width: 34px;
+    height: 30px;
+  }
+
+  .service__contact-input {
+    width: 56%;
+  }
+
+  .footer__introduce-heading::after {
+    width: 38%;
+  }
+
+
+}
+
+/* =============== Mobile & tablet ==============*/
+@media only screen and (max-width: 63.9375em) {
+  .hide-on-mobile-tablet {
+    display: none !important;
+  }
+
+}
+
+/* ==================== Tablet ===================*/
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+  .hide-on-tablet {
+    display: none !important;
+  }
+
+}
+
+/* =================== Tablet SM =================== */
+@media only screen and (max-width: 37em) {}
+
+/* =================== Mobile ===================*/
+@media only screen and (max-width: 46.1875em) {
+  .hide-on-mobile {
+    display: none;
+  }
+
+
+}
+
+/* ================= Iphone 5/SE ===============*/
+@media only screen and (max-width: 24.4375em) {}
+
+@media only screen and (min-width: 63.9375em) {
+
+  /* 5 colum Bootstrap */
+  .col-xs-5ths,
+  .col-sm-5ths,
+  .col-md-5ths,
+  .col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .col-xs-5ths {
+    width: 20%;
+    float: left;
+  }
+
+  @media (min-width: 768px) {
+    .col-sm-5ths {
+      width: 20%;
+      float: left;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .col-md-5ths {
+      width: 20%;
+      float: left;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .col-lg-5ths {
+      width: 20%;
+      float: left;
+    }
+  }
+}

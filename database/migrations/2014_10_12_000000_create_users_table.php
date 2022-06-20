@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('identity_card_number')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone')->nullable();
@@ -35,6 +35,12 @@ class CreateUsersTable extends Migration
             $table->string('fb_id')->nullable();
             $table->integer('max_client_day')->default(0);
             $table->string('otp')->nullable();
+            $table->string('purpose')->nullable();
+            $table->string('name_friend')->nullable();
+            $table->string('phone_friend')->nullable();
+            $table->string('bank_number')->nullable();
+            $table->string('bank_name')->nullable();
+            $table->bigInteger('bank_id')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

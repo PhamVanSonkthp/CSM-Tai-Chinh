@@ -1,0 +1,44 @@
+// =================== Font family text ==================
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@500&display=swap');
+
+
+@font-face {
+    src: url('../css/webfonts/SF-Pro-Text-Semibold.otf');
+    font-family: 'SF-Pro-Text-Black';
+}
+
+$font-text-bold: "SF-Pro-Text-Black";
+
+
+$primary-font: 'Encode Sans Semi Expanded',
+sans-serif;
+
+// ======================== Color Main =====================
+$orange-color: #ff8137;
+$red-color: rgb(204, 59, 59);
+$yellow-color: #fff32d;
+$primary-color: #277CEA;
+$black-color: #000;
+
+$color-star: #ffce2d;
+$color-sort: #F4F3F1;
+$color-blue: rgb(44, 74, 171);
+$color-blue-gray: #002dbf;
+$color-green: rgb(61, 114, 133);
+
+$back-white: #fff;
+$back-branch: #F2F2F2;
+$back-light: #EEEEEE;
+$back-digital: #F5F5F5;
+$back-feedback: #F8F8F8;
+$background-header: #f1f3f8;
+
+$border-orange: #ff9c3f;
+$border-grey: #DCDCDC;
+$border-search: #E5E5E5;
+
+// Text color
+$text-search: #aeaeae;
+$text-hover: #efefef;
+$text-light: #666;
+$text-titleProduct: #3b332e;

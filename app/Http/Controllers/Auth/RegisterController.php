@@ -29,8 +29,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    //protected $redirectTo = RouteServiceProvider::HOME;
-    protected $redirectTo = '/email/verify';
+    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = '/email/verify';
 
     /**
      * Create a new controller instance.
@@ -51,8 +51,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
         ]);
     }
@@ -66,21 +65,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $dataCreate =  [
-            'name' => $data['name'],
-            'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone'=>$data['phone'],
-            'user_discord'=>$data['user_discord'],
-            'date_of_birth'=>$data['date_of_birth'],
-            'gender'=>$data['gender'] ? 1 : 0,
         ];
-
-        if(!empty($data['refer'])){
-            $dataCreate['refer'] = filter_var($data['refer'], FILTER_SANITIZE_NUMBER_INT) ?? 0;
-            if (empty($dataCreate['refer'])){
-                $dataCreate['refer'] = 0;
-            }
-        }
 
         return User::create($dataCreate);
     }

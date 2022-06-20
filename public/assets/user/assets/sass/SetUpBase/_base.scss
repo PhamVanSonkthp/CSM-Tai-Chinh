@@ -1,0 +1,209 @@
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth !important;
+}
+
+body {
+    scroll-behavior: smooth !important;
+    transition: all 0.3s ease;
+    transition: 0.3s;
+    // overflow-y: auto !important;
+    overflow-x: hidden;
+
+    // font-family: $font-text-bold;
+    font-family: $primary-font;
+    line-height: 1;
+    // min-width: 1240px;
+
+    color: $black-color;
+    position: static;
+    margin: 0;
+    font-size: 1.6rem;
+    padding-right: 0 !important;
+
+    background-color: $back-white !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center center !important;
+}
+
+.back-white {
+    background-color: #fff;
+}
+
+.hide {
+    display: none !important;
+}
+
+.color-main {
+    color: $orange-color;
+}
+
+.color-red {
+    color: $red-color;
+}
+
+.background-header {
+    background-color: $background-header;
+}
+
+button:focus {
+    box-shadow: none !important;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.modal-backdrop.show {
+    opacity: 0.8;
+}
+
+.offcanvas {
+    overflow-y: auto;
+}
+
+.offcanvas-body {
+    overflow-y: inherit;
+}
+
+.toast {
+    width: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+
+    &-container {
+        z-index: 1051;
+        border-radius: 10px;
+    }
+
+    &-body {
+        padding: 8px 16px 8px 10px;
+        @include flexBox(bothSides);
+
+        &-alert {
+            margin-bottom: 0;
+            @include flexBox(hor);
+            align-items: flex-start;
+
+            & > i {
+                color: #0f5132;
+                font-size: 1.8rem;
+            }
+
+            & > span {
+                line-height: 18px;
+                margin-left: 10px;
+                display: block;
+                color: #0f5132;
+                font-size: 14px;
+            }
+        }
+
+        button {
+            font-size: 12px;
+        }
+    }
+
+    &-close {
+        background-color: #f8d7da;
+        border-color: #f5c2c7;
+
+        .toast-body {
+            &-alert {
+                & > i {
+                    color: #842029;
+                }
+
+                & > span {
+                    color: #842029;
+                }
+            }
+        }
+    }
+}
+
+.swal2-popup.swal2-modal.swal2-show {
+    width: 540px;
+    padding: 30px 17px;
+    border-radius: 10px;
+
+    #swal2-title.swal2-title {
+        font-size: 2.4em;
+    }
+
+    & > .swal2-icon {
+        font-size: initial;
+        border: 4px solid;
+
+        & > .swal2-icon-content {
+            font-size: 6rem;
+        }
+    }
+
+    & > .swal2-html-container {
+        font-size: 2rem;
+        line-height: 28px;
+    }
+
+    & button {
+        padding: 12px 22px;
+        font-size: 2rem;
+    }
+}
+
+.alert-modal {
+    color: #fff;
+
+    &:hover {
+        color: #fff;
+    }
+}
+
+.btn-link {
+    display: block;
+    width: 80%;
+    font-size: 1.6rem;
+
+    margin: 34px auto 0;
+    padding: 8px 0;
+    border-radius: 10px;
+
+    text-decoration: none;
+    color: $back-white !important;
+    background-color: $color-blue-gray;
+
+    &:disabled {
+        background-color: #666;
+    }
+
+    &:hover {
+        background-color: $color-blue;
+        opacity: 0.8;
+        color: $back-white !important;
+    }
+}
+
+// ::-webkit-scrollbar {
+//     width: 6px;
+// }
+
+/* Track */
+// ::-webkit-scrollbar-track {
+//     background: #f1f1f1;
+//     border-radius: 50px;
+// }
+
+/* Handle */
+// ::-webkit-scrollbar-thumb {
+//     border-radius: 50px;
+//     background: #dcdcdc;
+// }
+
+/* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//     background: #a1a1a1;
+// }

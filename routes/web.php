@@ -17,70 +17,27 @@ Route::prefix('/')->group(function () {
     Route::get('/', [
         'as'=>'welcome.index',
         'uses'=>'App\Http\Controllers\WelcomeController@index',
-    ]);
+    ])->middleware('auth');
 
-    Route::get('/product/{slug}', [
-        'as'=>'welcome.product',
-        'uses'=>'App\Http\Controllers\WelcomeController@product',
-    ]);
+    Route::get('/logout', [
+        'as'=>'welcome.logout',
+        'uses'=>'App\Http\Controllers\WelcomeController@logout',
+    ])->middleware('auth');
 
-    Route::get('/combo-product/{slug}', [
-        'as'=>'welcome.comboProduct',
-        'uses'=>'App\Http\Controllers\WelcomeController@comboProduct',
-    ]);
+    Route::get('/information', [
+        'as'=>'welcome.information',
+        'uses'=>'App\Http\Controllers\WelcomeController@indexInformation',
+    ])->middleware('auth');
 
-    Route::get('/trading/{slug}', [
-        'as'=>'welcome.trading',
-        'uses'=>'App\Http\Controllers\WelcomeController@trading',
-    ]);
+    Route::put('/information', [
+        'as'=>'welcome.information',
+        'uses'=>'App\Http\Controllers\WelcomeController@updateInformation',
+    ])->middleware('auth');
 
-    Route::get('/post/{slug}', [
-        'as'=>'welcome.post',
-        'uses'=>'App\Http\Controllers\WelcomeController@post',
-    ]);
-
-    Route::get('/post-trading/{slug}', [
-        'as'=>'welcome.postTrading',
-        'uses'=>'App\Http\Controllers\WelcomeController@postTrading',
-    ]);
-
-    Route::get('/products', [
-        'as'=>'welcome.products',
-        'uses'=>'App\Http\Controllers\WelcomeController@products',
-    ]);
-
-    Route::get('/tradings', [
-        'as'=>'welcome.tradings',
-        'uses'=>'App\Http\Controllers\WelcomeController@tradings',
-    ]);
-
-    Route::get('/posts', [
-        'as'=>'welcome.posts',
-        'uses'=>'App\Http\Controllers\WelcomeController@posts',
-    ]);
-
-    Route::get('/post-tradings', [
-        'as'=>'welcome.postTradings',
-        'uses'=>'App\Http\Controllers\WelcomeController@postTradings',
-    ]);
-
-    Route::get('/invoice-product/{id}', [
-        'as'=>'welcome.invoiceProduct',
-        'uses'=>'App\Http\Controllers\WelcomeController@invoiceProduct',
-    ]);
-
-    Route::get('/search', [
-        'as'=>'welcome.search',
-        'uses'=>'App\Http\Controllers\WelcomeController@search',
-    ]);
-
-    Route::get('/term-of-use', function (){
-        return view('user.home.term_of_use');
-    })->name('welcome.termOfUse');
-
-    Route::get('/privacy-policy', function (){
-        return view('user.home.privacy_policy');
-    })->name('welcome.privacyPolicy');
+    Route::post('/loan', [
+        'as'=>'welcome.loan',
+        'uses'=>'App\Http\Controllers\WelcomeController@loan',
+    ])->middleware('auth');
 
 });
 

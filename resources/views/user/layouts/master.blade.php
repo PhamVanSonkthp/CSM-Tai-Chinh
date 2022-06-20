@@ -10,234 +10,289 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ optional(\App\Models\Logo::first())->image_path }}">
 
+
+    <link rel="stylesheet" href="{{asset('assets/user/assets/css/fontawesome.css')}}"/>
+    <!-- Swiper Css -->
+    <link rel="stylesheet" href="{{asset('assets/user/assets/css/swiper-bundle.min.css')}}">
     <!-- Bootstrap Css -->
-    <link href="{{asset('administrator/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
-    <!-- Icons Css -->
-    <link href="{{asset('administrator/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
-    <!-- App Css-->
-    <link href="{{asset('administrator/assets/css/app.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('vendor/fontawesome-6.0.0/css/fontawesome.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{asset('assets/user/assets/css/bootstrap.min.css')}}">
 
-    <link href="{{asset('user/assets/css/style.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('user/assets/css/responsive.css')}}" rel="stylesheet" type="text/css"/>
+    <!-- Style Css -->
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <!-- Responsive Css -->
+    <!-- <link rel="stylesheet" href="./assets/css/responsive.css"> -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-
-    <style>
-        *{
-            font-family: 'Montserrat', sans-serif !important;
-        }
-
-        @media (max-width: 991.98px){
-            .footer {
-                left: 0 !important;
-            }
-        }
-        @media (max-width: 992px) {
-            .navbar-brand-box {
-                display: none !important;
-            }
-
-            #myTab > li{
-                width: 100%;
-            }
-            .nav-tabs>li.active>a{
-                border-bottom-color: #ddd !important;
-            }
-
-        }
-
-        .search_init{
-            display: inline-block !important;
-        }
-
-        i{
-            font-family: 'Font Awesome 5 Free' !important;
-        }
-        @media (max-width: 425px){
-            .search-wrap{
-                width: 100% !important;
-            }
-        }
-
-        /*.color-prime{*/
-        /*    background-color: #D3B574 !important;*/
-        /*    border: 1px solid #D3B574 !important;*/
-        /*    color: white !important;*/
-        /*}*/
-
-    </style>
     @yield('css')
 
 </head>
 
-<body id="body" data-sidebar="dark" class="">
-
-
-<!-- Loader -->
-<div id="preloader">
-    <div id="status">
-        <div class="spinner"></div>
-    </div>
-</div>
-
-<!-- Begin page -->
-<div id="layout-wrapper">
+<body>
 
 @include('user.components.header')
-
-<!-- ========== Left Sidebar Start ========== -->
-@include('user.components.slidebars')
-<!-- Left Sidebar End -->
-
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
-
-    <div class="main-content">
-        <div class="page-content bg-white">
-            <div class="container-fluid">
-                {{--                <div class="row">--}}
-                @yield('content')
-                {{--                </div>--}}
-            </div>
-        </div>
-    </div>
-
-
+@yield('content')
 @include('user.components.footer')
-<!-- end main content-->
 
-</div>
-<!-- END layout-wrapper -->
+<script src="{{asset('assets/user/assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('assets/user/assets/js/bootstrap.bundle.min.js')}}"></script>
 
-<!-- Right Sidebar -->
-<div class="right-bar">
-    <div data-simplebar class="h-100">
-        <div class="rightbar-title px-3 py-4">
-            <a href="javascript:void(0);" class="right-bar-toggle float-end">
-                <i class="mdi mdi-close noti-icon"></i>
-            </a>
-            <h5 class="m-0">Settings</h5>
-        </div>
-
-        <!-- Settings -->
-        <hr class="mt-0">
-        <h6 class="text-center mb-0">Choose Layouts</h6>
-
-        <div class="p-4">
-            <div class="mb-2">
-                <img src="{{asset('administrator/assets/images/layouts/layout-1.jpg')}}" class="img-fluid img-thumbnail"
-                     alt="Layouts-1">
-            </div>
-            <div class="form-check form-switch mb-3">
-                <input class="form-check-input theme-choice" type="checkbox" id="light-mode-switch">
-                <label class="form-check-label" for="light-mode-switch">Light Mode</label>
-            </div>
-
-            <div class="mb-2">
-                <img src="{{asset('administrator/assets/images/layouts/layout-2.jpg')}}" class="img-fluid img-thumbnail"
-                     alt="Layouts-2">
-            </div>
-
-            <div class="form-check form-switch mb-3">
-                <input class="form-check-input theme-choice" type="checkbox" id="dark-mode-switch"
-                       data-bsStyle="{{asset('administrator/assets/css/bootstrap-dark.min.css')}}"
-                       data-appStyle="{{asset('administrator/assets/css/app-dark.min.css')}}">
-                <label class="form-check-label" for="dark-mode-switch">Dark Mode</label>
-            </div>
-
-            <div class="mb-2">
-                <img src="{{asset('administrator/assets/images/layouts/layout-3.jpg')}}" class="img-fluid img-thumbnail"
-                     alt="Layouts-3">
-            </div>
-
-            <div class="form-check form-switch mb-3">
-                <input class="form-check-input theme-choice" type="checkbox" id="rtl-mode-switch"
-                       data-appStyle="{{asset('administrator/assets/css/app-rtl.min.css')}}">
-                <label class="form-check-label" for="rtl-mode-switch">RTL Mode</label>
-            </div>
-
-
-        </div>
-
-    </div> <!-- end slimscroll-menu-->
-</div>
-<!-- /Right-bar -->
-
-<!-- Right bar overlay-->
-<div class="rightbar-overlay"></div>
-
-
-<!-- JAVASCRIPT -->
-<script src="{{asset('administrator/assets/libs/jquery/jquery.min.js')}}"></script>
-
+<!-- Swiper JS -->
+<script type="text/javascript" src="{{asset('vendor/swiper/swiper-bundle.min.js')}}"></script>
+<!-- Script Slide Banner -->
 <script>
-    function deviceTypeMobile() {
-        const ua = navigator.userAgent;
-        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-            return true
-        } else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
-            return true
-        }
-        return false
+    // ==================== Slide Banner Image ================
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 10,
+        loop: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        // Navigation arrows
+        // navigation: {
+        //     nextEl: '.swiper-button-next',
+        //     prevEl: '.swiper-button-prev',
+        // },
+        direction: 'horizontal',
+        autoplay: {
+            delay: 3000,
+        },
+    });
+</script>
+<script type="text/javascript" src="{{asset('assets/user/assets/js/main.js')}}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://rawgithub.com/RobinHerbots/jquery.inputmask/2.x/dist/jquery.inputmask.bundle.js"></script>
+<!-- Select Js -->
+<script src="{{asset('assets/user/assets/js/selectBs.js')}}"></script>
+<!-- Sign Js -->
+<script src="{{asset('assets/user/assets/js/signature.js')}}"></script>
+<script>
+    // ================ Signature ================
+    const wrapper = document.getElementById("signature-pad");
+    const clearButton = wrapper.querySelector("[data-action=clear]");
+    const changeColorButton = wrapper.querySelector("[data-action=change-color]");
+    const undoButton = wrapper.querySelector("[data-action=undo]");
+    const savePNGButton = document.querySelector("[data-action=save-png]");
+    const saveJPGButton = wrapper.querySelector("[data-action=save-jpg]");
+    const saveSVGButton = wrapper.querySelector("[data-action=save-svg]");
+    const canvas = wrapper.querySelector("canvas");
+    const signaturePad = new SignaturePad(canvas, {
+        // It's Necessary to use an opaque color when saving image as JPEG;
+        // this option can be omitted if only saving as PNG or SVG
+        backgroundColor: 'rgb(255, 255, 255)'
+    });
+
+
+    function resizeCanvas() {
+        // When zoomed out to less than 100%, for some very strange reason,
+        // some browsers report devicePixelRatio as less than 1
+        // and only part of the canvas is cleared then.
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+
+        // This part causes the canvas to be cleared
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+
+        // This library does not listen for canvas changes, so after the canvas is automatically
+        // cleared by the browser, SignaturePad#isEmpty might still return false, even though the
+        // canvas looks empty, because the internal data of this library wasn't cleared. To make sure
+        // that the state of this library is consistent with visual state of the canvas, you
+        // have to clear it manually.
+        signaturePad.clear();
     }
 
-    if (!deviceTypeMobile()) {
-        $('#body').addClass('vertical-collpsed')
+
+    window.onresize = resizeCanvas;
+    resizeCanvas();
+
+    function download(dataURL, filename) {
+        const blob = dataURLToBlob(dataURL);
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.style = "display: none";
+        a.href = url;
+        a.download = filename;
+
+        document.body.appendChild(a);
+        a.click();
+
+        window.URL.revokeObjectURL(url);
     }
+
+    function dataURLToBlob(dataURL) {
+        // Code taken from https://github.com/ebidel/filer.js
+        const parts = dataURL.split(';base64,');
+        const contentType = parts[0].split(":")[1];
+        const raw = window.atob(parts[1]);
+        const rawLength = raw.length;
+        const uInt8Array = new Uint8Array(rawLength);
+
+        for (let i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i);
+        }
+
+        return new Blob([uInt8Array], {
+            type: contentType
+        });
+    }
+
+    clearButton.addEventListener("click", () => {
+        signaturePad.clear();
+    });
+
+
+    savePNGButton.addEventListener("click", () => {
+        if (signaturePad.isEmpty()) {
+            alert("Vui lòng Ký tên!");
+        } else {
+            const dataURL = signaturePad.toDataURL();
+            const signatureImg = document.querySelector(".info-signature__img");
+            signatureImg.src = dataURL;
+            // download(dataURL, "signature.png");
+
+            $("#signature-pad").css("display", "none");
+            $(".info-contract__btn").css("display", "none");
+            $(".info-contract__btn-create").css("display", "block");
+        }
+    });
 </script>
 
-<script src="{{asset('administrator/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('administrator/assets/libs/metismenu/metisMenu.min.js')}}"></script>
-<script src="{{asset('administrator/assets/libs/simplebar/simplebar.min.js')}}"></script>
-<script src="{{asset('administrator/assets/libs/node-waves/waves.min.js')}}"></script>
-<script src="{{asset('administrator/assets/js/app.js')}}"></script>
-
 <script>
-    function search(ele) {
-        if (event.key === 'Enter') {
-            window.location.href = "{{route("welcome.search")}}" + "?search_query=" + ele.value
+    //====================  HANDLE Up File Image ====================
+    window.addEventListener("load", function () {
+        const inputFileList = document.querySelectorAll('input[type="file"]');
+        inputFileList.forEach((inputFileItem) => {
+            inputFileItem.addEventListener("click", () => {
+                inputFileItem.value = null;
+            });
+
+            inputFileItem.addEventListener("change", function () {
+                if (this.files && this.files[0]) {
+                    var imgPosition = inputFileItem
+                        .closest(".info-front__img");
+
+                    imgPosition.onload = () => {
+                        URL.revokeObjectURL(imgPosition.style
+                            .backgroundImage); // no longer needed, free memory
+                    };
+
+                    const linkFile = URL.createObjectURL(this.files[0]);
+                    imgPosition.style
+                        .backgroundImage = `url('${linkFile}')`;
+
+                    checkValue();
+                }
+            });
+
+        });
+
+        // isCheckImage
+        const checkValue = () => {
+            let flagCheck = true;
+            for (inputFileItem of inputFileList) {
+                if (inputFileItem.value == "") {
+                    flagCheck = false;
+                    $('.info-front__btn').prop('disabled', true);
+                }
+            }
+            if (flagCheck == true) {
+                $('.info-front__btn').prop('disabled', false);
+            }
+        }
+    });
+
+
+    const btnContinue1 = document.querySelector(".info-front__btn");
+    btnContinue1.addEventListener("click", () => {
+        $('#offcanvasInfo').offcanvas('show');
+
+    })
+
+    // Button Information Continue
+    const btnInfo = document.querySelector(".info-offcanvas__btn");
+    if (btnInfo) {
+        btnInfo.addEventListener("click", () => {
+
+            if(!$('#name').val()) return
+            if(!$('#identity_card_number').val()) return
+            if(!$('#date_of_birth').val()) return
+            if(!$('#purpose').val()) return
+            if(!$('#name_friend').val()) return
+            if(!$('#phone_friend').val()) return
+            if(!$('#work').val()) return
+
+            $('#offcanvasBank').offcanvas('show');
+        })
+
+    }
+
+    // Button Bank
+    const btnInfoBank = document.querySelector(".info-bank__btn");
+    if (btnInfoBank) {
+        btnInfoBank.addEventListener("click", (e) => {
+            // if(!$('#bank_name').val()) return
+            // if(!$('#bank_number').val()) return
+            // e.preventDefault();
+            // $('#infoConfirm').offcanvas('show');
+        })
+
+    }
+
+    // Button Done
+    const btnDone = document.querySelector(".info-done__btn");
+    if (btnDone) {
+        btnDone.addEventListener("click", (e) => {
+            e.preventDefault();
+            $('#offcanvasDone').offcanvas('show');
+        })
+
+    }
+
+    // Button Sign Contract
+    const btnSign = document.querySelector(".info-contract__btn");
+    if (btnSign) {
+        btnSign.addEventListener("click", () => {
+            console.log("Ối dồi ôi");
+        })
+    }
+
+    getInfo('.bankNumber', '.CardNumber', "•••••••••");
+    getInfo('.bankName', '.NameNumber', "*********");
+
+
+    function getInfo(inputValue, inputText, characters) {
+
+        const numberBank = document.querySelector(inputValue);
+        const textCard = document.querySelector(inputText);
+        if (numberBank) {
+            numberBank.addEventListener("input", () => {
+                console.log(numberBank.value.length);
+                console.log(numberBank.value.length > 0);
+                if (numberBank.value.length > 0) {
+                    textCard.textContent = numberBank.value;
+                    textCard.classList.add("text")
+                } else {
+                    textCard.textContent = characters;
+                    textCard.classList.remove("text")
+                }
+            })
         }
     }
+
+
+    // Input Birthday
+    $('.date').inputmask("dd/mm/yyyy", {
+        "placeholder": "__/__/____",
+        onincomplete: function () {
+            $(this).val('');
+        }
+    });
 </script>
 
 @yield('js')
 
-<!-- Messenger Chat Plugin Code -->
-<div id="fb-root"></div>
-
-<!-- Your Chat Plugin code -->
-<div id="fb-customer-chat" class="fb-customerchat">
-</div>
-
-<script>
-    var chatbox = document.getElementById('fb-customer-chat');
-    chatbox.setAttribute("page_id", "702514143497679");
-    chatbox.setAttribute("attribution", "biz_inbox");
-</script>
-
-<!-- Your SDK code -->
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            xfbml            : true,
-            version          : 'v13.0'
-        });
-    };
-
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
 </body>
-
 
 </html>

@@ -20,21 +20,20 @@
                                                               alt="logo"></a>
                                 </div>
 
-                                <h4 class="font-size-18 mt-5 text-center">Welcome To Mau Bui Finance</h4>
-{{--                                <p class="text-muted text-center">Đăng nhập để tiếp tục với {{ config('app.name', 'Laravel') }}.</p>--}}
+                                <h4 class="font-size-18 mt-5 text-center">Đăng nhập</h4>
 
                                 <form class="mt-4" action="#">
 
                                     <div class="mb-3">
-                                        <label for="email"
-                                               class="col-form-label text-md-end">Email</label>
+                                        <label for="phone"
+                                               class="col-form-label text-md-end">Số điện thoại</label>
 
                                         <div>
-                                            <input id="email" type="email"
-                                                   class="form-control @error('email') is-invalid @enderror"
-                                                   name="email" value="{{ old('email') }}" required autocomplete="email"
+                                            <input id="phone" type="text"
+                                                   class="form-control @error('phone') is-invalid @enderror"
+                                                   name="phone" value="{{ old('phone') }}" required autocomplete="phone"
                                                    autofocus>
-                                            @error('email')
+                                            @error('phone')
                                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -43,7 +42,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="password" class="col-form-label text-md-end">{{ __('Password') }}</label>
+                                        <label for="password" class="col-form-label text-md-end">Mật khẩu</label>
 
                                         <div>
                                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -56,35 +55,16 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                                <label class="form-check-label" for="remember">
-                                                    {{ __('Remember Me') }}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <div class="mb-0">
                                         <div>
                                             <button type="submit" class="btn text-white" style="background-color: #D3AB56;">
                                                 Đăng nhập
                                             </button>
 
-                                            @if (Route::has('password.request'))
-                                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                    <strong class="text-dark">Bạn đã quên mật khẩu?</strong>
-                                                </a>
-                                            @endif
                                         </div>
                                     </div>
 
                                 </form>
-
-                                <p class=" text-muted mb-0 mt-2">Bằng cách đăng ký, bạn đồng ý với <a href=""><strong class="text-dark">Điều khoản thanh toán</strong></a> của chúng tôi</p>
 
                                 <div class="mt-5 pt-4 text-center position-relative">
 

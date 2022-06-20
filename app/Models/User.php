@@ -111,4 +111,15 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(PaymentStatus::class , 'id','payment_status_id');
     }
+
+    public function isConfirm(){
+        if (!empty(auth()->user()->name)){
+            return true;
+        }
+        return false;
+    }
+
+    public function userIdentityImage($type = 1){
+        return UserIdentityImage::where('user_id', \auth()->id())->where('type', $type)->first();
+    }
 }
