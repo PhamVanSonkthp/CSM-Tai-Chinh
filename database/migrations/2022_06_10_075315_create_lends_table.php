@@ -34,14 +34,10 @@ class CreateLendsTable extends Migration
             $table->string('bank_name');
             $table->bigInteger('lend_money');
             $table->string('sign_image_name');
-            $table->string('sign_image_path');
-            $table->bigInteger('admin_id')->index();
+            $table->text('sign_image_path');
+            $table->bigInteger('admin_id')->default(0)->index();
             $table->bigInteger('lend_status_id')->default(1);
             $table->string('phone');
-            $table->string('feature_image_name');
-            $table->string('feature_image_path');
-            $table->integer('purpose_reject_id')->default(0);
-            $table->string('purpose_reject')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

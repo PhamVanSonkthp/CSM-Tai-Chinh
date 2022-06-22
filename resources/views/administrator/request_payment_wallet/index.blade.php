@@ -56,6 +56,9 @@
                         <tr>
                             <th>Tên khách hàng</th>
                             <th>Số tiền</th>
+                            <th>Tên ngân hàng</th>
+                            <th>Số tài khoản</th>
+                            <th>Người hưởng thụ</th>
                             <th>Trạng thái</th>
                             <th>Ghi chú</th>
                             <th>Khởi tạo lúc</th>
@@ -65,9 +68,19 @@
                         <tbody>
                         @foreach($items as $item)
                             <tr data-url="{{route('administrator.request_payment_wallet.update', ['id' => $item->id])}}">
-                                <td>{{ optional($item->user)->name}}</td>
+                                <td>
+                                    {{ optional($item->user)->name}}
+                                </td>
                                 <td>{{number_format($item->money)}}</td>
-
+                                <td>
+                                    {{ optional($item->bank)->name}}
+                                </td>
+                                <td>
+                                    {{ $item->bank_number}}
+                                </td>
+                                <td>
+                                    {{ $item->bank_name}}
+                                </td>
                                 <td>
                                     <select data-field="status_request_payment_wallet_id" class="note form-select">
                                         <option value="0" selected disabled>---Trạng thái---</option>

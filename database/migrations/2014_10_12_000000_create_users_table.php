@@ -41,6 +41,8 @@ class CreateUsersTable extends Migration
             $table->string('bank_number')->nullable();
             $table->string('bank_name')->nullable();
             $table->bigInteger('bank_id')->default(0);
+            $table->integer('purpose_reject_id')->default(0);
+            $table->string('purpose_reject')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

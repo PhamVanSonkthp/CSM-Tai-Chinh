@@ -39,6 +39,11 @@ Route::prefix('/')->group(function () {
         'uses'=>'App\Http\Controllers\WelcomeController@loan',
     ])->middleware('auth');
 
+    Route::post('/welcome.wallet-out', [
+        'as'=>'welcome.wallet_out',
+        'uses'=>'App\Http\Controllers\WelcomeController@walletOut',
+    ])->middleware('auth');
+
 });
 
 

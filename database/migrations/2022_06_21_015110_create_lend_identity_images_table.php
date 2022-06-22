@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLendImagesTable extends Migration
+class CreateLendIdentityImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateLendImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('lend_images', function (Blueprint $table) {
+        Schema::create('lend_identity_images', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('lend_id')->index();
             $table->string('image_name');
             $table->string('image_path');
+            $table->bigInteger('lend_id')->index();
+            $table->tinyInteger('type');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateLendImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lend_images');
+        Schema::dropIfExists('lend_identity_images');
     }
 }

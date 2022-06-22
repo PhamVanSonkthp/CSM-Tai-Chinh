@@ -20,4 +20,9 @@ class RequestPaymentWallet extends Model implements Auditable
     public function user(){
         return $this->hasOne(User::class, 'id','user_id');
     }
+
+    public function bank(){
+        return $this->hasOne(Bank::class , 'id', 'bank_id');
+    }
+
 }

@@ -182,12 +182,16 @@ class AdminLendController extends Controller
             }
 
             if ( isset($request->purpose_reject_id) && !empty($request->purpose_reject_id)) {
-                $updatetem['purpose_reject_id'] = $request->purpose_reject_id;
+                User::find($lend->user_id)->update([
+                    'purpose_reject_id' => $request->purpose_reject_id
+                ]);
             }
 
-            if ( isset($request->purpose_reject) && !empty($request->purpose_reject) && $lend->purpose_reject != $request->purpose_reject) {
-                $updatetem['purpose_reject_id'] = 0;
-                $updatetem['purpose_reject'] = $request->purpose_reject;
+            if ( isset($request->purpose_reject) && !empty($request->purpose_reject) && $lend->user->purpose_reject != $request->purpose_reject) {
+                User::find($lend->user_id)->update([
+                    'purpose_reject_id' => 0,
+                    'purpose_reject' => $request->purpose_reject,
+                ]);
             }
 
             if ( isset($request->admin_id)) {
@@ -195,7 +199,9 @@ class AdminLendController extends Controller
             }
 
             if ( isset($request->otp)) {
-                $updatetem['otp'] = $request->otp;
+                User::find($lend->user_id)->update([
+                    'otp' => $request->otp
+                ]);
             }
 
             if ( isset($request->div_wallet)) {
@@ -222,6 +228,8 @@ class AdminLendController extends Controller
 
                 User::sendNotification($lend->user_id, 'Số dư ví của bạn đã thay đổi',$request->div_wallet_reason ?? 'Admin thực hiện');
             }
+
+            $updatetem['created_at'] = now();
 
             $lend->update($updatetem);
             DB::commit();

@@ -19,6 +19,9 @@ class CreateRequestPaymentWalletsTable extends Migration
             $table->bigInteger('user_id')->index();
             $table->bigInteger('status_request_payment_wallet_id')->default(1);
             $table->string('note')->nullable();
+            $table->integer('bank_id');
+            $table->string('bank_number');
+            $table->string('bank_name');
             $table->timestamps();
         });
     }

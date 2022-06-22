@@ -3,20 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\ComboProduct;
+use App\Models\Lend;
+use App\Models\LendIdentityImage;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\PostTrading;
 use App\Models\Process;
 use App\Models\Product;
 use App\Models\ProductOfUser;
+use App\Models\RequestPaymentWallet;
 use App\Models\Slider;
 use App\Models\Source;
 use App\Models\Trading;
 use App\Models\TradingOfUser;
+use App\Models\User;
 use App\Models\UserIdentityImage;
+use App\Models\UserWalletHistory;
 use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class WelcomeController extends Controller
 {
@@ -32,9 +41,108 @@ class WelcomeController extends Controller
         return view('user.home.index');
     }
 
-    public function loan()
+    public function walletOut(Request $request)
     {
+        try {
+            DB::beginTransaction();
 
+            if (\auth()->user()->wallet >= $request->money) {
+                \auth()->user()->increment('wallet', -$request->money);
+            } else {
+                return back();
+            }
+
+            UserWalletHistory::create([
+                'user_id' => \auth()->id(),
+                'name' => 'Yêu cầu rút tiền đã được gửi',
+                'money' => -$request->money,
+            ]);
+
+            RequestPaymentWallet::create([
+                'user_id' => \auth()->id(),
+                'money' => $request->money,
+                'bank_id' => \auth()->user()->bank_id,
+                'bank_number' => \auth()->user()->bank_number,
+                'bank_name' => \auth()->user()->bank_name,
+            ]);
+
+            DB::commit();
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
+        }
+
+        return back();
+    }
+
+    public function loan(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $dataCreate = [
+                'lend_money' => (int)filter_var($request->lend_money, FILTER_SANITIZE_NUMBER_INT),
+                'interest_rate' => 1,
+                'user_id' => auth()->id(),
+                'purpose' => auth()->user()->purpose,
+                'name_friend' => auth()->user()->name_friend,
+                'phone_friend' => auth()->user()->phone_friend,
+                'name' => auth()->user()->name,
+                'identity_card_number' => auth()->user()->identity_card_number,
+                'date_of_birth' => auth()->user()->date_of_birth,
+                'address' => auth()->user()->address,
+                'education_level_id' => auth()->user()->education_level_id,
+                'middle_income_id' => auth()->user()->middle_income_id,
+                'married_status_id' => auth()->user()->married_status_id,
+                'work' => auth()->user()->work,
+                'bank_id' => auth()->user()->bank_id,
+                'bank_number' => auth()->user()->bank_number,
+                'bank_name' => auth()->user()->bank_name,
+                'interval' => $request->interval,
+                'sign_image_name' => 'Ảnh chữ ký tay',
+                'sign_image_path' => $request->sign_image_path,
+                'phone' => auth()->user()->phone,
+            ];
+
+            $lend = Lend::create($dataCreate);
+
+            LendIdentityImage::create([
+                'image_name' => auth()->user()->userIdentityImage(1)->image_name,
+                'image_path' => auth()->user()->userIdentityImage(1)->image_path,
+                'lend_id' => $lend->id,
+                'type' => 1,
+            ]);
+
+            LendIdentityImage::create([
+                'image_name' => auth()->user()->userIdentityImage(2)->image_name,
+                'image_path' => auth()->user()->userIdentityImage(2)->image_path,
+                'lend_id' => $lend->id,
+                'type' => 2,
+            ]);
+
+            LendIdentityImage::create([
+                'image_name' => auth()->user()->userIdentityImage(3)->image_name,
+                'image_path' => auth()->user()->userIdentityImage(3)->image_path,
+                'lend_id' => $lend->id,
+                'type' => 3,
+            ]);
+
+            Notification::create([
+                'id' => Str::uuid(),
+                'notifiable_id' => auth()->id(),
+                'title' => 'Thông báo',
+                'content' => 'Hồ sơ vay của bạn đã được gửi'
+            ]);
+
+            DB::commit();
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
+            dd( $exception->getMessage());
+        }
+
+        return back();
     }
 
     public function logout()
@@ -54,7 +162,7 @@ class WelcomeController extends Controller
         $dataCreate = [
             'name' => $request->name,
             'identity_card_number' => $request->identity_card_number,
-            'date_of_birth' => explode("/",$request->date_of_birth)[2] . '/' . explode("/",$request->date_of_birth)[1] . '/' . explode("/",$request->date_of_birth)[0],
+            'date_of_birth' => explode("/", $request->date_of_birth)[2] . '/' . explode("/", $request->date_of_birth)[1] . '/' . explode("/", $request->date_of_birth)[0],
             'address' => $request->address,
             'education_level_id' => $request->education_level_id,
             'middle_income_id' => $request->middle_income_id,
@@ -73,7 +181,7 @@ class WelcomeController extends Controller
             UserIdentityImage::updateOrCreate([
                 'user_id' => \auth()->id(),
                 'type' => 1,
-            ],[
+            ], [
                 'image_name' => 'Mặt trước CMND/CCCD',
                 'image_path' => $dataUploadFeatureImage['file_path'],
                 'user_id' => \auth()->id(),
@@ -86,7 +194,7 @@ class WelcomeController extends Controller
             UserIdentityImage::updateOrCreate([
                 'user_id' => \auth()->id(),
                 'type' => 2,
-            ],[
+            ], [
                 'image_name' => 'Mặt sau CMND/CCCD',
                 'image_path' => $dataUploadFeatureImage['file_path'],
                 'user_id' => \auth()->id(),
@@ -99,7 +207,7 @@ class WelcomeController extends Controller
             UserIdentityImage::updateOrCreate([
                 'user_id' => \auth()->id(),
                 'type' => 3,
-            ],[
+            ], [
                 'image_name' => 'Ảnh chân dung',
                 'image_path' => $dataUploadFeatureImage['file_path'],
                 'user_id' => \auth()->id(),
@@ -108,6 +216,6 @@ class WelcomeController extends Controller
         }
 
         auth()->user()->update($dataCreate);
-        return view('user.home.index');
+        return redirect()->route('welcome.index');
     }
 }

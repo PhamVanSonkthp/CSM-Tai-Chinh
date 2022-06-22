@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{asset('assets/user/assets/css/bootstrap.min.css')}}">
 
     <!-- Style Css -->
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/user/assets/css/style.css')}}">
     <!-- Responsive Css -->
     <!-- <link rel="stylesheet" href="./assets/css/responsive.css"> -->
 
@@ -150,6 +150,7 @@
             const dataURL = signaturePad.toDataURL();
             const signatureImg = document.querySelector(".info-signature__img");
             signatureImg.src = dataURL;
+            $('#sign_image_path').val(dataURL)
             // download(dataURL, "signature.png");
 
             $("#signature-pad").css("display", "none");
@@ -222,6 +223,7 @@
             if(!$('#name_friend').val()) return
             if(!$('#phone_friend').val()) return
             if(!$('#work').val()) return
+            if(!$('#address').val()) return
 
             $('#offcanvasBank').offcanvas('show');
         })

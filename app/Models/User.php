@@ -102,6 +102,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Lend::class, 'admin_id','id');
     }
 
+    public function lends(){
+        return $this->hasMany(Lend::class, 'user_id','id');
+    }
+
+    public function bank(){
+        return $this->hasOne(Bank::class , 'id', 'bank_id');
+    }
+
     public function status()
     {
         return $this->hasOne(UserStatus::class , 'id','user_status_id');
@@ -120,6 +128,18 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function userIdentityImage($type = 1){
-        return UserIdentityImage::where('user_id', \auth()->id())->where('type', $type)->first();
+        return UserIdentityImage::where('user_id', $this->id)->where('type', $type)->first();
     }
+
+    public function purposeReject(){
+        return $this->hasOne(PurposeReject::class, 'id','purpose_reject_id');
+    }
+
+//    public function purposeReject(){
+//        if (!empty($this->purpose)){
+//            return $this->purpose;
+//        }
+//
+////        if ()
+//    }
 }

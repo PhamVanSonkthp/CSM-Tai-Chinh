@@ -16,6 +16,14 @@ class Formatter extends Model
         return 1000;
     }
 
+    public static function getDateCustom($input, $fomater){
+        try {
+            return date($fomater, strtotime($input));
+        }catch (\Exception $exception){
+            return null;
+        }
+    }
+
     public static function getOnlyDate($input){
         try {
             return date('d/m/Y', strtotime($input));

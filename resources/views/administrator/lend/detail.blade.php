@@ -78,7 +78,7 @@
                 @method('PUT')
             <div class="row pb-4 pt-4">
                 <div class="col-md-3">
-                    <img class="image_modal image_detail" src="{{$item->feature_image_path}}" style="object-fit: cover;">
+                    <img class="image_modal image_detail" src="{{ optional($item->user->userIdentityImage(3))->image_path}}" style="object-fit: cover;">
                     <div class="text-center">
                         <label>{{$item->phone}}</label>
                     </div>
@@ -469,7 +469,7 @@
                                         <select name="purpose_reject_id" class="form-select @error('purpose_reject_id') is-invalid @enderror">
                                             <option value="" disabled selected>Chọn lý do</option>
                                             @foreach(\App\Models\PurposeReject::orderBy('name')->get() as $purposeRejectItem)
-                                                <option value="{{$purposeRejectItem->id}}" {{$item->purpose_reject_id == $purposeRejectItem->id ? 'selected' : ''}}>{{$purposeRejectItem->name}}</option>
+                                                <option value="{{$purposeRejectItem->id}}" {{$item->user->purpose_reject_id == $purposeRejectItem->id ? 'selected' : ''}}>{{$purposeRejectItem->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('purpose_reject_id')
@@ -480,7 +480,7 @@
                                     <div style="flex: 1">
                                         <input name="purpose_reject" type="text"
                                                class="form-control @error('purpose_reject') is-invalid @enderror"
-                                               value="{{ optional($item->purposeReject)->name ?? $item->purpose_reject}}" placeholder="Khác">
+                                               value="{{ optional($item->user->purposeReject)->name ?? $item->user->purpose_reject}}" placeholder="Khác">
                                         @error('purpose_reject')
                                         <div class="alert alert-danger">{{$message}}</div>
                                         @enderror
@@ -502,7 +502,7 @@
                             <label class="w-100">
                                 <input name="otp" type="text"
                                        class="w-100 form-control @error('otp') is-invalid @enderror"
-                                       value="{{$item->otp}}" placeholder="Mật khẩu xem lý do từ chối">
+                                       value="{{$item->user->otp}}" placeholder="Mật khẩu xem lý do từ chối">
                                 @error('otp')
                                 <div class="alert alert-danger">{{$message}}</div>
                                 @enderror
@@ -569,6 +569,10 @@
                         @endforeach
                     </div>
 
+                @else
+                    <div class="text-center">
+                        Chưa có yêu cầu
+                    </div>
                 @endif
             </div>
         </div>
@@ -708,12 +712,6 @@
                             <div>
                                 <p>
                                     Mã hợp đồng : {{$item->IDLend()}}
-                                </p>
-                            </div>
-
-                            <div>
-                                <p>
-                                    signature_capture
                                 </p>
                             </div>
 

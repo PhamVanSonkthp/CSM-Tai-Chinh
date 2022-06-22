@@ -20,7 +20,7 @@ class AdminNotificationController extends Controller
 
     public function index()
     {
-        Notification::where('notifiable_id', auth()->id())->whereNull('read_at')->update([
+        Notification::whereNull('read_at')->update([
             'read_at' => now()
         ]);
 

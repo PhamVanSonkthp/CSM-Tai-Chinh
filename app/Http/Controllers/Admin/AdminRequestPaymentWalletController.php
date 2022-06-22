@@ -7,6 +7,7 @@ use App\Http\Requests\UserAddRequest;
 use App\Http\Requests\UserEditRequest;
 use App\Models\Formatter;
 use App\Models\Lend;
+use App\Models\Notification;
 use App\Models\RequestPaymentWallet;
 use App\Models\Role;
 use App\Models\User;
@@ -16,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use function redirect;
 use function view;
 
@@ -113,6 +115,22 @@ class AdminRequestPaymentWalletController extends Controller
 
             if ( isset($request->status_request_payment_wallet_id)) {
                 $updatetem['status_request_payment_wallet_id'] = $request->status_request_payment_wallet_id;
+
+                if ($request->status_request_payment_wallet_id == 2){
+                    Notification::firstOrCreate([
+                        'id' => Str::uuid(),
+                        'notifiable_id' => $item->user_id,
+                        'title' => 'Thông báo',
+                        'content' => 'Bạn vừa được duyệt rút tiền: ' . $item->money
+                    ]);
+                }else if ($request->status_request_payment_wallet_id == 3){
+                    Notification::firstOrCreate([
+                        'id' => Str::uuid(),
+                        'notifiable_id' => $item->user_id,
+                        'title' => 'Thông báo',
+                        'content' => 'Yêu cầu rút tiền của bạn bị từ chối: ' . $item->money
+                    ]);
+                }
             }
 
             if ( isset($request->note)) {

@@ -183,6 +183,10 @@
                             </div>
                         </div>
 
+                        <div class="input-group full">
+                            <input id="address" name="address" type="text" class="form-control" placeholder="Địa chỉ" required>
+                        </div>
+
                         <button class="btn btn-link info-offcanvas__btn" type="submit">
                             Tiếp tục
                         </button>

@@ -178,6 +178,15 @@ button:hover {
     opacity: 0.8;
     color: #fff !important; }
 
+.App-main {
+  display: none; }
+
+@media only screen and (max-width: 46.1875em) {
+  .App-full {
+    display: none; }
+  .App-main {
+    display: block; } }
+
 /* Track */
 /* Handle */
 /* Handle on hover */
@@ -404,6 +413,7 @@ button:hover {
       color: #002dbf;
       font-size: 1.3rem;
       margin-top: 16px;
+      padding: 10px;
       display: inline-block; }
     .tabs-register__btn {
       width: 80%;
@@ -439,13 +449,11 @@ button:hover {
           border-left: 6px solid transparent; }
       .tabs-register__alert-form {
         display: flex;
-        align-items: center;
-        align-items: flex-start; }
+        align-items: center; }
         .tabs-register__alert-form > i {
           color: #faad14;
-          font-size: 1.5rem;
-          margin-top: 4px; }
-        .tabs-register__alert-form > p {
+          font-size: 1.5rem; }
+        .tabs-register__alert-form .alert-form {
           margin-left: 10px;
           line-height: 20px; }
       .tabs-register__alert-btn {

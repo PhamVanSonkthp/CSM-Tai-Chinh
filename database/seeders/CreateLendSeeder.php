@@ -48,8 +48,6 @@ class CreateLendSeeder extends Seeder
                 "admin_id" => "2",
                 "lend_status_id" => "1",
                 "phone" => "phone",
-                "feature_image_name" => "Ảnh",
-                "feature_image_path" => "/storage/lend/PhPmo7ppH6yf5gzkAN9G.png",
                 "created_at" => now(),
             ],
         ]);
