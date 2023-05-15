@@ -35,7 +35,9 @@
 
                                             @error('phone')
                                             <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>
+                                            Số điện thoại đã được sử dụng
+                                        </strong>
                                     </span>
                                             @enderror
                                         </div>
@@ -52,7 +54,9 @@
 
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>
+                                            Mật khẩu không hợp lệ
+                                        </strong>
                                     </span>
                                             @enderror
                                         </div>
