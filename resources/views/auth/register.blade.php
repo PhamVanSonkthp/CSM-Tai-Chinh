@@ -31,7 +31,7 @@
                                             <input id="phone" type="text"
                                                    class="form-control @error('phone') is-invalid @enderror"
                                                    name="phone" value="{{ old('phone') }}"
-                                                   autocomplete="phone">
+                                                   autocomplete="phone" required>
 
                                             @error('phone')
                                             <span class="invalid-feedback" role="alert">
@@ -70,8 +70,8 @@
 
                                     <div class="mb-3">
                                         <div class="text-end">
-                                            <button
-                                                class="btn btn-primary w-md waves-effect waves-light button-register"
+                                            <button style="background-color: #D3AB56;"
+                                                class="btn w-md waves-effect waves-light button-register text-white"
                                                 type="submit">Đăng ký
                                             </button>
                                         </div>
@@ -85,7 +85,7 @@
                     <div class="mt-5 text-center position-relative">
                         <p class="text-dark">Bạn đã có tài khoản ? <a href="{{ route('login') }}"
                                                                            class="font-weight-bold text-primary">
-                                Login </a></p>
+                                Đăng nhập ngay </a></p>
                         <p class="text-dark">
                             <script>document.write(new Date().getFullYear())</script>
                             © {{ config('app.name', 'Laravel') }}.

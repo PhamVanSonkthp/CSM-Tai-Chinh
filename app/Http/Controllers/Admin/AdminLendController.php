@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\View;
 use function redirect;
 use function view;
 
@@ -244,6 +245,45 @@ class AdminLendController extends Controller
     public function delete($id)
     {
         return $this->deleteModelTrait($id, $this->model);
+    }
+
+    public function approve(Request $request)
+    {
+        $item = $this->model->findOrFail($request->id);
+
+        $item->update([
+            'lend_status_id' => 2
+        ]);
+
+        $item->refresh();
+
+        $isEdit = true;
+
+        $row = View::make('administrator.lend.row', compact('item','isEdit'))->render();
+        return response()->json([
+            'message' => 200,
+            'data_html' => $row
+        ]);
+    }
+
+    public function reject(Request $request)
+    {
+        $item = $this->model->findOrFail($request->id);
+
+        $item->update([
+            'lend_status_id' => 3
+        ]);
+
+        $item->refresh();
+
+        $isEdit = true;
+
+        $row = View::make('administrator.lend.row', compact('item','isEdit'))->render();
+
+        return response()->json([
+            'message' => 200,
+            'data_html' => $row
+        ]);
     }
 
 //    public function export()

@@ -35,7 +35,9 @@
                                                    autofocus>
                                             @error('phone')
                                             <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>
+                                            Tài khoản không chính xác
+                                        </strong>
                                     </span>
                                             @enderror
                                         </div>

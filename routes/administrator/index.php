@@ -343,6 +343,18 @@ Route::prefix('administrator')->group(function () {
             'middleware' => 'can:lend-delete',
         ]);
 
+        Route::put('/approve', [
+            'as' => 'administrator.lends.approve',
+            'uses' => 'App\Http\Controllers\Admin\AdminLendController@approve',
+            'middleware' => 'can:lend-edit',
+        ]);
+
+        Route::put('/reject', [
+            'as' => 'administrator.lends.reject',
+            'uses' => 'App\Http\Controllers\Admin\AdminLendController@reject',
+            'middleware' => 'can:lend-edit',
+        ]);
+
         Route::get('/export', [
             'as' => 'administrator.lends.export',
             'uses' => 'App\Http\Controllers\Admin\AdminLendController@exportUser',

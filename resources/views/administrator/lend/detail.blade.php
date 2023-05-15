@@ -491,7 +491,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex">
+                    <div class="d-flex" style="display: none;">
                         <div class="flex-1">
                             <label>
                                 Mã OTP:

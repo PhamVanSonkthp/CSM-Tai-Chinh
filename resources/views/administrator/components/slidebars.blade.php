@@ -13,6 +13,9 @@
                     <li @yield('lend')>
                         <a href="{{route('administrator.lends.index')}}" class="waves-effect">
                             <i class="mdi mdi-cube-outline"></i>
+                            @if(\App\Models\Lend::where('lend_status_id', 1)->count() > 0)
+                                <span class="badge rounded-pill bg-danger float-end">{{\App\Models\Lend::where('lend_status_id', 1)->count()}}</span>
+                            @endif
                             <span> Hợp đồng </span>
                         </a>
                     </li>

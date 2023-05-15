@@ -27,12 +27,12 @@ class CreateLendStatusSeeder extends Seeder
             [
                 "name" => "Chưa xác minh",
             ],
-//            [
-//                "name" => "Đã xác minh",
-//            ],
             [
                 "name" => "Đã tạo hồ sơ",
-            ]
+            ],
+            [
+                "name" => "Từ chối",
+            ],
         ]);
     }
 }
