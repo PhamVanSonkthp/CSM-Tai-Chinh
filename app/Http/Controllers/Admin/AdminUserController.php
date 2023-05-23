@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\View;
 use function redirect;
 use function view;
 
@@ -57,6 +58,33 @@ class AdminUserController extends Controller
     {
         $roles = $this->role->all();
         return view('administrator.user.add', compact('roles'));
+    }
+
+    public function get(Request $request)
+    {
+        $item = User::find($request->id);
+
+        $item['html'] = View::make('administrator.user.detail', compact('item'))->render();
+        return response()->json($item);
+    }
+
+    public function updateAjax(Request $request)
+    {
+        $item = User::find($request->id);
+
+        $item->update([
+            "identity_card_number" => $request->identity_card_number,
+            "address" => $request->address,
+            "work" => $request->work,
+            "married_status_id" => $request->married_status_id,
+            "education_level_id" => $request->education_level_id,
+            "middle_income_id" => $request->middle_income_id,
+            "bank_id" => $request->bank_id,
+            "bank_name" => $request->bank_name,
+            "bank_number" => $request->bank_number,
+        ]);
+
+        return response()->json($item);
     }
 
     public function store(UserAddRequest $request)

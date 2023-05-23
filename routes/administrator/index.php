@@ -100,6 +100,18 @@ Route::prefix('administrator')->group(function () {
             'middleware' => 'can:user-edit',
         ]);
 
+        Route::get('/get', [
+            'as' => 'administrator.users.get',
+            'uses' => 'App\Http\Controllers\Admin\AdminUserController@get',
+            'middleware' => 'can:user-list',
+        ]);
+
+        Route::put('/update', [
+            'as' => 'administrator.users.update',
+            'uses' => 'App\Http\Controllers\Admin\AdminUserController@updateAjax',
+            'middleware' => 'can:user-edit',
+        ]);
+
     });
 
     Route::prefix('employees')->group(function () {

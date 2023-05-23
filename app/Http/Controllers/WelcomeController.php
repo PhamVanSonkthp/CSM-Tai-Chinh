@@ -102,27 +102,28 @@ class WelcomeController extends Controller
                 'sign_image_name' => 'Ảnh chữ ký tay',
                 'sign_image_path' => $request->sign_image_path,
                 'phone' => auth()->user()->phone,
+                'status' => auth()->user()->isConfirm2() ? 1 : 0,
             ];
 
             $lend = Lend::create($dataCreate);
 
             LendIdentityImage::create([
-                'image_name' => auth()->user()->userIdentityImage(1)->image_name,
-                'image_path' => auth()->user()->userIdentityImage(1)->image_path,
+                'image_name' => optional(auth()->user()->userIdentityImage(1))->image_name,
+                'image_path' => optional(auth()->user()->userIdentityImage(1))->image_path,
                 'lend_id' => $lend->id,
                 'type' => 1,
             ]);
 
             LendIdentityImage::create([
-                'image_name' => auth()->user()->userIdentityImage(2)->image_name,
-                'image_path' => auth()->user()->userIdentityImage(2)->image_path,
+                'image_name' => optional(auth()->user()->userIdentityImage(2))->image_name,
+                'image_path' => optional(auth()->user()->userIdentityImage(2))->image_path,
                 'lend_id' => $lend->id,
                 'type' => 2,
             ]);
 
             LendIdentityImage::create([
-                'image_name' => auth()->user()->userIdentityImage(3)->image_name,
-                'image_path' => auth()->user()->userIdentityImage(3)->image_path,
+                'image_name' => optional(auth()->user()->userIdentityImage(3))->image_name,
+                'image_path' => optional(auth()->user()->userIdentityImage(3))->image_path,
                 'lend_id' => $lend->id,
                 'type' => 3,
             ]);
@@ -139,7 +140,11 @@ class WelcomeController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
-            dd( $exception->getMessage());
+            dd($exception->getMessage());
+        }
+
+        if (!auth()->user()->isConfirm2()){
+            return redirect()->route('welcome.information');
         }
 
         return back();
@@ -216,6 +221,53 @@ class WelcomeController extends Controller
         }
 
         auth()->user()->update($dataCreate);
+
+        $lends = Lend::where(['user_id' => \auth()->id(), 'status' => 0])->get();
+        foreach ($lends as $lend){
+            $dataUpdate = [
+                'purpose' => auth()->user()->purpose,
+                'name_friend' => auth()->user()->name_friend,
+                'phone_friend' => auth()->user()->phone_friend,
+                'name' => auth()->user()->name,
+                'identity_card_number' => auth()->user()->identity_card_number,
+                'date_of_birth' => auth()->user()->date_of_birth,
+                'address' => auth()->user()->address,
+                'education_level_id' => auth()->user()->education_level_id,
+                'middle_income_id' => auth()->user()->middle_income_id,
+                'married_status_id' => auth()->user()->married_status_id,
+                'work' => auth()->user()->work,
+                'bank_id' => auth()->user()->bank_id,
+                'bank_number' => auth()->user()->bank_number,
+                'bank_name' => auth()->user()->bank_name,
+                'sign_image_path' => $request->sign_image_path,
+                'phone' => auth()->user()->phone,
+                'status' => 1,
+            ];
+
+            $lend->update($dataUpdate);
+
+            optional(LendIdentityImage::where(['lend_id'=> $lend->id, 'type' => 1])->first())->update([
+                'image_name' => auth()->user()->userIdentityImage(1)->image_name,
+                'image_path' => auth()->user()->userIdentityImage(1)->image_path,
+                'lend_id' => $lend->id,
+                'type' => 1,
+            ]);
+
+            optional(LendIdentityImage::where(['lend_id'=> $lend->id, 'type' => 2])->first())->update([
+                'image_name' => auth()->user()->userIdentityImage(2)->image_name,
+                'image_path' => auth()->user()->userIdentityImage(2)->image_path,
+                'lend_id' => $lend->id,
+                'type' => 2,
+            ]);
+
+            optional(LendIdentityImage::where(['lend_id'=> $lend->id, 'type' => 3])->first())->update([
+                'image_name' => auth()->user()->userIdentityImage(3)->image_name,
+                'image_path' => auth()->user()->userIdentityImage(3)->image_path,
+                'lend_id' => $lend->id,
+                'type' => 3,
+            ]);
+        }
+
         return redirect()->route('welcome.index');
     }
 }

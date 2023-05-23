@@ -78,7 +78,7 @@
                 @method('PUT')
             <div class="row pb-4 pt-4">
                 <div class="col-md-3">
-                    <img class="image_modal image_detail" src="{{ optional($item->user->userIdentityImage(3))->image_path}}" style="object-fit: cover;">
+                    <img class="image_modal image_detail" src="{{ optional(optional($item->user)->userIdentityImage(3))->image_path}}" style="object-fit: cover;">
                     <div class="text-center">
                         <label>{{$item->phone}}</label>
                     </div>
@@ -537,7 +537,7 @@
                     Yêu cầu rút tiền:
                 </label>
 
-                @if($item->user->requestPaymentWallets->count())
+                @if(optional(optional($item->user)->requestPaymentWallets)->count())
                     <div class="row">
                         <div class="col-6">
                             <label>
@@ -593,7 +593,7 @@
 
                 <label>
                     <strong>
-                        {{number_format($item->user->wallet)}} VNĐ
+                        {{number_format( optional($item->user)->wallet)}} VNĐ
                     </strong>
                 </label>
             </div>
@@ -614,27 +614,29 @@
                 </label>
 
                 <div class="ps-4">
-                    @foreach($item->user->walletHistories as $walletHistoriesItem)
-                        <div class="d-flex">
-                            <div class="flex-1">
-                                <label>
-                                    {{$walletHistoriesItem->name}}
-                                </label>
-                            </div>
+                    @if(!empty($item->user))
+                        @foreach($item->user->walletHistories as $walletHistoriesItem)
+                            <div class="d-flex">
+                                <div class="flex-1">
+                                    <label>
+                                        {{$walletHistoriesItem->name}}
+                                    </label>
+                                </div>
 
-                            <div class="flex-1">
-                                @if($walletHistoriesItem->money > 0)
-                                    <label class="text-success">
-                                        +{{number_format($walletHistoriesItem->money)}}
-                                    </label>
-                                @else
-                                    <label class="text-danger">
-                                        {{number_format($walletHistoriesItem->money)}}
-                                    </label>
-                                @endif
+                                <div class="flex-1">
+                                    @if($walletHistoriesItem->money > 0)
+                                        <label class="text-success">
+                                            +{{number_format($walletHistoriesItem->money)}}
+                                        </label>
+                                    @else
+                                        <label class="text-danger">
+                                            {{number_format($walletHistoriesItem->money)}}
+                                        </label>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
 
 
@@ -687,13 +689,13 @@
 
                             <div>
                                 <p>
-                                    Bên B ( Bên vay ) Ông / Bà : {{$item->user->name}}
+                                    Bên B ( Bên vay ) Ông / Bà : {{optional($item->user)->name}}
                                 </p>
                             </div>
 
                             <div>
                                 <p>
-                                    Số CMT / CCCD : {{$item->user->identity_card_number}}
+                                    Số CMT / CCCD : {{optional($item->user)->identity_card_number}}
                                 </p>
                             </div>
 
@@ -842,7 +844,7 @@
 
                                     <div>
                                         <p>
-                                            {{$item->user->name}}
+                                            {{optional($item->user)->name}}
                                         </p>
                                     </div>
 

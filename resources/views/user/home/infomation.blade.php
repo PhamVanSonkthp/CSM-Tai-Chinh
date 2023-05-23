@@ -14,15 +14,16 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 @endsection
 
 @section('content')
 
     <form action="{{route('welcome.information')}}" method="post" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-        <!-- Information Register -->
+    @csrf
+    @method('PUT')
+    <!-- Information Register -->
         <div class="info">
             <h3 class="info-heading">
                 @if(auth()->user()->isConfirm())
@@ -102,6 +103,9 @@
 
                     <div class="info-form">
                         <div class="input-group">
+                            <div style="width: 100%;margin-block: 10px;">
+                                <label>Họ tên</label>
+                            </div>
                             <input id="name" name="name" type="text" class="form-control" placeholder="Họ tên" required>
                             <span class="input-group-text">
                             <svg viewBox="64 64 896 896" focusable="false" data-icon="idcard" width="25" height="25"
@@ -114,7 +118,11 @@
                         </div>
 
                         <div class="input-group">
-                            <input id="identity_card_number" name="identity_card_number" type="text" class="form-control" placeholder="Số CMND/CCCD" required>
+                            <div style="width: 100%;margin-block: 10px;">
+                                <label>Số CMND/CCCD</label>
+                            </div>
+                            <input id="identity_card_number" name="identity_card_number" type="text"
+                                   class="form-control" placeholder="Số CMND/CCCD" required>
 
                             <span class="input-group-text">
                             <svg viewBox="64 64 896 896" focusable="false" data-icon="pic-right" width="25" height="25"
@@ -127,19 +135,32 @@
                         </div>
 
                         <div class="input-group">
-                            <input id="date_of_birth" name="date_of_birth" type="text" class="form-control date" maskplaceholder="dd/mm/yyyy"
+                            <div style="width: 100%;margin-block: 10px;">
+                                <label>Ngày / Tháng / Năm ( ngày sinh của bạn )</label>
+                            </div>
+                            <input id="date_of_birth" name="date_of_birth" type="text" class="form-control date"
+                                   maskplaceholder="dd/mm/yyyy"
                                    placeholder="Ngày / Tháng / Năm ( ngày sinh của bạn )"
-                                   style="border-radius: 5px; padding: 7px; font-size: 16px; width: 100%; border: 1px solid rgb(234, 234, 234);" required>
+                                   style="border-radius: 5px; padding: 7px; font-size: 16px; width: 100%; border: 1px solid rgb(234, 234, 234);"
+                                   required>
                         </div>
 
-                        <select name="education_level_id" class="form-select" aria-label="Default select example" required>
+                        <div style="width: 100%;margin-block: 10px;">
+                            <label>Học vấn</label>
+                        </div>
+                        <select name="education_level_id" class="form-select" aria-label="Default select example"
+                                required>
                             @foreach(\App\Models\EducationLevel::all() as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
                         </select>
 
                         <div class="input-group">
-                            <input id="purpose" name="purpose" type="text" class="form-control" placeholder="Mục đích khoản vay" required>
+                            <div style="width: 100%;margin-block: 10px;">
+                                <label>Mục đích khoản vay</label>
+                            </div>
+                            <input id="purpose" name="purpose" type="text" class="form-control"
+                                   placeholder="Mục đích khoản vay" required>
                             <span class="input-group-text">
                             <svg viewBox="64 64 896 896" focusable="false" data-icon="file-add" width="25" height="25"
                                  fill="rgb(119, 119, 119)" aria-hidden="true">
@@ -151,27 +172,48 @@
                         </div>
 
                         <div class="input-group full">
-                            <input id="name_friend" name="name_friend" type="text" class="form-control" placeholder="Tên người thân" required>
+                            <div style="width: 100%;margin-block: 10px;">
+                                <label>Tên người thân</label>
+                            </div>
+                            <input id="name_friend" name="name_friend" type="text" class="form-control"
+                                   placeholder="Tên người thân" required>
                         </div>
 
                         <div class="input-group full">
-                            <input id="phone_friend" name="phone_friend" type="text" class="form-control" placeholder="Số điện thoại người thân" required>
+                            <div style="width: 100%;margin-block: 10px;">
+                                <label>Số điện thoại người thân</label>
+                            </div>
+                            <input id="phone_friend" name="phone_friend" type="text" class="form-control"
+                                   placeholder="Số điện thoại người thân" required>
                         </div>
 
-                        <select id="middle_income_id" name="middle_income_id" class="form-select" aria-label="Default select example" required>
+                        <div style="width: 100%;margin-block: 10px;">
+                            <label>Thu nhập hàng tháng</label>
+                        </div>
+                        <select id="middle_income_id" name="middle_income_id" class="form-select"
+                                aria-label="Default select example" required>
                             @foreach(\App\Models\MiddleIncome::all() as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
                         </select>
 
-                        <select id="married_status_id" name="married_status_id" class="form-select" aria-label="Default select example" required>
+                        <div style="width: 100%;margin-block: 10px;">
+                            <label>Tình trạng hôn nhân</label>
+                        </div>
+                        <select id="married_status_id" name="married_status_id" class="form-select"
+                                aria-label="Default select example" required>
                             @foreach(\App\Models\MarriedStatus::all() as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
                         </select>
 
                         <div class="input-group mb-3">
-                            <input id="work" name="work" type="text" class="form-control" placeholder="Công việc hiện tại" required>
+                            <div style="width: 100%;margin-block: 10px;">
+                                <label>Công viện hiện tại</label>
+                            </div>
+
+                            <input id="work" name="work" type="text" class="form-control"
+                                   placeholder="Công việc hiện tại" required>
                             <div class="input-group-text">
                                 <svg viewBox="64 64 896 896" focusable="false" data-icon="schedule" width="25"
                                      height="25"
@@ -184,7 +226,11 @@
                         </div>
 
                         <div class="input-group full">
-                            <input id="address" name="address" type="text" class="form-control" placeholder="Địa chỉ" required>
+                            <div style="width: 100%;margin-block: 10px;">
+                                <label>Địa chỉ</label>
+                            </div>
+                            <input id="address" name="address" type="text" class="form-control" placeholder="Địa chỉ"
+                                   required>
                         </div>
 
                         <button class="btn btn-link info-offcanvas__btn" type="submit">
@@ -202,7 +248,7 @@
                 <!-- <button type="button" class="btn header-modal-close" data-bs-dismiss="offcanvas" aria-label="Close">
 
              </button> -->
-                <h5 class="offcanvas-title" style="margin-right: 0px !important;"id="offcanvasInfoLabel">Xác minh</h5>
+                <h5 class="offcanvas-title" style="margin-right: 0px !important;" id="offcanvasInfoLabel">Xác minh</h5>
             </div>
             <div class="offcanvas-body">
 
@@ -244,8 +290,10 @@
                                 </path>
                             </svg>
                         </span>
-                            <input id="bank_number" name="bank_number" type="text" class="form-control bankNumber" placeholder="Nhập số tài khỏan"
-                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" required
+                            <input id="bank_number" name="bank_number" type="text" class="form-control bankNumber"
+                                   placeholder="Nhập số tài khỏan"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"
+                                   required
                                    maxlength="19">
                         </div>
 
@@ -258,7 +306,8 @@
                                     </path>
                                 </svg>
                             </div>
-                            <input id="bank_name" name="bank_name" type="text" class="form-control bankName" placeholder="Tên người thụ hưởng" required>
+                            <input id="bank_name" name="bank_name" type="text" class="form-control bankName"
+                                   placeholder="Tên người thụ hưởng" required>
                         </div>
 
                         <button class="btn btn-link info-bank__btn" type="submit">
@@ -336,7 +385,8 @@
                         </path>
                     </svg>
                 </button>
-                <h5 class="offcanvas-title" style="margin-right: 0px !important;" id="staticBackdropLabel">Đăng ký khoản vay</h5>
+                <h5 class="offcanvas-title" style="margin-right: 0px !important;" id="staticBackdropLabel">Đăng ký khoản
+                    vay</h5>
             </div>
             <div class="offcanvas-body">
                 <h4 class="info-confirm__text">Hãy kiểm tra lại khoản vay bạn đăng ký</h4>

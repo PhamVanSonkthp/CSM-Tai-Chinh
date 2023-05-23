@@ -96,6 +96,8 @@
                                        class="btn btn-danger btn-sm delete action_delete" title="Delete">
                                         <i class="mdi mdi-close"></i>
                                     </a>
+                                    <a style="cursor: pointer;" class="m-3" data-bs-toggle="modal" data-bs-target="#editModal" onclick="onDetailUser({{$item->id}})">Xem
+                                        chi tiết</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -113,119 +115,84 @@
 
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Thông tin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal_detail">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('js')
 
     <script>
 
-        function getFormattedDate(date) {
-            var year = date.getFullYear();
+        let user_id
 
-            var month = (1 + date.getMonth()).toString();
-            month = month.length > 1 ? month : '0' + month;
-
-            var day = date.getDate().toString();
-            day = day.length > 1 ? day : '0' + day;
-
-            return month + '/' + day + '/' + year;
-        }
-
-        function updateConfig() {
-            const url = new URL(decodeURIComponent(window.location.href));
-
-            $('#select_gender').val(url.searchParams.get("gender")).change();
-
-            const options = {}
-            options.autoApply = false;
-
-            if (url.searchParams.get("start")){
-                options.startDate = getFormattedDate(new Date(url.searchParams.get("start")))
-            }
-
-            if (url.searchParams.get("end")){
-                options.endDate = getFormattedDate(new Date(url.searchParams.get("end")))
-            }
-
-            $('#config-demo').daterangepicker(options, function (start, end, label) {
-                addUrlParameterObjects([{name: "start", value: start.format('YYYY-MM-DD')}, {
-                    name: "end",
-                    value: end.format('YYYY-MM-DD')
-                }])
-            });
-        }
-
-        updateConfig()
-
-        function viewBirthOfDay(){
-            // addUrlParameterObjects([{name: "start", value: new Date().toISOString().slice(0, 10)}, {
-            //     name: "end",
-            //     value: new Date().toISOString().slice(0, 10)
-            // }])
-
-            const searchParams = new URLSearchParams(window.location.search)
-            searchParams.set('date_of_birth', new Date().toISOString().slice(0, 10))
-            window.location.search = searchParams.toString()
-        }
-    </script>
-
-    <script>
-        function addUrlParameterObjects($params) {
-            const searchParams = new URLSearchParams(window.location.search)
-
-            for(let i = 0 ; i < $params.length; i++){
-                searchParams.set($params[i].name, $params[i].value)
-            }
-
-            searchButton(searchParams)
-        }
-
-        function search(ele) {
-            if(event.key === 'Enter') {
-                searchButton()
-            }
-        }
-
-        function searchButton(searchParams) {
-            if(!searchParams){
-                searchParams = new URLSearchParams(window.location.search)
-            }
-            searchParams.set('search_query', $('#input_search').val())
-            searchParams.set('gender', $('#select_gender').val())
-            window.location.search = searchParams.toString()
-
-        }
-
-        function exportExcel(){
-            window.location.href = "{{route('administrator.users.export')}}" + window.location.search
-        }
-
-    </script>
-
-    <script>
-        $('.note').on('change', function () {
-
-            const value = this.value
-            const field = $(this).data('field')
-            const urlRequest = $(this).parent().parent().data('url')
+        function onDetailUser(id) {
+            user_id = id
 
             $.ajax({
-                type: 'PUT',
-                url: urlRequest,
+                type: "GET",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
+                cache: false,
                 data: {
-                    [field]: value,
+                    id : user_id
                 },
+                url: "{{route('administrator.users.get')}}",
                 success: function (response) {
-                    console.log(response)
+                    $('#modal_detail').html(response.html)
                 },
                 error: function (err) {
-                    console.log(err)
+                    console.log(response)
                 },
-            })
-        })
+            });
+
+        }
+
+        function onSubmitUpdateUser() {
+
+            $.ajax({
+                type: "PUT",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                cache: false,
+                data: {
+                    id : user_id,
+                    identity_card_number : $('input[name="identity_card_number"]').val(),
+                    address : $('input[name="address"]').val(),
+                    work : $('input[name="work"]').val(),
+                    married_status_id : $('select[name="married_status_id"]').val(),
+                    education_level_id : $('select[name="education_level_id"]').val(),
+                    middle_income_id : $('select[name="middle_income_id"]').val(),
+                    bank_id : $('select[name="bank_id"]').val(),
+                    bank_name : $('input[name="bank_name"]').val(),
+                    bank_number : $('input[name="bank_number"]').val(),
+                },
+                url: "{{route('administrator.users.update')}}",
+                success: function (response) {
+                    alert("Đã lưu")
+                },
+                error: function (err) {
+                    console.log(response)
+                },
+            });
+
+        }
     </script>
 
 @endsection

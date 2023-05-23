@@ -36,6 +36,8 @@ class AdminLendController extends Controller
     {
         $query = $this->model;
 
+        $query = $query->where('status', 1);
+
         foreach ($request->all() as $key => $item) {
 
             if ($key == "search_query") {

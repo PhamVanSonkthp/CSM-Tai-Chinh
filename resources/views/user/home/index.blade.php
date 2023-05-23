@@ -180,7 +180,7 @@
 
                             <div class="tabs-account__status">
 
-                            @if(auth()->user()->isConfirm())
+                            @if(auth()->user()->isConfirm2())
                                 <!--  Verified -->
                                     <div class="tabs-account__status-verified">
                                         <svg viewBox="64 64 896 896" focusable="false" data-icon="check" width="1em"
@@ -1482,5 +1482,19 @@
                 $('#container_reason_reject').show()
             }
         }
+    </script>
+
+    <script>
+        {{--$('.tab-register').click(function(){--}}
+        {{--    window.location.href = "{{route('welcome.information')}}"--}}
+        {{--});--}}
+
+        {{--$( document ).ready(function() {--}}
+        {{--    if ("{{request('is_open_lend')}}"){--}}
+        {{--        $('#tabRegister').offcanvas('show')--}}
+        {{--    }--}}
+        {{--});--}}
+
+
     </script>
 @endsection

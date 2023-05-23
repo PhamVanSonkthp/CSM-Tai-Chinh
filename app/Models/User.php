@@ -121,6 +121,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function isConfirm(){
+
+        return true;
+
+        if (!empty(auth()->user()->name)){
+            return true;
+        }
+        return false;
+    }
+
+    public function isConfirm2(){
         if (!empty(auth()->user()->name)){
             return true;
         }
