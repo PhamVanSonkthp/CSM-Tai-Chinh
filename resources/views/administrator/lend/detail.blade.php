@@ -11,9 +11,6 @@
 
     <!-- Swiper Css -->
     <link rel="stylesheet" href="{{asset('vendor/swiper/swiper-bundle.min.css')}}">
-    /*<!-- Bootstrap Css -->*/
-    /*
-    <link rel="stylesheet" type="text/css" href="./bootstrap.min.css">*/
 
     <style>
         .banner__slide {
@@ -51,11 +48,8 @@
             justify-content: space-between;
         }
 
-        .banner__slide-title {
-            position: absolute;
-            bottom: -28px;
-            left: 50%;
-            transform: translateX(-50%)
+        .swiper-slide {
+            text-align: center;
         }
 
         .card {
@@ -71,7 +65,15 @@
 
 @section('content')
     <div class="col-lg-9">
+
         <div class="card">
+
+            <div class="p-3">
+                <h4>
+                    Thông tin hợp đồng
+                </h4>
+            </div>
+
             <form action="{{route('administrator.lends.update', ['id' => $item->id ])}}" method="post"
                   enctype="multipart/form-data">
                 @csrf
@@ -247,22 +249,31 @@
                         </div>
                     </div>
 
+                    <div class="d-flex">
+                        <div class="flex-1">
+                            <label>
+                                Chữ ký
+                            </label>
+                        </div>
+
+                        <div class="flex-1">
+                            <img src="{{$item->sign_image_path}}" style="width: 200px;">
+                        </div>
+                    </div>
+
                     <input style="display: none" name="lend_status_id" value="2">
 
                     @if($item->lend_status_id == 1)
                         <label class="w-100">
                             <div class="d-grid">
-                                <button class="btn btn-primary lend-status-{{$item->lend_status_id}}" type="submit">Xác
-                                    minh hồ sơ
+                                <button class="btn btn-primary lend-status-{{$item->lend_status_id}}" type="submit">Duyệt khoản vay
                                 </button>
                             </div>
                         </label>
-
                     @else
                         <label class="w-100">
                             <div class="d-grid">
-                                <button class="btn btn-primary lend-status-{{$item->lend_status_id}}" type="button">Đã
-                                    tạo hồ sơ
+                                <button class="btn btn-primary lend-status-{{$item->lend_status_id}}" type="button">Đã duyệt
                                 </button>
                             </div>
                         </label>
@@ -349,6 +360,12 @@
 
     <div class="col-lg-3">
         <div class="card pb-4">
+
+            <div class="p-3">
+                <h4>
+                    Thông tin khách hàng
+                </h4>
+            </div>
 
             <div class="contianer-xl">
                 <div class="col-lg-12">
@@ -491,25 +508,25 @@
                         </div>
                     </div>
 
-                    <div class="d-flex" style="display: none;">
-                        <div class="flex-1">
-                            <label>
-                                Mã OTP:
-                            </label>
-                        </div>
+{{--                    <div class="d-flex" style="display: none;">--}}
+{{--                        <div class="flex-1">--}}
+{{--                            <label>--}}
+{{--                                Mã OTP:--}}
+{{--                            </label>--}}
+{{--                        </div>--}}
 
-                        <div class="flex-1">
-                            <label class="w-100">
-                                <input name="otp" type="text"
-                                       class="w-100 form-control @error('otp') is-invalid @enderror"
-                                       value="{{$item->user->otp}}" placeholder="Mật khẩu xem lý do từ chối">
-                                @error('otp')
-                                <div class="alert alert-danger">{{$message}}</div>
-                                @enderror
-                            </label>
+{{--                        <div class="flex-1">--}}
+{{--                            <label class="w-100">--}}
+{{--                                <input name="otp" type="text"--}}
+{{--                                       class="w-100 form-control @error('otp') is-invalid @enderror"--}}
+{{--                                       value="{{$item->user->otp}}" placeholder="Mật khẩu xem lý do từ chối">--}}
+{{--                                @error('otp')--}}
+{{--                                <div class="alert alert-danger">{{$message}}</div>--}}
+{{--                                @enderror--}}
+{{--                            </label>--}}
 
-                        </div>
-                    </div>
+{{--                        </div>--}}
+{{--                    </div>--}}
 
                     <div class="d-flex">
                         <div class="flex-1">
@@ -531,7 +548,73 @@
     </div>
 
     <div class="col-lg-3">
+
+    </div>
+
+    <div class="col-lg-3">
         <div class="card">
+            <div>
+                <label>
+                    Ví người dùng
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    Số dư:
+                </label>
+
+                <label>
+                    <strong>
+                        {{number_format( optional($item->user)->wallet)}} VNĐ
+                    </strong>
+                </label>
+            </div>
+
+            <div class="d-flex">
+                <div class="flex-1 text-center">
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_div_wallet">Trừ ví</button>
+                </div>
+
+                <div class="flex-1 text-center">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_add_wallet">Cộng ví</button>
+                </div>
+            </div>
+
+            <div>
+                <label>
+                    Lịch sử ví
+                </label>
+
+                <div class="ps-4">
+                    @if(!empty($item->user))
+                        @foreach($item->user->walletHistories as $walletHistoriesItem)
+                            <div class="d-flex">
+                                <div class="flex-1">
+                                    <label>
+                                        {{$walletHistoriesItem->name}}
+                                    </label>
+                                </div>
+
+                                <div class="flex-1">
+                                    @if($walletHistoriesItem->money > 0)
+                                        <label class="text-success">
+                                            +{{number_format($walletHistoriesItem->money)}}
+                                        </label>
+                                    @else
+                                        <label class="text-danger">
+                                            {{number_format($walletHistoriesItem->money)}}
+                                        </label>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+
+
+            </div>
+
             <div>
                 <label>
                     Yêu cầu rút tiền:
@@ -575,74 +658,11 @@
                     </div>
                 @endif
             </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3">
-        <div class="card">
-            <div>
-                <label>
-                    Ví người dùng
-                </label>
-            </div>
-
-            <div>
-                <label>
-                    Số dư:
-                </label>
-
-                <label>
-                    <strong>
-                        {{number_format( optional($item->user)->wallet)}} VNĐ
-                    </strong>
-                </label>
-            </div>
-
-            <div class="d-flex">
-                <div class="flex-1 text-center">
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_div_wallet">Trừ ví</button>
-                </div>
-
-                <div class="flex-1 text-center">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_add_wallet">Cộng ví</button>
-                </div>
-            </div>
-
-            <div>
-                <label>
-                    Lịch sử
-                </label>
-
-                <div class="ps-4">
-                    @if(!empty($item->user))
-                        @foreach($item->user->walletHistories as $walletHistoriesItem)
-                            <div class="d-flex">
-                                <div class="flex-1">
-                                    <label>
-                                        {{$walletHistoriesItem->name}}
-                                    </label>
-                                </div>
-
-                                <div class="flex-1">
-                                    @if($walletHistoriesItem->money > 0)
-                                        <label class="text-success">
-                                            +{{number_format($walletHistoriesItem->money)}}
-                                        </label>
-                                    @else
-                                        <label class="text-danger">
-                                            {{number_format($walletHistoriesItem->money)}}
-                                        </label>
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-                </div>
-
-
-            </div>
 
         </div>
+
+
+
     </div>
 
     <!-- Modal -->

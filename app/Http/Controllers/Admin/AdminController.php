@@ -15,7 +15,7 @@ class AdminController extends Controller
     public function loginAdmin(){
         if(auth()->check()){
             if( optional(auth()->user())->is_admin == 0) return view('administrator.login.index');
-            return redirect()->to('administrator/users');
+            return redirect()->to('administrator/lends');
         }
 
         return view('administrator.login.index');

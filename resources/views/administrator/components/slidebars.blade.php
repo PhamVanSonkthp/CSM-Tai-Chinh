@@ -86,6 +86,13 @@
                     </li>
                 @endcan
 
+                <li @yield('setting')>
+                    <a href="{{route('administrator.setting.index')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Cài đặt </span>
+                    </a>
+                </li>
+
                 @can('role-list')
                     <li @yield('role') style="display: none">
                         <a href="{{route('administrator.roles.index')}}" class="waves-effect">

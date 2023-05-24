@@ -44,6 +44,11 @@ Route::prefix('/')->group(function () {
         'uses'=>'App\Http\Controllers\WelcomeController@walletOut',
     ])->middleware('auth');
 
+    Route::get('/lend-done', [
+        'as'=>'welcome.lend_done',
+        'uses'=>'App\Http\Controllers\WelcomeController@lendDone',
+    ])->middleware('auth');
+
 });
 
 

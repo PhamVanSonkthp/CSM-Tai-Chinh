@@ -13,7 +13,7 @@ class Formatter extends Model
     use HasFactory;
 
     public static function getLimitRequest(){
-        return 1000;
+        return 20;
     }
 
     public static function getDateCustom($input, $fomater){

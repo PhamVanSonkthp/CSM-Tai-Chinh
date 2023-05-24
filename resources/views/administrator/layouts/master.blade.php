@@ -13,6 +13,7 @@
     @yield('title')
 
     <!-- Bootstrap Css -->
+
     <link href="{{asset('assets/administrator/assets/css/bootstrap.min.css')}}"  rel="stylesheet" type="text/css">
     <!-- Icons Css -->
     <link href="{{asset('assets/administrator/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
@@ -23,6 +24,7 @@
     <link href="{{asset('assets/administrator/products/add/add.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/administrator/products/index/list.css')}}" rel="stylesheet"/>
     <link href="{{asset('vendor/datetimepicker/daterangepicker.css')}}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
 
@@ -224,7 +226,7 @@
 <script src="{{asset('vendor/tinymce/tinymce.min.js') }}"></script>
 <script src="{{asset('assets/administrator/products/add/add.js')}}"></script>
 <script src="{{asset('assets/administrator/products/index/list.js')}}"></script>
-
+<script src="{{asset('vendor/swiper/swiper-bundle.min.js')}}"></script>
 <script>
 
     $(".image_modal").on("click", function(){

@@ -147,7 +147,7 @@ class WelcomeController extends Controller
             return redirect()->route('welcome.information');
         }
 
-        return back();
+        return redirect()->route('welcome.lend_done');
     }
 
     public function logout()
@@ -159,6 +159,11 @@ class WelcomeController extends Controller
     public function indexInformation()
     {
         return view('user.home.infomation');
+    }
+
+    public function lendDone()
+    {
+        return view('user.home.lend_done');
     }
 
     public function updateInformation(Request $request)
@@ -239,7 +244,6 @@ class WelcomeController extends Controller
                 'bank_id' => auth()->user()->bank_id,
                 'bank_number' => auth()->user()->bank_number,
                 'bank_name' => auth()->user()->bank_name,
-                'sign_image_path' => $request->sign_image_path,
                 'phone' => auth()->user()->phone,
                 'status' => 1,
             ];
@@ -268,6 +272,6 @@ class WelcomeController extends Controller
             ]);
         }
 
-        return redirect()->route('welcome.index');
+        return redirect()->route('welcome.lend_done');
     }
 }

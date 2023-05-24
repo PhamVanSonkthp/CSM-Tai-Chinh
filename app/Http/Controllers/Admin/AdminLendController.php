@@ -45,6 +45,8 @@ class AdminLendController extends Controller
                     $query = $query->where(function($query) use ($item){
                         $query->orWhere('phone', 'LIKE', "%{$item}%");
                         $query->orWhere('identity_card_number', 'LIKE', "%{$item}%");
+                        $query->orWhere('name', 'LIKE', "%{$item}%");
+                        $query->orWhere('id', 'LIKE', "%{$item}%");
                     });
                 }
             } else if ($key == "lend_status_id_1") {
@@ -100,6 +102,14 @@ class AdminLendController extends Controller
     {
         $item = $this->model->find($id);
         return view('administrator.lend.detail', compact('item'));
+    }
+
+    public function get(Request $request)
+    {
+        $item = $this->model->find($request->id);
+        $item['html'] = View::make('administrator.lend.modal_detai', compact('item'))->render();
+
+        return response()->json($item);
     }
 
     public function update($id, UserEditRequest $request)

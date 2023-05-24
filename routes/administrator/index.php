@@ -44,6 +44,19 @@ Route::prefix('administrator')->group(function () {
 
     });
 
+    Route::prefix('setting')->group(function () {
+        Route::get('/', [
+            'as' => 'administrator.setting.index',
+            'uses' => 'App\Http\Controllers\Admin\AdminSettingController@index',
+        ]);
+
+        Route::put('/update', [
+            'as' => 'administrator.setting.update',
+            'uses' => 'App\Http\Controllers\Admin\AdminSettingController@update',
+        ]);
+
+    });
+
     Route::prefix('users')->group(function () {
 
         Route::get('/', [
@@ -370,6 +383,12 @@ Route::prefix('administrator')->group(function () {
         Route::get('/export', [
             'as' => 'administrator.lends.export',
             'uses' => 'App\Http\Controllers\Admin\AdminLendController@exportUser',
+            'middleware' => 'can:lend-list',
+        ]);
+
+        Route::get('/get', [
+            'as' => 'administrator.lends.get',
+            'uses' => 'App\Http\Controllers\Admin\AdminLendController@get',
             'middleware' => 'can:lend-list',
         ]);
 
