@@ -122,7 +122,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isConfirm(){
 
-        return true;
+//        return true;
 
         if (!empty(auth()->user()->name)){
             return true;

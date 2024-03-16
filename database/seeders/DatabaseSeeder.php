@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CreateNotificationSeeder::class);
         $this->call(CreateStatusRequestPaymentWalletSeeder::class);
         $this->call(CreateRequestPaymentWalletSeeder::class);
+        $this->call(CreateSettingSeeder::class);
 
     }
 }

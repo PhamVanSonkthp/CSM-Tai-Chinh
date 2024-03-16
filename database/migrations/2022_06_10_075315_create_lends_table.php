@@ -37,6 +37,7 @@ class CreateLendsTable extends Migration
             $table->text('sign_image_path');
             $table->bigInteger('admin_id')->default(0)->index();
             $table->bigInteger('lend_status_id')->default(1);
+            $table->bigInteger('status')->default(1);
             $table->string('phone');
             $table->timestamps();
             $table->softDeletes();

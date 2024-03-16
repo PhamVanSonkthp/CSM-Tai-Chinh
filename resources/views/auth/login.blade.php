@@ -25,6 +25,10 @@
 
                                                 <h4 class="font-size-18 mt-5 text-center">Đăng nhập</h4>
 
+                                                @if(Session::has('error'))
+                                                    <p class="alert alert-info">{{ Session::get('error') }}</p>
+                                                @endif
+
                                                 <form class="mt-4" action="#">
 
                                                     <div class="mb-3">

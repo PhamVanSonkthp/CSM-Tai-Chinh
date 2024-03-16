@@ -155,7 +155,7 @@
                             <div class="footer__wrapper">
                                 <div class="footer-img">
                                     <img
-                                        src="https://mafc.com.vn/wp-content/uploads/2021/11/Banner-Mobile-web-3.jpg.webp"
+                                        src="{{asset('/assets/user/assets/images/hr3.jpg')}}"
                                         alt="Img">
                                 </div>
                                 {{--                            <div class="footer-admin">--}}
